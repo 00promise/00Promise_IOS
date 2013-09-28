@@ -13,9 +13,56 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+    
+    //Badge 개수 설정
+    application.applicationIconBadgeNumber = 0;
+    
     return YES;
 }
-							
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    NSLog(@"deviceToken : %@", deviceToken);
+    NSMutableString* token = [[NSMutableString alloc]initWithFormat:@"%@",deviceToken];
+    [token setString:[token stringByReplacingOccurrencesOfString:@"<" withString:@""]];
+    [token setString:[token stringByReplacingOccurrencesOfString:@">" withString:@""]];
+    [token setString:[token stringByReplacingOccurrencesOfString:@" " withString:@""]];
+    
+    NSLog(@"%@",token);
+}
+//push : 어플 실행중에 알림도착
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    NSLog(@"userInfo : %@", userInfo);
+    NSDictionary *aps = [userInfo valueForKey:@"aps"];
+    NSLog(@"Alert : %@", [aps valueForKey:@"alert"]);
+    
+    UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:[aps valueForKey:@"alert"] message:@"" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+    [alertView show];
+    
+    //application.applicationState
+}
+
+- (void)transitionToViewController:(UIViewController *)viewController
+                    withTransition:(UIViewAnimationOptions)transition
+{
+//    [UIView transitionFromView:self.window.rootViewController.view
+//                        toView:viewController.view
+//                      duration:0.65f
+//                       options:transition
+//                    completion:^(BOOL finished){
+//                        
+//                        self.window.rootViewController = viewController;
+//                    }];
+    
+    [UIView transitionWithView:self.window
+                      duration:1.0f
+                       options: UIViewAnimationOptionTransitionFlipFromLeft
+                    animations:^{
+                        self.window.rootViewController = viewController;
+                    }
+                    completion:nil];
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

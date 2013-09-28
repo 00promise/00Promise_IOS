@@ -12,6 +12,12 @@
 #define COCOAPODS_VERSION_MINOR_AFNetworking 3
 #define COCOAPODS_VERSION_PATCH_AFNetworking 2
 
+// CJStringValidator
+#define COCOAPODS_POD_AVAILABLE_CJStringValidator
+#define COCOAPODS_VERSION_MAJOR_CJStringValidator 1
+#define COCOAPODS_VERSION_MINOR_CJStringValidator 0
+#define COCOAPODS_VERSION_PATCH_CJStringValidator 1
+
 // FSExtendedAlertKit
 #define COCOAPODS_POD_AVAILABLE_FSExtendedAlertKit
 #define COCOAPODS_VERSION_MAJOR_FSExtendedAlertKit 0
@@ -31,6 +37,24 @@
 #define COCOAPODS_VERSION_MINOR_LBBlurredImage 1
 #define COCOAPODS_VERSION_PATCH_LBBlurredImage 0
 
+// MBProgressHUD
+#define COCOAPODS_POD_AVAILABLE_MBProgressHUD
+#define COCOAPODS_VERSION_MAJOR_MBProgressHUD 0
+#define COCOAPODS_VERSION_MINOR_MBProgressHUD 8
+#define COCOAPODS_VERSION_PATCH_MBProgressHUD 0
+
+// NSRails
+#define COCOAPODS_POD_AVAILABLE_NSRails
+#define COCOAPODS_VERSION_MAJOR_NSRails 2
+#define COCOAPODS_VERSION_MINOR_NSRails 0
+#define COCOAPODS_VERSION_PATCH_NSRails 3
+
+// ODRefreshControl
+#define COCOAPODS_POD_AVAILABLE_ODRefreshControl
+#define COCOAPODS_VERSION_MAJOR_ODRefreshControl 1
+#define COCOAPODS_VERSION_MINOR_ODRefreshControl 1
+#define COCOAPODS_VERSION_PATCH_ODRefreshControl 0
+
 // SDWebImage
 #define COCOAPODS_POD_AVAILABLE_SDWebImage
 #define COCOAPODS_VERSION_MAJOR_SDWebImage 3
@@ -43,11 +67,11 @@
 #define COCOAPODS_VERSION_MINOR_SDWebImage_MapKit 4
 #define COCOAPODS_VERSION_PATCH_SDWebImage_MapKit 0
 
-// ViewDeck
-#define COCOAPODS_POD_AVAILABLE_ViewDeck
-#define COCOAPODS_VERSION_MAJOR_ViewDeck 2
-#define COCOAPODS_VERSION_MINOR_ViewDeck 3
-#define COCOAPODS_VERSION_PATCH_ViewDeck 1
+// VKDAKeyboardControl
+#define COCOAPODS_POD_AVAILABLE_VKDAKeyboardControl
+#define COCOAPODS_VERSION_MAJOR_VKDAKeyboardControl 2
+#define COCOAPODS_VERSION_MINOR_VKDAKeyboardControl 3
+#define COCOAPODS_VERSION_PATCH_VKDAKeyboardControl 0
 
 // libwebp
 #define COCOAPODS_POD_AVAILABLE_libwebp

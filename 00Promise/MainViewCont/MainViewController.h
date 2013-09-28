@@ -7,8 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "IIViewDeckController.h"
-
-@interface MainViewController : IIViewDeckController
-
+@interface MainViewController : UIViewController < UITableViewDataSource, UITableViewDelegate>
+@property (strong, nonatomic) IBOutlet UITableView* tableView;
 @end

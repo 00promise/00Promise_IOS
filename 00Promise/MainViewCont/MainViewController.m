@@ -7,26 +7,13 @@
 //
 
 #import "MainViewController.h"
-
+#import "MainTableViewCell.h"
 @interface MainViewController ()
 
 @end
 
 @implementation MainViewController
 
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    self = [super initWithCenterViewController:[storyboard instantiateViewControllerWithIdentifier:@"middleViewController"]
-                            leftViewController:[storyboard instantiateViewControllerWithIdentifier:@"leftViewController"]
-                            rightViewController:[storyboard instantiateViewControllerWithIdentifier:@"rightViewController"]];
-    self.leftSize = 20;
-    self.rightSize = 20;
-    if (self) {
-        // Add any extra init code here
-    }
-    return self;
-}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,6 +28,47 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+
+}
+
+- (void)initVariable{
+    
+}
+- (void)initView{
+    //    CGFloat navBarHeight = [self.navigationController.navigationBar sizeThatFits:self.view.bounds.size].height;
+    //
+    //    // Resizing navigationBar
+    //    self.navigationController.navigationBar.frame = CGRectMake(0, 0, self.view.bounds.size.width, navBarHeight);
+    [_tableView setContentInset:UIEdgeInsetsMake(10.0, 0.0, 0.0, 0.0)];
+    
+}
+
+#pragma mark UITableViewDelegate UITableViewDataSource
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 296;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 5;
+}
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *CellIdentifier = @"Cell";
+    
+    MainTableViewCell *cell = (MainTableViewCell*) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"MainTableViewCell" owner:nil options:nil];
+        cell = [topLevelObjects objectAtIndex:0];
+        
+    }
+    [cell setFrame:CGRectMake(10, 0, 300, 296)];
+    return cell;
+    
 }
 
 - (void)didReceiveMemoryWarning

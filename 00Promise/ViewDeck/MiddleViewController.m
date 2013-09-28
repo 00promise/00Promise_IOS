@@ -7,8 +7,9 @@
 //
 
 #import "MiddleViewController.h"
-#import "IIViewDeckController.h"
 #import "MainTableViewCell.h"
+#import "LocationViewController.h"
+#import "SearchViewController.h"
 @interface MiddleViewController ()
 
 @end
@@ -31,12 +32,47 @@
     // Do any additional setup after loading the view from its nib.
 }
 - (void)initVariable{
-    NSLog(@"INIT VARIABLE");
 }
 
 - (void)initView{
-    NSLog(@"INIT VIEW");
     [_tableView setContentInset:UIEdgeInsetsMake(10.0, 0.0, 0.0, 0.0)];
+}
+
+- (void)leftItemClick{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    LocationViewController* locationViewCont = [storyboard instantiateViewControllerWithIdentifier:@"locationViewController"];
+    UIViewController *src = (UIViewController *) self;
+    UIViewController *dst = (UIViewController *) locationViewCont;
+    [UIView transitionFromView:src.view
+                        toView:dst.view
+                      duration:1
+                       options:UIViewAnimationOptionTransitionFlipFromLeft
+                    completion:nil];
+    [UIView transitionFromView:src.navigationItem.titleView
+                        toView:dst.navigationItem.titleView
+                      duration:1
+                       options:UIViewAnimationOptionTransitionFlipFromLeft
+                    completion:nil];
+    [src.navigationController pushViewController:dst animated:NO];
+
+    
+    /*
+    CATransition *animation = [CATransition animation];
+    [self.navigationController pushViewController:locationViewCont animated:NO];
+    [animation setDuration:0.45];
+    [animation setType:kCATransitionPush];
+    [animation setSubtype:kCATransitionFromRight];
+    [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault]];
+    [locationViewCont.view.layer addAnimation:animation forKey:@"SwitchToView1"];
+     */
+}
+
+- (void)rightItemClick{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    SearchViewController* locationNaviViewCont = [storyboard instantiateViewControllerWithIdentifier:@"searchViewController"];
+    [self.navigationController pushViewController:locationNaviViewCont animated:TRUE];
 }
 
 #pragma mark UITableViewDelegate UITableViewDataSource
