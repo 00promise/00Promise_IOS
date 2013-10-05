@@ -39,10 +39,10 @@
 - (void)initView{
     [self setTitleLabelStr:@"서울특별시"];
     if (IS_IPHONE && [[UIScreen mainScreen] bounds].size.height != 568.0f) {
-        [_tableView setFrame:CGRectMake(_tableView.frame.origin.x, _tableView.frame.origin.y, _tableView.frame.size.width, _tableView.frame.size.height-88)];
+        //[_tableView setFrame:CGRectMake(_tableView.frame.origin.x, _tableView.frame.origin.y, _tableView.frame.size.width, _tableView.frame.size.height-88)];
     }
     if (IS_UNDER_IOS7) {
-        _tableView.frame = CGRectMake(0, 12, 320, 458);
+        //_tableView.frame = CGRectMake(0, 0, 320, 478);
     }
     // create a new Search Bar and add it to the table view
     _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 44.0f)];
@@ -53,7 +53,7 @@
     
     //_searchBar.backgroundImage = [UIImage imageNamed:@"search_bg01.png"];
     //[UIColor colorWithPatternImage:[UIImage imageNamed:@"search_icon01"]];
-    _searchBar.placeholder = @"지번을 입력하세요 (읍 면 동 리)";
+    _searchBar.placeholder = @"시군구를 입력하세요";
     // we need to be the delegate so the cancel button works
     _searchBar.delegate = self;
     
@@ -223,9 +223,10 @@
     }
     
     [[NSUserDefaults standardUserDefaults] setInteger:sigungu.code.integerValue forKey:@"locationCode"];
-    [[NSUserDefaults standardUserDefaults] setValue:sigungu.name forKey:@"locationName"];
+    [[NSUserDefaults standardUserDefaults] setValue:sigungu.fullName forKey:@"locationName"];
     BaseViewController* baseViewCont = [[self.navigationController viewControllers] objectAtIndex:0];
-    [baseViewCont.locationView reloadLocation];
+    [[NSUserDefaults standardUserDefaults] setInteger:sigungu.ID.integerValue forKey:@"sigunguId"];
+    [baseViewCont.locationView reloadLocation:sigungu.ID.integerValue :sigungu.fullName];
     [self.navigationController popToRootViewControllerAnimated:TRUE];
 }
 #pragma mark UISearchBarDelegate

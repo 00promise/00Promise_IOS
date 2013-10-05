@@ -15,10 +15,10 @@
 {
     NSInteger searchBarY;
 }
-@property (nonatomic, strong) IBOutlet UIView* bottomNaviBarView;
-@property (nonatomic, strong) IBOutlet UIScrollView* scrollView;
-@property (nonatomic, strong) IBOutlet UIImageView* backBarImgView;
-@property (nonatomic, strong) IBOutlet UIImageView* highlightBarImgView;
+@property (nonatomic, weak) IBOutlet UIView* bottomNaviBarView;
+@property (nonatomic, weak) IBOutlet UIScrollView* scrollView;
+@property (nonatomic, weak) IBOutlet UIImageView* backBarImgView;
+@property (nonatomic, weak) IBOutlet UIImageView* highlightBarImgView;
 @property (nonatomic, strong) IBOutlet LocationView* locationView;
 @property (nonatomic, strong) IBOutlet MainView* mainView;
 @property (nonatomic, strong) IBOutlet SearchView* searchView;

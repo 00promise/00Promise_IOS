@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[MainView tableView:heightForRowAtIndexPath:]:MainView.m">
+      </ContextState>
+      <ContextState
+         contextName = "__35-[PledgeViewController agreeClick:]_block_invoke_2374:PledgeViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__33-[PledgeViewController sendClick]_block_invoke_2266:PledgeViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[MainView tableView:cellForRowAtIndexPath:]:MainView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "largeTitle">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

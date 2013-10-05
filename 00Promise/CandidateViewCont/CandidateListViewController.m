@@ -40,9 +40,15 @@
     NSLog(@"%@",[segue identifier]);
 }
 - (void)initVariable{
+    page = 1;
     _candidateArr = [NSMutableArray new];
 }
 - (void)initView{
+    [[NSBundle mainBundle] loadNibNamed:@"PledgeFooterActivityIndicator" owner:self options:nil];//this gets a new instance from the xib
+    self.activityIndicator=self.activityIndicator;
+    [[self tableView] setTableFooterView:[self activityIndicatorView]];
+    [[self activityIndicatorView] setHidden:TRUE];
+    
     [_tableView setContentInset:UIEdgeInsetsMake(10.0f, 0.0, 10.0, 0.0)];
     
     [_candidateArr removeAllObjects];
@@ -77,18 +83,55 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
         NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
-        FSBlockButton *cancelButton = [FSBlockButton blockButtonWithTitle:@"예" block:^ {
-            [self initView];
-        }];
-        FSBlockButton *okButton = [FSBlockButton blockButtonWithTitle:@"아니요" block:^ {
-        }];
-        FSAlertView *alert = [[FSAlertView alloc] initWithTitle:@"에러" message:@"다시 시도하시겠습니까?." cancelButton:cancelButton otherButtons:okButton, nil];
-        [alert show];
+    
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
 }
 - (void)backItemClick{
     [self.navigationController popViewControllerAnimated:TRUE];
+}
+- (void)loadMore{
+    page++;
+    NSString *url;
+    if (_electionId != 0) {
+        url = [NSString stringWithFormat:@"elections/%i/politicians.json",_electionId];
+    }else{
+        url = [NSString stringWithFormat:@"parties/%i/politicians.json",_candidateId];
+    }
+    NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
+    [params setObject:[NSString stringWithFormat:@"%d",page] forKey:@"page"];
+    [[AFAppDotNetAPIClient sharedClient] getPath:url parameters:params success:^(AFHTTPRequestOperation *response, id responseObject) {
+#ifdef _SERVER_LOG_
+        NSLog(@"parties/@id/politicians.json : %@",(NSDictionary *)responseObject);
+#endif
+        NSString* code = [responseObject objectForKey:@"code"];
+        int tmpIdx;
+        if (![code isEqualToString:@"0000"]) {
+            FSBlockButton *cancelButton = [FSBlockButton blockButtonWithTitle:@"확인" block:^ {
+                [[UIApplication sharedApplication] finalize];
+            }];
+            FSAlertView *alert = [[FSAlertView alloc] initWithTitle:@"에러" message:[responseObject objectForKey:@"message"] cancelButton:cancelButton otherButtons: nil];
+            [alert show];
+        }else{
+            tmpIdx = [_candidateArr count];
+            NSMutableArray* manifestoArr = [responseObject objectForKey:@"data"];
+            for (NSDictionary* dic in manifestoArr) {
+                NSDictionary* politicianDic = [NSDictionary dictionaryWithObject:dic forKey:@"politician"];
+                Politician* politician = [Politician new];
+                [politician setPropertiesUsingRemoteDictionary:politicianDic];
+                [_candidateArr addObject:politician];
+            }
+            [_tableView reloadData];
+        }
+        if (_tableView.contentOffset.y > _tableView.contentSize.height - _tableView.frame.size.height-_activityIndicatorView.frame.size.height) {
+            [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:tmpIdx-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:TRUE];
+        }
+        [[self activityIndicatorView] setHidden:TRUE];
+        [[self activityIndicator] stopAnimating];
+    } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
+        NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+        page--;
+    }];
 }
 #pragma mark UITableViewDelegate UITableViewDataSource
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -154,7 +197,7 @@
     cell.contentLabel.text = politician.memo;
     cell.positionLabel.text = politician.positionName;
     if ([politician haveImg]) {
-        [cell.profileImgView setImageWithURL:[NSURL URLWithString:[politician img]] placeholderImage:nil options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType){
+        [cell.profileImgView setImageWithURL:[NSURL URLWithString:[politician img]] placeholderImage:[UIImage imageNamed:@"default_image.png"] options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType){
             
         }];
     }
@@ -170,7 +213,20 @@
     candidateViewCont.politicianId = politician.ID.integerValue;
     [self.navigationController pushViewController:candidateViewCont animated:TRUE];
 }
-
+#pragma mark UIScrollView delegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if ([_candidateArr count] < 10) {
+        return ;
+    }
+	if (([scrollView contentOffset].y + scrollView.frame.size.height) > [scrollView contentSize].height) {
+        if (![[self activityIndicator] isAnimating]) {
+            [self loadMore];
+        }
+        [[self activityIndicator] startAnimating];
+        [[self activityIndicatorView] setHidden:FALSE];
+	}
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

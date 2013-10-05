@@ -6,80 +6,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "00Promise/LocationViewCont/LocationView.m"
-            timestampString = "401593611.426373"
+            filePath = "Pods/NSRails/nsrails/Source/NSRRemoteObject.m"
+            timestampString = "402642234.335075"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
-            landmarkName = "-awakeFromNib"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "00Promise/LocationViewCont/LocationView.m"
-            timestampString = "401593504.352618"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "17"
-            endingLineNumber = "17"
-            landmarkName = "-initWithFrame:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "00Promise/LocationViewCont/LocationView.m"
-            timestampString = "401593884.540424"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "-startLocationManager"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "00Promise/SearchViewCont/SearchView.m"
-            timestampString = "401880540.656359"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "-layoutSubviews"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "00Promise/SearchViewCont/SearchView.m"
-            timestampString = "401880020.755688"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
+            landmarkName = "+typeClassForProperty:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -89,27 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "00Promise/CommonUI/SuperViewController.m"
-            timestampString = "401790471.146348"
+            filePath = "Pods/NSRails/nsrails/Source/NSRRemoteObject.m"
+            timestampString = "402642442.165485"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "00Promise/MainViewCont/BaseViewController.m"
-            timestampString = "401880648.906"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
-            landmarkName = "-scrollViewDidScroll:"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
+            landmarkName = "+typeForProperty:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -119,14 +41,44 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "00Promise/SearchViewCont/ContentViewController.m"
-            timestampString = "401880171.135781"
+            filePath = "Pods/NSRails/nsrails/Source/NSRRemoteObject.m"
+            timestampString = "402642444.628831"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
+            landmarkName = "+typeForProperty:"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "+[NSRRemoteObject typeForProperty:]"
+                  moduleName = "00Promise"
+                  urlString = "file://localhost/Users/Digitalfrog/Dropbox/Rangken/Programming/IOS/00Promise/Pods/NSRails/nsrails/Source/NSRRemoteObject.m"
+                  timestampString = "402642477.500363"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "131"
+                  endingLineNumber = "131"
+                  offsetFromSymbolStart = "275">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "+[NSRRemoteObject typeForProperty:]"
+                  moduleName = "00Promise"
+                  urlString = "file://localhost/Users/Digitalfrog/Dropbox/Rangken/Programming/IOS/00Promise/Pods/NSRails/nsrails/Source/NSRRemoteObject.m"
+                  timestampString = "402642477.500588"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "131"
+                  endingLineNumber = "131"
+                  offsetFromSymbolStart = "803">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -135,46 +87,44 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "00Promise/SearchViewCont/ContentViewController.m"
-            timestampString = "401880173.014431"
+            filePath = "Pods/NSRails/nsrails/Source/NSRRemoteObject.m"
+            timestampString = "402642492.993299"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
+            landmarkName = "+typeForProperty:"
             landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "00Promise/SearchViewCont/ContentViewController.m"
-            timestampString = "401880177.244515"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "-tableView:numberOfRowsInSection:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "00Promise/SearchViewCont/ContentViewController.m"
-            timestampString = "401880178.020603"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "-tableView:numberOfRowsInSection:"
-            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "+[NSRRemoteObject typeForProperty:]"
+                  moduleName = "00Promise"
+                  urlString = "file://localhost/Users/Digitalfrog/Dropbox/Rangken/Programming/IOS/00Promise/Pods/NSRails/nsrails/Source/NSRRemoteObject.m"
+                  timestampString = "402642492.994473"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "131"
+                  endingLineNumber = "131"
+                  offsetFromSymbolStart = "275">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "+[NSRRemoteObject typeForProperty:]"
+                  moduleName = "00Promise"
+                  urlString = "file://localhost/Users/Digitalfrog/Dropbox/Rangken/Programming/IOS/00Promise/Pods/NSRails/nsrails/Source/NSRRemoteObject.m"
+                  timestampString = "402642492.994733"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "131"
+                  endingLineNumber = "131"
+                  offsetFromSymbolStart = "803">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

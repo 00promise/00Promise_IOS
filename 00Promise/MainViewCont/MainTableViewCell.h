@@ -9,18 +9,20 @@
 #import <UIKit/UIKit.h>
 
 @interface MainTableViewCell : UITableViewCell
-@property (nonatomic, strong) IBOutlet UIImageView* backImgView1;
-@property (nonatomic, strong) IBOutlet UIImageView* backImgView2;
-@property (nonatomic, strong) IBOutlet UIImageView* bgImgView;
-@property (nonatomic, strong) IBOutlet UIImageView* candidateImgView;
-@property (nonatomic, strong) IBOutlet UILabel* nameLabel;
-@property (nonatomic, strong) IBOutlet UILabel* positioNameLabel;
-@property (nonatomic, strong) IBOutlet UILabel* titleLabel;
-@property (nonatomic, strong) IBOutlet UILabel* userNameLabel;
-@property (nonatomic, strong) IBOutlet UILabel* createdAtLabel;
-@property (nonatomic, strong) IBOutlet UILabel* contentLabel;
-@property (nonatomic, strong) IBOutlet UILabel* replyCntLabel;
+@property (nonatomic, weak) IBOutlet UIImageView* backImgView1;
+@property (nonatomic, weak) IBOutlet UIImageView* backImgView2;
+@property (nonatomic, weak) IBOutlet UIImageView* bgImgView;
+@property (nonatomic, weak) IBOutlet UIImageView* candidateImgView;
+@property (nonatomic, weak) IBOutlet UILabel* nameLabel;
+@property (nonatomic, weak) IBOutlet UILabel* positioNameLabel;
+@property (nonatomic, weak) IBOutlet UILabel* titleLabel;
+@property (nonatomic, weak) IBOutlet UILabel* userNameLabel;
+@property (nonatomic, weak) IBOutlet UILabel* createdAtLabel;
+@property (nonatomic, weak) IBOutlet UILabel* contentLabel;
+@property (nonatomic, weak) IBOutlet UILabel* replyCntLabel;
 
-@property (nonatomic, strong) IBOutlet UIImageView* bannerImgView;
-@property (nonatomic, strong) IBOutlet UILabel* bannerLabel;
+@property (nonatomic, weak) IBOutlet UIImageView* bannerImgView;
+@property (nonatomic, weak) IBOutlet UILabel* bannerLabel;
+@property (nonatomic, weak) IBOutlet UIImageView* lineImgView;
+@property (nonatomic, weak) IBOutlet UIView* bottomView;
 @end

@@ -13,8 +13,8 @@
 {
     
 }
-@property (nonatomic, strong) IBOutlet UITextField* searchTextField;
-@property (nonatomic, strong) IBOutlet UITableView* tableView;
+@property (nonatomic, weak) IBOutlet UITextField* searchTextField;
+@property (nonatomic, weak) IBOutlet UITableView* tableView;
 @property (nonatomic, strong) UISearchDisplayController *searchDisplayCont;
 @property (nonatomic, strong) UISearchBar* searchBar;
 @property (nonatomic, strong) NSMutableArray* electionArr;

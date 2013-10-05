@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface LoginViewController : UIViewController
-@property (nonatomic, strong) IBOutlet UITextField* emailTextField;
-@property (nonatomic, strong) IBOutlet UITextField* passwordTextField;
+@property (nonatomic, weak) IBOutlet UITextField* emailTextField;
+@property (nonatomic, weak) IBOutlet UITextField* passwordTextField;
 @end

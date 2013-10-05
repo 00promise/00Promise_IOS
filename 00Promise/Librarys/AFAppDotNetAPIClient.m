@@ -52,8 +52,11 @@ static NSString * const kAFAppDotNetAPIBaseURLString = RAILS_BASE_URL;
     }
     [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
     [self setDefaultHeader:@"Accept" value:@"application/json"];
+    
     NSString* token = [[NSUserDefaults standardUserDefaults] objectForKey:@"authToken"];
-    [self setDefaultHeader:@"Authorization" value:[NSString stringWithFormat:@"access_token=\"%@\"", token]];
+    //[self setDefaultHeader:@"access_token" value:token];
+    NSLog(@"token : %@",token);
+    [self setAuthorizationHeaderWithToken:token];
     //[self setDefaultSSLPinningMode:AFSSLPinningModePublicKey];
     
     return self;

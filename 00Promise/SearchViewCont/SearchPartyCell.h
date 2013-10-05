@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "SearchView.h"
 @interface SearchPartyCell : UITableViewCell
-@property (nonatomic, strong) IBOutlet UIImageView* backImgView;
-@property (nonatomic, strong) IBOutlet UILabel* partyLabel;
-@property (nonatomic, strong) IBOutlet UIImageView* arrowImgView;
-@property (nonatomic, strong) IBOutlet UIImageView* checkImgView;
+@property (nonatomic, weak) IBOutlet UIImageView* backImgView;
+@property (nonatomic, weak) IBOutlet UILabel* partyLabel;
+@property (nonatomic, weak) IBOutlet UIImageView* arrowImgView;
+@property (nonatomic, weak) IBOutlet UIImageView* checkImgView;
 
 @end

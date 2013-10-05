@@ -9,6 +9,7 @@
 #import "CandidateViewController.h"
 #import "CandidateInfoCell.h"
 #import "PledgeListCell.h"
+#import "PledgeViewController.h"
 #import "JYGraphic.h"
 #import "DateUtil.h"
 #import <FSExtendedAlertKit.h>
@@ -81,7 +82,7 @@
 #pragma mark UITableViewDelegate UITableViewDataSource
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section == 1) {
-        return 20;
+        return 6;
     }
     return 0;
 }
@@ -91,7 +92,7 @@
     if (section == 0) {
         height = 0;
     }else{
-        height = 10;
+        height = 6;
     }
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, height)];
     [view setBackgroundColor:[UIColor clearColor]];
@@ -120,7 +121,7 @@
     }else if (indexPath.section == 1){
         if (indexPath.row == 0) {
             return 57;
-        }else if(indexPath.row == 4){
+        }else if(indexPath.row == [_politician.manifestos count]-1){
             return 58;
         }else{
             return 56;
@@ -153,17 +154,17 @@
             cell = [topLevelObjects objectAtIndex:0];
             
         }
-        [JYGraphic setRoundedView:cell.politicianImgView toDiameter:92.0f];
+        [JYGraphic setRoundedView:cell.politicianImgView toDiameter:88.0f];
         UIImage *backImage = [UIImage imageNamed:@"profile_bg01.png"];
         cell.backImgView.image = [backImage stretchableImageWithLeftCapWidth:3 topCapHeight:3];
         
         if ([_politician haveImg]) {
-            [cell.politicianImgView setImageWithURL:[NSURL URLWithString:[_politician img]] placeholderImage:nil options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType){
+            [cell.politicianImgView setImageWithURL:[NSURL URLWithString:[_politician img]] placeholderImage:[UIImage imageNamed:@"feed_bg_profile01.png"] options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType){
                 
             }];
         }
         if ([_politician haveBgImg]) {
-            [cell.bgImgView setImageWithURL:[NSURL URLWithString:[_politician bgImg]] placeholderImage:nil options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType){
+            [cell.bgImgView setImageWithURL:[NSURL URLWithString:[_politician bgImg]] placeholderImage:[UIImage imageNamed:@"bg_default.png"] options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType){
                 
             }];
         }
@@ -171,7 +172,7 @@
         cell.birthLabel.text = [DateUtil dateStringByTimestamp:_politician.birthday.longLongValue];
         cell.positionLabel.text = [NSString stringWithFormat:@"현재 제 %@ (%@)",_politician.positionName,_politician.partyName];
         cell.positionHistoryLabel.text = _politician.memo;
-        
+        cell.positionHistoryLabel.frame = CGRectMake(cell.positionHistoryLabel.frame.origin.x, cell.positionHistoryLabel.frame.origin.y, cell.positionHistoryLabel.frame.size.width, memoHeight);
         return cell;
     }else{
         PledgeListCell *cell = (PledgeListCell*) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -216,7 +217,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    if (indexPath.section == 1) {
+        Manifesto* manifesto = [_politician.manifestos objectAtIndex:indexPath.row];
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        PledgeViewController* pledgeViewCont = [storyboard instantiateViewControllerWithIdentifier:@"pledgeViewController"];
+        pledgeViewCont.manifestoId = manifesto.ID.integerValue;
+        [self.navigationController pushViewController:pledgeViewCont animated:TRUE];
+    }
 }
 
 

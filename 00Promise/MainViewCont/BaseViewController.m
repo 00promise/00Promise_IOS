@@ -274,7 +274,7 @@
 }
 #pragma mark UISearchBarDelegate
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-    //[self.bottomNaviBarView setHidden:TRUE];
+    [self.bottomNaviBarView setHidden:TRUE];
     [searchBar setShowsCancelButton:YES animated:YES];
     _searchView.tableView.allowsSelection = NO;
     _searchView.tableView.scrollEnabled = NO;
@@ -297,13 +297,15 @@
             }
         }
     }
+    
+    /*
     CGRect statusBarFrame =  [[UIApplication sharedApplication] statusBarFrame];
     UIView *topView = _searchView.searchDisplayCont.searchBar.subviews[0];
     if (IS_IOS7 && IS_IPHONE_5) {
         topView = _searchView.searchDisplayCont.searchBar.subviews[0];
         topView.frame = CGRectMake(topView.frame.origin.x, searchBarY+statusBarFrame.size.height, topView.frame.size.width, topView.frame.size.height);
     }
-    
+    */
     if (cancelButton){
         //Set the new title of the cancel button
         [cancelButton setTitle:@"취소" forState:UIControlStateNormal];
@@ -314,11 +316,15 @@
     }
 }
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar; {
-    
+    [self.bottomNaviBarView setHidden:FALSE];
 }
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+    if ([searchText length] < 2) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        return ;
+    }
     NSLog(@"SEARCH TEXT :%@",searchText);
-    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[[AFAppDotNetAPIClient sharedClient] operationQueue] cancelAllOperations];
     [_searchArr removeAllObjects];
     NSDictionary* params = [NSDictionary dictionaryWithObject:searchText forKey:@"q"];
@@ -343,13 +349,15 @@
             [_searchView.searchDisplayCont.searchResultsTableView reloadData];
             //[_tableView reloadData];
         }
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
         NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
         [_searchView.searchDisplayCont.searchResultsTableView reloadData];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
 }
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    //[self.bottomNaviBarView setHidden:FALSE];
+    [self.bottomNaviBarView setHidden:FALSE];
     searchBar.text=@"";
     
     [searchBar setShowsCancelButton:NO animated:YES];
@@ -359,7 +367,7 @@
     
 }
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
-    
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 
 #pragma mark UISearchDisplayDelegate

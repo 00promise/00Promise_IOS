@@ -4,23 +4,12 @@ PODS:
   - FSExtendedAlertKit (0.1.0)
   - JSONKit (1.5pre)
   - LBBlurredImage (0.1.0)
-  - libwebp (0.3.0-rc7):
-    - libwebp/dec
-    - libwebp/dsp
-    - libwebp/utils
-    - libwebp/webp
-  - libwebp/dec (0.3.0-rc7)
-  - libwebp/dsp (0.3.0-rc7)
-  - libwebp/utils (0.3.0-rc7)
-  - libwebp/webp (0.3.0-rc7)
   - MBProgressHUD (0.8)
   - NSRails (2.0.3)
   - ODRefreshControl (1.1.0)
   - SDWebImage (3.4):
-    - libwebp
-    - SDWebImage/MapKit
-  - SDWebImage/MapKit (3.4):
-    - libwebp
+    - SDWebImage/Core
+  - SDWebImage/Core (3.4)
   - VKDAKeyboardControl (2.3.0)
 
 DEPENDENCIES:
@@ -41,11 +30,10 @@ SPEC CHECKSUMS:
   FSExtendedAlertKit: f4e7dc5f0feccfa280d1f88492e8f01e8e30b97f
   JSONKit: 409734ab3407fce90ef7eaa95d7168f38d9a6601
   LBBlurredImage: f44c432794e2a8a225f4c8a563aa1bd713b6b4c5
-  libwebp: 40517fa1fd3716eded73b4696c45fc0b66e4b414
   MBProgressHUD: 2bbc6f470111daf7f3eaa4eb12b8cbf01c4c0622
   NSRails: e8cf8a44ec777a63002ecae69f0ac0f9ececc6c4
   ODRefreshControl: 886e323a7c25114b9e5c397a9eefbebc034224a9
-  SDWebImage: f13f791e411c632489824aa7f129e230b52bf5c4
+  SDWebImage: 366188f04c019bfd712d45e3b36aa52070f4abd8
   VKDAKeyboardControl: 30db5b6c7dabb363376962cffd0f88e490e85850
 
 COCOAPODS: 0.23.0

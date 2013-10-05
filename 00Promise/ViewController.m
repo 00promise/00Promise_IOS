@@ -19,6 +19,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     if (IS_IPHONE_5) {
         UIImageView* imgView;
         //imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Splash_640x1136.png"]];
@@ -32,7 +33,7 @@
         UIImageView* imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
         imgView.image = [UIImage imageNamed:@"Splash_640x960.png"];
         if ([[UIDevice currentDevice].systemVersion floatValue] < 7.0) {
-            [imgView setFrame:CGRectMake(0, -20, 320, 480)];
+            [imgView setFrame:CGRectMake(0, 0, 320, 480)];
         }
         [self.view addSubview:imgView];
     }

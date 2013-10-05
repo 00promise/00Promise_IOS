@@ -10,17 +10,19 @@
 #import "PledgeViewController.h"
 @interface PledgeCell : UITableViewCell
 @property (nonatomic, strong) PledgeViewController* parent;
-@property (nonatomic, strong) IBOutlet UIImageView* bgImgView;
-@property (nonatomic, strong) IBOutlet UIImageView* candidateImgView;
-@property (nonatomic, strong) IBOutlet UILabel* nameLabel;
-@property (nonatomic, strong) IBOutlet UILabel* positionLabel;
-@property (nonatomic, strong) IBOutlet UILabel* titleLabel;
-@property (nonatomic, strong) IBOutlet UILabel* goodCntLabel;
-@property (nonatomic, strong) IBOutlet UILabel* fairCntLabel;
-@property (nonatomic, strong) IBOutlet UILabel* poorCntLabel;
-@property (nonatomic, strong) IBOutlet UILabel* replyCntLabel;
+@property (nonatomic, weak) IBOutlet UIImageView* bgImgView;
+@property (nonatomic, weak) IBOutlet UIImageView* candidateImgView;
+@property (nonatomic, weak) IBOutlet UILabel* nameLabel;
+@property (nonatomic, weak) IBOutlet UILabel* positionLabel;
+@property (nonatomic, weak) IBOutlet UILabel* titleLabel;
+@property (nonatomic, weak) IBOutlet UILabel* goodCntLabel;
+@property (nonatomic, weak) IBOutlet UILabel* fairCntLabel;
+@property (nonatomic, weak) IBOutlet UILabel* poorCntLabel;
+@property (nonatomic, weak) IBOutlet UILabel* replyCntLabel;
+@property (nonatomic, weak) IBOutlet UILabel* theMoreLabel;
+@property (nonatomic, weak) IBOutlet UILabel* manifestoLabel;
 
-@property (nonatomic, strong) IBOutlet UILabel* manifestoLabel;
-
-
+@property (nonatomic, weak) IBOutlet UIButton* goodBtn;
+@property (nonatomic, weak) IBOutlet UIButton* fairBtn;
+@property (nonatomic, weak) IBOutlet UIButton* poorBtn;
 @end

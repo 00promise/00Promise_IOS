@@ -25,17 +25,15 @@
     }
     return self;
 }
+
 - (void)awakeFromNib{
-    if (IS_IPHONE && [[UIScreen mainScreen] bounds].size.height != 568.0f) {
-        [_tableView setFrame:CGRectMake(_tableView.frame.origin.x, _tableView.frame.origin.y, _tableView.frame.size.width, _tableView.frame.size.height-88)];
-    }
-    if (IS_UNDER_IOS7) {
-        _tableView.frame = CGRectMake(0, 0, 320, 458);
-    }
+    
 }
 - (void)layoutSubviews{
     [super layoutSubviews];
-    
+    if (IS_IOS7 ) {
+        [_tableView setFrame:CGRectMake(0, 0, 320, _tableView.frame.size.height)];
+    }
     // create a new Search Bar and add it to the table view
     _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 44.0f)];
     //[[UISearchBar appearance] setSearchFieldBackgroundImage:[UIImage imageNamed:@"search_bg01.png"] forState:UIControlStateNormal];
@@ -118,14 +116,14 @@
         [MBProgressHUD hideHUDForView:self animated:YES];
     } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
         NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
-        FSBlockButton *cancelButton = [FSBlockButton blockButtonWithTitle:@"예" block:^ {
-            [self initView];
-        }];
-        FSBlockButton *okButton = [FSBlockButton blockButtonWithTitle:@"아니요" block:^ {
-            
-        }];
-        FSAlertView *alert = [[FSAlertView alloc] initWithTitle:@"에러" message:@"다시 시도하시겠습니까?." cancelButton:cancelButton otherButtons:okButton, nil];
-        [alert show];
+//        FSBlockButton *cancelButton = [FSBlockButton blockButtonWithTitle:@"예" block:^ {
+//            [self initView];
+//        }];
+//        FSBlockButton *okButton = [FSBlockButton blockButtonWithTitle:@"아니요" block:^ {
+//            
+//        }];
+//        FSAlertView *alert = [[FSAlertView alloc] initWithTitle:@"에러" message:@"다시 시도하시겠습니까?." cancelButton:cancelButton otherButtons:okButton, nil];
+//        [alert show];
         [MBProgressHUD hideHUDForView:self animated:YES];
     }];
 }
@@ -140,7 +138,7 @@
     [((UIViewController *)self.parentViewCont).navigationController pushViewController:candidateViewCont animated:TRUE];
     
 }
-
+//http://00promise.org/api/politicians/my_district/1.json
 #pragma mark BaseViewDelegate
 - (void)viewDidSlide{
     NSLog(@"viewDidSlide");

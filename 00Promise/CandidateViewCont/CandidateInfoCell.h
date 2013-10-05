@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface CandidateInfoCell : UITableViewCell
-@property (nonatomic, strong) IBOutlet UIImageView* backImgView;
-@property (nonatomic, strong) IBOutlet UIImageView* bgImgView;
-@property (nonatomic, strong) IBOutlet UIImageView* politicianImgView;
-@property (nonatomic, strong) IBOutlet UILabel* nameLabel;
-@property (nonatomic, strong) IBOutlet UILabel* birthLabel;
-@property (nonatomic, strong) IBOutlet UILabel* positionLabel;
-@property (nonatomic, strong) IBOutlet UILabel* positionHistoryLabel;
+@property (nonatomic, weak) IBOutlet UIImageView* backImgView;
+@property (nonatomic, weak) IBOutlet UIImageView* bgImgView;
+@property (nonatomic, weak) IBOutlet UIImageView* politicianImgView;
+@property (nonatomic, weak) IBOutlet UILabel* nameLabel;
+@property (nonatomic, weak) IBOutlet UILabel* birthLabel;
+@property (nonatomic, weak) IBOutlet UILabel* positionLabel;
+@property (nonatomic, weak) IBOutlet UILabel* positionHistoryLabel;
 @end

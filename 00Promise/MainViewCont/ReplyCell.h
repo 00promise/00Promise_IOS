@@ -11,10 +11,12 @@
 @class PledgeViewController;
 @interface ReplyCell : UITableViewCell
 @property (nonatomic, strong) PledgeViewController* parent;
-@property (nonatomic, strong) IBOutlet UIImageView* bestImgView;
-@property (nonatomic, strong) IBOutlet UILabel* nameLabel;
-@property (nonatomic, strong) IBOutlet UILabel* createdAtLabel;
-@property (nonatomic, strong) IBOutlet UILabel* contentLabel;
-@property (nonatomic, strong) IBOutlet UILabel* ratingAgreeLabel;
-@property (nonatomic, strong) IBOutlet UILabel* ratingDisAgreeLabel;
+@property (nonatomic, weak) IBOutlet UIImageView* bestImgView;
+@property (nonatomic, weak) IBOutlet UILabel* nameLabel;
+@property (nonatomic, weak) IBOutlet UILabel* createdAtLabel;
+@property (nonatomic, weak) IBOutlet UILabel* contentLabel;
+@property (nonatomic, weak) IBOutlet UILabel* ratingAgreeLabel;
+@property (nonatomic, weak) IBOutlet UILabel* ratingDisAgreeLabel;
+@property (nonatomic, weak) IBOutlet UIButton* agreeBtn;
+@property (nonatomic, weak) IBOutlet UIButton* disAgreeBtn;
 @end

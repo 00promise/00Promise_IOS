@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface LogoutCell : UITableViewCell
-@property (nonatomic, strong) IBOutlet UIImageView* backImgView;
-@property (nonatomic, strong) IBOutlet UILabel* txtLabel;
+@property (nonatomic, weak) IBOutlet UIImageView* backImgView;
+@property (nonatomic, weak) IBOutlet UILabel* txtLabel;
 @end

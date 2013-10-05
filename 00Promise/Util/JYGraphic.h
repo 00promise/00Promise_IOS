@@ -14,8 +14,10 @@
 }
 + (void )setRoundedView:(UIImageView *)roundedView toDiameter:(float)newSize;
 + (UIImage* )setSquareView:(UIImage *)image ratio:(CGFloat)ratio;
+/*
 + (UIImage *)convertImageToGrayScale:(UIImage *)image;
 + (UIImage *)addCircle:(UIImage *)img radius:(CGFloat)radius latCon:(CGFloat)lat lonCon:(CGFloat)lon;
 + (UIImage*)maskImage:(UIImage *)image withMask:(UIImage *)maskImage;
 + (UIImage*)imageByCropping:(UIImage *)imageToCrop toRect:(CGRect)rect;
+*/
 @end

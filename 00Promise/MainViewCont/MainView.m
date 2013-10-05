@@ -25,14 +25,12 @@
     return self;
 }
 - (void)awakeFromNib{
-    if (IS_IPHONE && [[UIScreen mainScreen] bounds].size.height != 568.0f) {
-        [_tableView setFrame:CGRectMake(_tableView.frame.origin.x, _tableView.frame.origin.y, _tableView.frame.size.width, _tableView.frame.size.height-88)];
-    }
 }
 - (void)initVariable{
     _mainManifestoArr = [NSMutableArray new];
 }
 - (void)initView{
+   
     [_tableView setHidden:TRUE];
     [_mainManifestoArr removeAllObjects];
     [MBProgressHUD showHUDAddedTo:self animated:YES];
@@ -55,6 +53,7 @@
                 [_mainManifestoArr addObject:manifesto];
             }
             [_tableView reloadData];
+            
         }
         [_tableView setHidden:FALSE];
         [MBProgressHUD hideHUDForView:self animated:YES];
@@ -73,6 +72,12 @@
 }
 - (void)layoutSubviews{
     [super layoutSubviews];
+    if (IS_IPHONE && [[UIScreen mainScreen] bounds].size.height != 568.0f) {
+        // 아이폰4
+        [_tableView setContentSize:CGSizeMake(_tableView.contentSize.width, _tableView.contentSize.height+88)];
+        //[_tableView setFrame:CGRectMake(_tableView.frame.origin.x, _tableView.frame.origin.y, _tableView.frame.size.width, _tableView.frame.size.height-68)];
+        
+    }
 }
 #pragma mark BaseViewDelegate
 - (void)viewDidSlide{
@@ -98,7 +103,7 @@
     if (section == 0) {
         return 12;
     }else{
-        return 8;
+        return 4;
     }
     return 0;
 }
@@ -129,7 +134,17 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
-        return 325;
+        Manifesto* manifesto = [_mainManifestoArr objectAtIndex:indexPath.row];
+        CGSize titleSize = [manifesto.title sizeWithFont:[UIFont systemFontOfSize:16] constrainedToSize:CGSizeMake(280, 49)];
+        CGSize replySize = [manifesto.reply.content sizeWithFont:[UIFont systemFontOfSize:16] constrainedToSize:CGSizeMake(275, 40)];
+        int height = 308;
+        if (titleSize.height > 30) {
+            height+=20;
+        }
+        if (replySize.height > 30) {
+            height+=20;
+        }
+        return height;
     }else{
         return 53;
     }
@@ -140,6 +155,9 @@
     if (section == 0) {
         return [_mainManifestoArr count];
     }else{
+        if ([_mainManifestoArr count] == 0) {
+            return 0;
+        }
         return 1;
     }
     return 0;
@@ -150,30 +168,60 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"Cell";
     if (indexPath.section == 0) {
+        Manifesto* manifesto = [_mainManifestoArr objectAtIndex:indexPath.row];
+        
         MainTableViewCell *cell = (MainTableViewCell*) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
-            NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"MainTableViewCell" owner:nil options:nil];
+            NSArray *topLevelObjects;
+            topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"MainTableViewCell" owner:nil options:nil];
+            
             cell = [topLevelObjects objectAtIndex:0];
         }
-        [cell setFrame:CGRectMake(10, 0, 300, 296)];
-        Manifesto* manifesto = [_mainManifestoArr objectAtIndex:indexPath.row];
-//        if ([manifesto rangeOfString:@"missing"].location == NSNotFound) {
-//            [nextView.imgView setImageWithURL:[NSURL URLWithString:[exercise img]] placeholderImage:[UIImage imageNamed:@"exercise_thumb_default.png"] options:SDWebImageRefreshCached];
-//        }
-        
-        //cell.candidateImgView.image = [UIImage imageNamed:@"test_candidate1.png"];
-        [JYGraphic setRoundedView:cell.candidateImgView toDiameter:92.0f];
+        BOOL largeTitle = FALSE;
+        BOOL largeReply = FALSE;
+        CGSize titleSize = [manifesto.title sizeWithFont:[UIFont systemFontOfSize:16] constrainedToSize:CGSizeMake(280, 49)];
+        CGSize replySize = [manifesto.reply.content sizeWithFont:[UIFont systemFontOfSize:16] constrainedToSize:CGSizeMake(275, 40)];
+        if (titleSize.height > 30) {
+            largeTitle = TRUE;
+        }
+        if (replySize.height > 30) {
+            largeReply = TRUE;
+        }
+
+        [JYGraphic setRoundedView:cell.candidateImgView toDiameter:88.0f];
         
         UIImage* backImage = [UIImage imageNamed:@"feed_bg01.png"];
         cell.backImgView1.image = [backImage stretchableImageWithLeftCapWidth:4 topCapHeight:4];
         backImage = [UIImage imageNamed:@"feed_bg02.png"];
         cell.backImgView2.image = [backImage stretchableImageWithLeftCapWidth:4 topCapHeight:4];
+        if (largeReply) {
+            if (largeTitle) {
+                [cell.bottomView setFrame:CGRectMake(10, 223, 300, 116)];
+            }else{
+                [cell.bottomView setFrame:CGRectMake(10, 203, 300, 116)];
+            }
+            [cell.backImgView2 setFrame:CGRectMake(0, 0, 300, 116)];
+        }else{
+            if (largeTitle) {
+                [cell.bottomView setFrame:CGRectMake(10, 223, 300, 96)];
+            }else{
+                [cell.bottomView setFrame:CGRectMake(10, 203, 300, 96)];
+            }
+            [cell.backImgView2 setFrame:CGRectMake(0, 0, 300, 96)];
+            [cell.replyCntLabel setFrame:CGRectMake(cell.replyCntLabel.frame.origin.x, cell.replyCntLabel.frame.origin.y-20, cell.replyCntLabel.frame.size.width, cell.replyCntLabel.frame.size.height)];
+        }
         
         cell.nameLabel.text = manifesto.politician.name;
         cell.titleLabel.text = manifesto.title;
+        if (largeTitle) {
+            [cell.titleLabel setFrame:CGRectMake(cell.titleLabel.frame.origin.x, cell.titleLabel.frame.origin.y+10, cell.titleLabel.frame.size.width, cell.titleLabel.frame.size.height)];
+        }
         cell.userNameLabel.text = manifesto.reply.username;
+        CGSize userNameSize = [manifesto.reply.username sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:CGSizeMake(58, 21)];
+        [cell.lineImgView setFrame:CGRectMake(72+userNameSize.width+6, 16, cell.lineImgView.frame.size.width, cell.lineImgView.frame.size.height)];
+        [cell.createdAtLabel setFrame:CGRectMake(cell.lineImgView.frame.origin.x+6, 9, cell.createdAtLabel.frame.size.width, cell.createdAtLabel.frame.size.height)];
         
-        cell.createdAtLabel.text = [NSString stringWithFormat:@" | %@",[DateUtil dateStringByTimestamp:manifesto.reply.createdAt.longLongValue]];
+        cell.createdAtLabel.text = [NSString stringWithFormat:@"%@",[DateUtil dateStringByTimestamp:manifesto.reply.createdAt.longLongValue]];
         cell.contentLabel.text = manifesto.reply.content;
         int totalRatingCnt = manifesto.goodCnt.integerValue + manifesto.fairCnt.integerValue + manifesto.poorCnt.integerValue;
         cell.replyCntLabel.text = [NSString stringWithFormat:@"평가 %i개  댓글 %i개",totalRatingCnt,manifesto.replyCnt.integerValue];
@@ -188,12 +236,15 @@
         }
         cell.positioNameLabel.text = manifesto.politician.positionName;
         if ([manifesto.politician haveImg]) {
-            [cell.candidateImgView setImageWithURL:[NSURL URLWithString:[manifesto.politician img]] placeholderImage:nil options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType){
+            [cell.candidateImgView setImageWithURL:[NSURL URLWithString:[manifesto.politician img]] placeholderImage:[UIImage imageNamed:@"default_image.png"] options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType){
                 
             }];
         }
+        if (largeTitle) {
+            [cell.bgImgView setFrame:CGRectMake(cell.bgImgView.frame.origin.x, cell.bgImgView.frame.origin.y, cell.bgImgView.frame.size.width, cell.bgImgView.frame.size.height+20)];
+        }
         if ([manifesto.politician haveBgImg]) {
-            [cell.bgImgView setImageWithURL:[NSURL URLWithString:[manifesto.politician bgImg]] placeholderImage:nil options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType){
+            [cell.bgImgView setImageWithURL:[NSURL URLWithString:[manifesto.politician bgImg]] placeholderImage:[UIImage imageNamed:@"bg_default.png"] options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType){
                 
             }];
         }

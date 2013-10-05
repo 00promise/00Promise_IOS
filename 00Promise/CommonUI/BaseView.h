@@ -16,6 +16,6 @@
 
 @class BaseViewController;
 @interface BaseView : UIView <BaseViewDelegate>
-@property (nonatomic, strong) BaseViewController* parentViewCont;
+@property (nonatomic, weak) BaseViewController* parentViewCont;
 
 @end

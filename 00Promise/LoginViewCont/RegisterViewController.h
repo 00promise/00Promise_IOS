@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface RegisterViewController : UIViewController
-@property (nonatomic, strong) IBOutlet UITextField* emailTextField;
-@property (nonatomic, strong) IBOutlet UITextField* passwordTextField;
-@property (nonatomic, strong) IBOutlet UITextField* passwordConfirmTextField;
+@property (nonatomic, weak) IBOutlet UITextField* emailTextField;
+@property (nonatomic, weak) IBOutlet UITextField* passwordTextField;
+@property (nonatomic, weak) IBOutlet UITextField* passwordConfirmTextField;
 @end

@@ -60,6 +60,7 @@
     
 	return thumbnail;
 }
+/*
 + (UIImage *)convertImageToGrayScale:(UIImage *)image
 {
     // Create image rectangle with current image width/height
@@ -191,6 +192,7 @@
     //Note: this is autoreleased
     return cropped;
 }
+ */
 
 
 @end

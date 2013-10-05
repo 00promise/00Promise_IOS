@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SuperViewController.h"
 @interface FavoriteLocationViewController : SuperViewController <SuperViewControllerDelegate, UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate>
-@property (nonatomic, strong) IBOutlet UITableView* tableView;
+@property (nonatomic, weak) IBOutlet UITableView* tableView;
 @property (nonatomic, strong) UISearchDisplayController *searchDisplayCont;
 @property (nonatomic, strong) UISearchBar* searchBar;
 @property (nonatomic, assign) NSInteger sidoId;

@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface PledgeListCell : UITableViewCell
-@property (nonatomic, strong) IBOutlet UIImageView* backImgView;
-@property (nonatomic, strong) IBOutlet UILabel* titleLabel;
-@property (nonatomic, strong) IBOutlet UIImageView* ratingImgView;
-@property (nonatomic, strong) IBOutlet UILabel* ratingCntLabel;
-@property (nonatomic, strong) IBOutlet UILabel* replyCntLabel;
+@property (nonatomic, weak) IBOutlet UIImageView* backImgView;
+@property (nonatomic, weak) IBOutlet UILabel* titleLabel;
+@property (nonatomic, weak) IBOutlet UIImageView* ratingImgView;
+@property (nonatomic, weak) IBOutlet UILabel* ratingCntLabel;
+@property (nonatomic, weak) IBOutlet UILabel* replyCntLabel;
 @end

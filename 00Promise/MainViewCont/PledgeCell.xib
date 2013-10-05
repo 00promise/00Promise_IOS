@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4488.1" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1536" identifier="iOS"/>
+        <deployment defaultVersion="1280" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3715.3"/>
     </dependencies>
     <objects>
@@ -14,12 +14,12 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="384"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="feed_bg_base.png" id="90k-SD-VSy">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_default.png" id="90k-SD-VSy">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="175"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="feed_bg03.png" id="Zy3-Sw-VM9">
-                        <rect key="frame" x="0.0" y="353" width="320" height="32"/>
+                        <rect key="frame" x="0.0" y="352" width="320" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                     </imageView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oHM-bB-UJ1">
@@ -30,35 +30,22 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="한국형 복지 체계의 구축" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gxJ-jg-8g6">
-                        <rect key="frame" x="59" y="194" width="202" height="21"/>
+                        <rect key="frame" x="10" y="194" width="300" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0KU-hq-Zew">
-                        <rect key="frame" x="138" y="286" width="45" height="45"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <state key="normal" image="appraisal_icon02_off.png">
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                        <state key="selected" image="appraisal_icon02_on.png"/>
-                        <state key="highlighted" image="appraisal_icon02_on.png"/>
-                        <connections>
-                            <action selector="ratingClick:" destination="3" eventType="touchUpInside" id="mHT-fJ-fbX"/>
-                        </connections>
-                    </button>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="박근혜" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pkJ-hc-tkf">
                         <rect key="frame" x="115" y="116" width="94" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                         <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_image.png" id="aXX-w2-6yF">
-                        <rect key="frame" x="114" y="19" width="92" height="92"/>
+                        <rect key="frame" x="116" y="20" width="88" height="88"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="feed_bg_profile01.png" id="QZS-pv-XTA">
@@ -85,6 +72,19 @@
                             <action selector="ratingClick:" destination="3" eventType="touchUpInside" id="DBr-fX-aVl"/>
                         </connections>
                     </button>
+                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0KU-hq-Zew">
+                        <rect key="frame" x="138" y="286" width="45" height="45"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <state key="normal" image="appraisal_icon02_off.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <state key="selected" image="appraisal_icon02_on.png"/>
+                        <state key="highlighted" image="appraisal_icon02_on.png"/>
+                        <connections>
+                            <action selector="ratingClick:" destination="3" eventType="touchUpInside" id="mHT-fJ-fbX"/>
+                        </connections>
+                    </button>
                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="XTP-ur-fDm">
                         <rect key="frame" x="231" y="286" width="45" height="45"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
@@ -109,22 +109,16 @@
                             <action selector="theMoreClick:" destination="3" eventType="touchUpInside" id="VEs-ay-glZ"/>
                         </connections>
                     </button>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- 대주주의 사익 추구행위, 대기업의" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vh8-Wb-F3b">
-                        <rect key="frame" x="15" y="223" width="246" height="69"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="서울시 강남구 을 | 새누리당" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OUM-KR-oTU">
                         <rect key="frame" x="20" y="133" width="280" height="42"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.82745098039999998" green="0.82745098039999998" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="더보기" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lNn-cI-Zcq">
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="더보기" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lNn-cI-Zcq">
                         <rect key="frame" x="266" y="254" width="42" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -150,6 +144,13 @@
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PDM-SC-tty">
+                        <rect key="frame" x="15" y="223" width="246" height="55"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </tableViewCellContentView>
@@ -157,13 +158,17 @@
             <connections>
                 <outlet property="bgImgView" destination="90k-SD-VSy" id="1dq-Pp-0dR"/>
                 <outlet property="candidateImgView" destination="aXX-w2-6yF" id="6Vp-72-rnJ"/>
+                <outlet property="fairBtn" destination="0KU-hq-Zew" id="1cm-QQ-1E2"/>
                 <outlet property="fairCntLabel" destination="PMT-uX-U3w" id="tK3-Dv-Z4K"/>
+                <outlet property="goodBtn" destination="AgU-VG-rDJ" id="KPR-Hw-P1G"/>
                 <outlet property="goodCntLabel" destination="sJO-7z-azx" id="d3L-3g-xqZ"/>
-                <outlet property="manifestoLabel" destination="vh8-Wb-F3b" id="P18-iF-zKm"/>
+                <outlet property="manifestoLabel" destination="PDM-SC-tty" id="X3Z-SN-Mkx"/>
                 <outlet property="nameLabel" destination="pkJ-hc-tkf" id="Ml9-4w-u67"/>
+                <outlet property="poorBtn" destination="XTP-ur-fDm" id="COf-7l-Q8S"/>
                 <outlet property="poorCntLabel" destination="emm-yt-KYZ" id="zn2-ma-BJ0"/>
                 <outlet property="positionLabel" destination="OUM-KR-oTU" id="AMi-lT-3Wz"/>
                 <outlet property="replyCntLabel" destination="oHM-bB-UJ1" id="bD7-ZW-h67"/>
+                <outlet property="theMoreLabel" destination="lNn-cI-Zcq" id="zhc-5K-DtE"/>
                 <outlet property="titleLabel" destination="gxJ-jg-8g6" id="yaU-FM-PPb"/>
             </connections>
         </tableViewCell>
@@ -175,9 +180,9 @@
         <image name="appraisal_icon02_on.png" width="45" height="45"/>
         <image name="appraisal_icon03_off.png" width="45" height="45"/>
         <image name="appraisal_icon03_on.png" width="45" height="45"/>
+        <image name="bg_default.png" width="360" height="240"/>
         <image name="default_image.png" width="102" height="102"/>
         <image name="feed_bg03.png" width="4" height="32"/>
-        <image name="feed_bg_base.png" width="300" height="203"/>
         <image name="feed_bg_profile01.png" width="95" height="95"/>
     </resources>
 </document>

@@ -30,5 +30,12 @@
 {
     [_parent reportClick:sender];
 }
-
+- (IBAction)agreeClick:(id)sender
+{
+    [_parent agreeClick:sender];
+}
+- (IBAction)disAgreeClick:(id)sender
+{
+    [_parent disAgreeClick:sender];
+}
 @end

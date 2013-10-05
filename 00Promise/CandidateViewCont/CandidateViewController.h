@@ -13,7 +13,7 @@
     NSInteger memoHeight;
 }
 
-@property (nonatomic, strong) IBOutlet UITableView* tableView;
+@property (nonatomic, weak) IBOutlet UITableView* tableView;
 
 @property (nonatomic, assign) NSInteger politicianId;
 @property (nonatomic, strong) Politician* politician;

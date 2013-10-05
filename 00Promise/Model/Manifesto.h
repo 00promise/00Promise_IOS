@@ -11,9 +11,10 @@
 #import "Politician.h"
 #import "Reply.h"
 @interface Manifesto : NSRRemoteObject
-@property (nonatomic, strong) NSNumber *ID,*replyCnt,*goodCnt,*fairCnt,*poorCnt;
+@property (nonatomic, strong) NSNumber *ID,*replyCnt,*goodCnt,*fairCnt,*poorCnt,*ratingStatus;
 @property (nonatomic, strong) NSString *title, *description;
 @property (nonatomic, strong) Politician*  politician;
 @property (nonatomic, strong) Reply* reply;
 @property (nonatomic, strong) NSMutableArray* replies;
+
 @end

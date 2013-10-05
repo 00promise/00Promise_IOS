@@ -9,8 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "SuperViewController.h"
 @interface CandidateListViewController : SuperViewController <SuperViewControllerDelegate>
+{
+    int page;
+}
+@property (nonatomic, weak) IBOutlet UITableView* tableView;
 
-@property (nonatomic, strong) IBOutlet UITableView* tableView;
+@property (nonatomic, retain) IBOutlet UIView *activityIndicatorView;
+@property (nonatomic, retain) UIActivityIndicatorView *activityIndicator;
 
 @property (nonatomic, strong) NSMutableArray* candidateArr;
 @property (nonatomic, assign) NSInteger electionId;
