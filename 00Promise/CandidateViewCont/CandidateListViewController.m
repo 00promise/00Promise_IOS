@@ -82,7 +82,7 @@
         }
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
-        NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+        NSLog(@"parties/@id/politicians.json [HTTPClient Error]: %@", error.localizedDescription);
     
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
@@ -129,7 +129,7 @@
         [[self activityIndicatorView] setHidden:TRUE];
         [[self activityIndicator] stopAnimating];
     } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
-        NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+        NSLog(@"parties/@id/politicians.json [HTTPClient Error]: %@", error.localizedDescription);
         page--;
     }];
 }

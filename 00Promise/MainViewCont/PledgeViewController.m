@@ -90,7 +90,7 @@
         }
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
-        NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+        NSLog(@"manifestos/@id.json [HTTPClient Error]: %@", error.localizedDescription);
         FSBlockButton *cancelButton = [FSBlockButton blockButtonWithTitle:@"확인" block:^ {
             [self.navigationController popViewControllerAnimated:TRUE];
         }];
@@ -122,7 +122,7 @@
             [_tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
         }
     } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
-        NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+        NSLog(@"replies/manifesto/@id.json [HTTPClient Error]: %@", error.localizedDescription);
         FSBlockButton *cancelButton = [FSBlockButton blockButtonWithTitle:@"확인" block:^ {
             [self.navigationController popViewControllerAnimated:TRUE];
         }];
@@ -249,7 +249,7 @@
             }
             [MBProgressHUD hideHUDForView:self.view animated:YES];
         } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
-            NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+            NSLog(@"replies/create.json [HTTPClient Error]: %@", error.localizedDescription);
             FSBlockButton *cancelButton = [FSBlockButton blockButtonWithTitle:@"확인" block:^ {
                 
             }];
@@ -322,7 +322,7 @@
             }
             [MBProgressHUD hideHUDForView:self.view animated:YES];
         } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
-            NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+            NSLog(@"ratings/update.json [HTTPClient Error]: %@", error.localizedDescription);
             FSBlockButton *cancelButton = [FSBlockButton blockButtonWithTitle:@"확인" block:^ {
                 
             }];
@@ -392,7 +392,7 @@
             [MBProgressHUD hideHUDForView:self.view animated:YES];
         }
     } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
-        NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+        NSLog(@"reply_reports/create.json [HTTPClient Error]: %@", error.localizedDescription);
         FSBlockButton *cancelButton = [FSBlockButton blockButtonWithTitle:@"확인" block:^ {
             //[self.navigationController popViewControllerAnimated:TRUE];
         }];
@@ -446,7 +446,7 @@
         }
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
-        NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+        NSLog(@"reply_evaluations/create.json [HTTPClient Error]: %@", error.localizedDescription);
         FSBlockButton *cancelButton = [FSBlockButton blockButtonWithTitle:@"확인" block:^ {
             
         }];
@@ -499,7 +499,7 @@
         }
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
-        NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+        NSLog(@"reply_evaluations/create.json [HTTPClient Error]: %@", error.localizedDescription);
         FSBlockButton *cancelButton = [FSBlockButton blockButtonWithTitle:@"확인" block:^ {
             
         }];
@@ -541,9 +541,10 @@
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
             [refreshControl endRefreshing];
         });
+        
         //[refreshControl endRefreshing];
     } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
-        NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+        NSLog(@"replies/manifesto/@id.json [HTTPClient Error]: %@", error.localizedDescription);
         FSBlockButton *cancelButton = [FSBlockButton blockButtonWithTitle:@"확인" block:^ {
             [self.navigationController popViewControllerAnimated:TRUE];
         }];
@@ -592,7 +593,7 @@
         [[self activityIndicatorView] setHidden:TRUE];
         [[self activityIndicator] stopAnimating];
     } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
-        NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+        NSLog(@"replies/manifesto/@id.json [HTTPClient Error]: %@", error.localizedDescription);
         FSBlockButton *cancelButton = [FSBlockButton blockButtonWithTitle:@"확인" block:^ {
             [self.navigationController popViewControllerAnimated:TRUE];
         }];
@@ -657,7 +658,7 @@
         cell.nameLabel.text = _manifesto.politician.name;
         cell.positionLabel.text = _manifesto.politician.positionName;
         cell.titleLabel.text = _manifesto.title;
-        cell.manifestoLabel.text = _manifesto.description;
+        cell.manifestoLabel.text = _manifesto.descriptionInfo;
         if (theMoreHeight > 60) {
            cell.manifestoLabel.frame = CGRectMake(cell.manifestoLabel.frame.origin.x, cell.manifestoLabel.frame.origin.y, cell.manifestoLabel.frame.size.width, theMoreHeight-30);
             [cell.theMoreLabel setText:@"닫기"];

@@ -55,6 +55,7 @@
             NSDictionary* userDic = [responseObject objectForKey:@"data"];
             [[NSUserDefaults standardUserDefaults] setValue:[userDic objectForKey:@"auth_token"] forKey:@"authToken"];
             [[NSUserDefaults standardUserDefaults] setValue:[userDic objectForKey:@"email"] forKey:@"email"];
+            [[AFAppDotNetAPIClient sharedClient] setAuthorizationHeaderWithToken:[userDic objectForKey:@"auth_token"]];
             
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             
@@ -65,7 +66,7 @@
         
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
-        NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+        NSLog(@"users/sign_in.json [HTTPClient Error]: %@", error.localizedDescription);
         FSBlockButton *cancelButton = [FSBlockButton blockButtonWithTitle:@"확인" block:^ {
         }];
         FSAlertView *alert = [[FSAlertView alloc] initWithTitle:@"서버공사" message:@"서버 공사중입니다. 잠시만 기다려 주세요." cancelButton:cancelButton otherButtons: nil];

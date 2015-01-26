@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "76A4AC588C0E48B3843BFAA6"
+               BlueprintIdentifier = "676991C664B341F1972E6AD8"
                BuildableName = "libPods-FSExtendedAlertKit.a"
                BlueprintName = "Pods-FSExtendedAlertKit"
                ReferencedContainer = "container:Pods.xcodeproj">

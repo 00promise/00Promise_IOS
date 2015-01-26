@@ -67,7 +67,7 @@
         }
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
-        NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+        NSLog(@"politicians/@id.json [HTTPClient Error]: %@", error.localizedDescription);
         FSBlockButton *cancelButton = [FSBlockButton blockButtonWithTitle:@"확인" block:^ {
             [self.navigationController popViewControllerAnimated:TRUE];
         }];

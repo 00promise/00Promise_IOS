@@ -93,7 +93,7 @@
         [_tableView setHidden:FALSE];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
-        NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+        NSLog(@"api/district/sidos/@id/sigungus.json [HTTPClient Error]: %@", error.localizedDescription);
         FSBlockButton *cancelButton = [FSBlockButton blockButtonWithTitle:@"확인" block:^ {
             [self.navigationController popViewControllerAnimated:TRUE];
         }];
@@ -292,7 +292,7 @@
             [_searchDisplayCont.searchResultsTableView reloadData];
         }
     } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
-        NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+        NSLog(@"district/search.json [HTTPClient Error]: %@", error.localizedDescription);
         [_searchDisplayCont.searchResultsTableView reloadData];
     }];
 }

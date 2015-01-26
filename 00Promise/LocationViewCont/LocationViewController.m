@@ -97,7 +97,7 @@
         [_tableView setHidden:FALSE];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
-        NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+        NSLog(@"district/sidos.json [HTTPClient Error]: %@", error.localizedDescription);
         
         [_tableView setHidden:FALSE];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -290,7 +290,7 @@
             [_searchDisplayCont.searchResultsTableView reloadData];
         }
     } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
-        NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+        NSLog(@"district/search.json [HTTPClient Error]: %@", error.localizedDescription);
         [_searchDisplayCont.searchResultsTableView reloadData];
     }];
 }

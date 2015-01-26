@@ -10,5 +10,5 @@
 #import "NSRails.h"
 @interface Winner : NSRRemoteObject
 @property (nonatomic, strong) NSNumber *ID,*replyCnt,*goodCnt,*fairCnt,*poorCnt;
-@property (nonatomic, strong) NSString *title, *description;
+@property (nonatomic, strong) NSString *title, *descriptionInfo;
 @end

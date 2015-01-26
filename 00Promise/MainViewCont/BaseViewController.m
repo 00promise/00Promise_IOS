@@ -351,7 +351,7 @@
         }
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
-        NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+        NSLog(@"politicians/search.json [HTTPClient Error]: %@", error.localizedDescription);
         [_searchView.searchDisplayCont.searchResultsTableView reloadData];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];

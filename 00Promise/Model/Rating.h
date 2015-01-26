@@ -10,5 +10,5 @@
 #import "NSRails.h"
 @interface Rating : NSRRemoteObject
 @property (nonatomic, strong) NSNumber *ID,*replyCnt,*goodCnt,*fairCnt,*poorCnt;
-@property (nonatomic, strong) NSString *title, *description;
+@property (nonatomic, strong) NSString *title, *descriptionInfo;
 @end

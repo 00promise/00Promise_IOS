@@ -88,7 +88,7 @@
         }
         [MBProgressHUD hideHUDForView:self animated:YES];
     } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
-        NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+        NSLog(@"manifestos/parties.json [HTTPClient Error]: %@", error.localizedDescription);
         [MBProgressHUD hideHUDForView:self animated:YES];
     }];
     
@@ -115,7 +115,7 @@
         }
         [MBProgressHUD hideHUDForView:self animated:YES];
     } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
-        NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+        NSLog(@"manifestos/elections.json [HTTPClient Error]: %@", error.localizedDescription);
 //        FSBlockButton *cancelButton = [FSBlockButton blockButtonWithTitle:@"예" block:^ {
 //            [self initView];
 //        }];

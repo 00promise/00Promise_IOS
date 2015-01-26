@@ -19,8 +19,9 @@
 - (NSString *) propertyForRemoteKey:(NSString *)remoteKey
 {
     if ([remoteKey isEqualToString:@"id"])
-    return @"ID";
-    
+        return @"ID";
+    if ([remoteKey isEqualToString:@"description"])
+        return @"descriptionInfo";
     return [super propertyForRemoteKey:remoteKey];
 }
 
@@ -28,6 +29,8 @@
 {
     if ([property isEqualToString:@"ID"])
         *remoteKey = @"id";
+    if ([property isEqualToString:@"descriptionInfo"])
+        *remoteKey = @"description";
     
     return [super encodeValueForProperty:property remoteKey:remoteKey];
 }

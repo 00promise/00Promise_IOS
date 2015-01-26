@@ -14,13 +14,19 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
+				<string>appicon_80x80</string>
 				<string>appicon_120x120</string>
+				<string>appicon_58x58</string>
 				<string>appicon_114x114</string>
+				<string>appicon_57x57</string>
+				<string>appicon_29x29</string>
 			</array>
 		</dict>
 	</dict>
+	<key>CFBundleIcons~ipad</key>
+	<dict/>
 	<key>CFBundleIdentifier</key>
-	<string>com.sigcam.00promise</string>
+	<string>com.00promise.iseeyou2</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -39,6 +45,8 @@
 	<array>
 		<string>location</string>
 	</array>
+	<key>UILaunchImageFile</key>
+	<string>Default</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

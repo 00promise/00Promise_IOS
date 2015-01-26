@@ -66,7 +66,7 @@
 
             [MBProgressHUD hideHUDForView:self.view animated:YES];
         } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
-            NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+            NSLog(@"users/sign_up.json [HTTPClient Error]: %@", error.localizedDescription);
             FSBlockButton *cancelButton = [FSBlockButton blockButtonWithTitle:@"확인" block:^ {
             }];
             FSAlertView *alert = [[FSAlertView alloc] initWithTitle:@"서버공사" message:@"서버 공사중입니다. 잠시만 기다려 주세요." cancelButton:cancelButton otherButtons: nil];

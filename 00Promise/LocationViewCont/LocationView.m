@@ -94,7 +94,7 @@
         }
         [MBProgressHUD hideHUDForView:self animated:YES];
     } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
-        NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+        NSLog(@"politicians/my_district/@id.json [HTTPClient Error]: %@", error.localizedDescription);
         [MBProgressHUD hideHUDForView:self animated:YES];
     }];
 }
@@ -132,7 +132,7 @@
             }
             [MBProgressHUD hideHUDForView:self animated:YES];
         } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
-            NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+            NSLog(@"politicians/my_district/@id.json [HTTPClient Error]: %@", error.localizedDescription);
             [MBProgressHUD hideHUDForView:self animated:YES];
         }];
     }
@@ -230,13 +230,13 @@
                      }
                      [MBProgressHUD hideHUDForView:self animated:YES];
                  } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
-                     NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+                     NSLog(@"politicians/my_district/@id.json [HTTPClient Error]: %@", error.localizedDescription);
                      [MBProgressHUD hideHUDForView:self animated:YES];
                  }];
              }
              //[MBProgressHUD hideHUDForView:self animated:YES];
          } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
-             NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+             NSLog(@"district/search.json [HTTPClient Error]: %@", error.localizedDescription);
              [MBProgressHUD hideHUDForView:self animated:YES];
          }];
          

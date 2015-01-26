@@ -58,7 +58,7 @@
         [_tableView setHidden:FALSE];
         [MBProgressHUD hideHUDForView:self animated:YES];
     } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
-        NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+        NSLog(@"manifestos/daily.json [HTTPClient Error]: %@", error.localizedDescription);
         FSBlockButton *cancelButton = [FSBlockButton blockButtonWithTitle:@"예" block:^ {
             [self initView];
         }];
@@ -283,6 +283,7 @@
             if ([[NSUserDefaults standardUserDefaults] objectForKey:@"authToken"]) {
                 
                 // 로그아웃
+                NSLog(@"로그아웃 토큰 : %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"authToken"]);
                 MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self animated:YES];
                 hud.dimBackground = TRUE;
                 NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"authToken"] forKey:@"auth_token"];
@@ -308,7 +309,7 @@
                     }
                     [MBProgressHUD hideHUDForView:self animated:YES];
                 } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
-                    NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+                    NSLog(@"users/sign_out.json [HTTPClient Error]: %@", error.localizedDescription);
                     FSBlockButton *cancelButton = [FSBlockButton blockButtonWithTitle:@"확인" block:^ {
                     }];
                     FSAlertView *alert = [[FSAlertView alloc] initWithTitle:@"서버공사" message:@"서버 공사중입니다. 잠시만 기다려 주세요." cancelButton:cancelButton otherButtons: nil];
