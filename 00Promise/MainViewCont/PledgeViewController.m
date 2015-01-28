@@ -169,7 +169,7 @@
     UIView *keyboardCover = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
     keyboardCover.backgroundColor = [UIColor redColor];
     
-    self.view.keyboardCoverView = keyboardCover;
+    //self.view.keyboardCoverView = keyboardCover;
     self.view.keyboardTriggerOffset = _keyboardView.bounds.size.height;
     UITableView* tableView = _tableView;
     UIView* keyboardView = _keyboardView;

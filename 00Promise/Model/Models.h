@@ -18,6 +18,8 @@
 #import "User.h"
 #import "Winner.h"
 #import "Party.h"
+#import "Issue.h"
+#import "Link.h"
 @interface Models : NSObject
 
 @end

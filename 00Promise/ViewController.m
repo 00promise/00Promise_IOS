@@ -24,14 +24,14 @@
         UIImageView* imgView;
         //imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Splash_640x1136.png"]];
         imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 568)];
-        imgView.image = [UIImage imageNamed:@"Splash_640x1136.png"];
+        imgView.image = [UIImage imageNamed:@"Default-568h.png"];
         if ([[UIDevice currentDevice].systemVersion floatValue] < 7.0) {
             [imgView setFrame:CGRectMake(0, -20, 320, 568)];
         }
         [self.view addSubview:imgView];
     }else{
         UIImageView* imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-        imgView.image = [UIImage imageNamed:@"Splash_640x960.png"];
+        imgView.image = [UIImage imageNamed:@"Default.png"];
         if ([[UIDevice currentDevice].systemVersion floatValue] < 7.0) {
             [imgView setFrame:CGRectMake(0, 0, 320, 480)];
         }
@@ -54,19 +54,17 @@
 }
 
 - (void)goToMain{
-    //[self performSegueWithIdentifier:@"GoToMainModal" sender:self];
-    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     UINavigationController* naviViewController = [storyboard instantiateViewControllerWithIdentifier:@"mainNavigationController"];
     
     CATransition* transition = [CATransition animation];
-    transition.type = kCATransitionMoveIn;
-    [transition setDuration:1.0f];
-    transition.subtype = kCATransitionFromLeft;
-    [transition setType:kCATransitionFade];
-    [self.view.window.layer addAnimation:transition forKey:nil ];
-    [self presentViewController:naviViewController animated:FALSE completion:nil];
+    transition.duration = 1;
+    transition.type = kCATransitionFade;
+    transition.subtype = kCATransitionFromBottom;
+    [self.view.window.layer addAnimation:transition forKey:kCATransition];
+     
+    [self presentViewController:naviViewController animated:NO completion:nil];
 }
 
 - (void)goToLogin{
@@ -75,11 +73,11 @@
     LoginViewController* loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
     
     CATransition* transition = [CATransition animation];
-    transition.type = kCATransitionMoveIn;
-    [transition setDuration:1.0f];
-    transition.subtype = kCATransitionFromLeft;
-    [transition setType:kCATransitionFade];
-    [self.view.window.layer addAnimation:transition forKey:nil ];
+    transition.duration = 1;
+    transition.type = kCATransitionFade;
+    transition.subtype = kCATransitionFromBottom;
+    [self.view.window.layer addAnimation:transition forKey:kCATransition];
+    
     [self presentViewController:loginViewController animated:FALSE completion:nil];
 }
 

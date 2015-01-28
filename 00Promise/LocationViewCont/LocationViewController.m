@@ -7,8 +7,7 @@
 //
 
 #import "LocationViewController.h"
-#import "SearchViewController.h"
-#import "SearchPartyCell.h"
+#import "SearchCell.h"
 #import "FavoriteLocationViewController.h"
 #import "BaseViewController.h"
 #import <FSExtendedAlertKit.h>
@@ -153,6 +152,7 @@
     return 1;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    /*
     static NSString *CellIdentifier = @"Cell";
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         SearchPartyCell *cell = (SearchPartyCell*) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -204,7 +204,7 @@
         
         return cell;
     }
-    
+    */
     return nil;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -214,7 +214,7 @@
         [[NSUserDefaults standardUserDefaults] setInteger:sigungu.code.integerValue forKey:@"locationCode"];
         [[NSUserDefaults standardUserDefaults] setValue:sigungu.fullName forKey:@"locationName"];
         BaseViewController* baseViewCont = [[self.navigationController viewControllers] objectAtIndex:0];
-        [baseViewCont.locationView reloadLocation:sigungu.ID.integerValue :sigungu.fullName];
+        //[baseViewCont.locationView reloadLocation:sigungu.ID.integerValue :sigungu.fullName];
         [[NSUserDefaults standardUserDefaults] setInteger:sigungu.ID.integerValue forKey:@"sigunguId"];
         [self.navigationController popToRootViewControllerAnimated:TRUE];
     }else{

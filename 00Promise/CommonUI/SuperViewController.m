@@ -13,6 +13,7 @@
 #import "CandidateListViewController.h"
 #import "LocationViewController.h"
 #import "FavoriteLocationViewController.h"
+#import "SearchListViewController.h"
 @interface SuperViewController ()
 
 @end
@@ -31,10 +32,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.automaticallyAdjustsScrollViewInsets = FALSE;
     UINavigationBar *navBar = self.navigationController.navigationBar;
-    UIImage *image = [UIImage imageNamed:@"top_bg01.png"];
-    [navBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+    
+    UIView *overlayView = [[UIView alloc] initWithFrame:CGRectMake(0, 44, self.view.frame.size.width, 1)];
+    [overlayView setBackgroundColor:[UIColor whiteColor]];
+    [navBar setBackgroundColor:[UIColor whiteColor]];
+    [navBar addSubview:overlayView];
+    
+     
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithHex:@"#DC5A14" alpha:1.0f]];
+    [[UINavigationBar appearance] setTranslucent:NO];
+    //UIImage *image = [UIImage imageNamed:@"top_bg01.png"];
+    //[navBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
     /*
     UIImage *centerBtnImg=[UIImage imageNamed:@"top_btn02.png"];
     UIImage *centerBtnImgOn=[UIImage imageNamed:@"top_btn02.png"];
@@ -49,10 +59,10 @@
 //    [titleImgView setCenter:CGPointMake(160, 18)];
 //    [navBar addSubview:titleImgView];
 
-    if ([self isKindOfClass:[LocationViewController class]] || [self isKindOfClass:[FavoriteLocationViewController class]]) {
+    if ([self isKindOfClass:[LocationViewController class]] || [self isKindOfClass:[FavoriteLocationViewController class]] || [self isKindOfClass:[SearchListViewController class]]) {
         titleLabel=[[UILabel alloc]init];
         
-        titleLabel.font=[UIFont boldSystemFontOfSize:18];
+        titleLabel.font=[UIFont boldSystemFontOfSize:19];
         //titleLabel.shadowColor = [UIColor whiteColor];
         
         titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -62,11 +72,11 @@
         titleLabel.center=CGPointMake(160, 22);
         self.navigationItem.titleView=titleLabel;
     }else{
-        titleImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"top_btn02.png"]];
+        titleImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"main_title.png"]];
         [titleImgView setCenter:CGPointMake(160, 18)];
         self.navigationItem.titleView=titleImgView;
     }
-    
+    /*
     CGRect frame = CGRectMake(self.view.frame.size.width/4, 0, self.view.frame.size.width/2, 44);
     UIView *navBarTapView = [[UIView alloc] initWithFrame:frame];
     [navBar addSubview:navBarTapView];
@@ -94,7 +104,7 @@
     UIBarButtonItem *rightBarBtn = [[UIBarButtonItem alloc]
                                     initWithCustomView:rightBtn];
     self.navigationItem.rightBarButtonItem = rightBarBtn;
-    
+    */
     if ([self isKindOfClass:[PledgeViewController class]]) {
         self.navigationItem.rightBarButtonItem = nil;
         [self setBackBtn];
@@ -112,6 +122,10 @@
         [self setBackBtn];
     }
     if ([self isKindOfClass:[FavoriteLocationViewController class]]) {
+        self.navigationItem.rightBarButtonItem = nil;
+        [self setBackBtn];
+    }
+    if ([self isKindOfClass:[SearchListViewController class]]) {
         self.navigationItem.rightBarButtonItem = nil;
         [self setBackBtn];
     }
@@ -139,19 +153,19 @@
 }
 - (void)backItemClick{
     id<SuperViewControllerDelegate> delegate = (id<SuperViewControllerDelegate>)self;
-    if ([delegate respondsToSelector:@selector(rightItemClick)]) {
+    if ([delegate respondsToSelector:@selector(backItemClick)]) {
         [delegate backItemClick];
     }
 }
 
 - (void)setBackBtn{
-    UIImage *rightBtnImg=[UIImage imageNamed:@"top_btn04.png"];
-    UIImage *rightBtnImgOn=[UIImage imageNamed:@"top_btn04.png"];
+    UIImage *rightBtnImg=[UIImage imageNamed:@"btn_back01.png"];
+    UIImage *rightBtnImgOn=[UIImage imageNamed:@"btn_back01.png"];
     UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [rightBtn setImage:rightBtnImg forState:UIControlStateNormal];
     [rightBtn setImage:rightBtnImgOn forState:UIControlStateHighlighted];
     [rightBtn addTarget:self action:@selector(backItemClick) forControlEvents:UIControlEventTouchUpInside];
-    rightBtn.frame = CGRectMake(0, 5,rightBtnImg.size.width, rightBtnImg.size.height+5);
+    rightBtn.frame = CGRectMake(0, 0, 12, 20);
     
     UIBarButtonItem *rightBarBtn = [[UIBarButtonItem alloc]
                                     initWithCustomView:rightBtn];

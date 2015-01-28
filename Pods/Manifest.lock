@@ -1,5 +1,6 @@
 PODS:
   - AFNetworking (1.3.3)
+  - AMScrollingNavbar (1.3.2)
   - CJStringValidator (1.0.1)
   - FSExtendedAlertKit (0.1.0)
   - JSONKit (1.5pre)
@@ -14,6 +15,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (< 1.9.9)
+  - AMScrollingNavbar
   - CJStringValidator
   - FSExtendedAlertKit
   - JSONKit (~> 1.4)
@@ -25,15 +27,16 @@ DEPENDENCIES:
   - VKDAKeyboardControl (~> 2.3.0)
 
 SPEC CHECKSUMS:
-  AFNetworking: 61fdd49e2ffe6380378df37b3b6e70630bb9dd66
-  CJStringValidator: f6b1226a0d995dd36af145595ba7c2c18437a9b9
-  FSExtendedAlertKit: f4e7dc5f0feccfa280d1f88492e8f01e8e30b97f
-  JSONKit: 409734ab3407fce90ef7eaa95d7168f38d9a6601
-  LBBlurredImage: f44c432794e2a8a225f4c8a563aa1bd713b6b4c5
-  MBProgressHUD: 2bbc6f470111daf7f3eaa4eb12b8cbf01c4c0622
-  NSRails: e8cf8a44ec777a63002ecae69f0ac0f9ececc6c4
-  ODRefreshControl: 886e323a7c25114b9e5c397a9eefbebc034224a9
-  SDWebImage: 366188f04c019bfd712d45e3b36aa52070f4abd8
-  VKDAKeyboardControl: 30db5b6c7dabb363376962cffd0f88e490e85850
+  AFNetworking: 5f5b2a731d6fc2082b8abc63d40fcaed5482c42f
+  AMScrollingNavbar: d17101ccb4871c4b9304cc51357ca1b8d2ed7ca8
+  CJStringValidator: 6b13b71275d3fce869b37ccbca025a2151712966
+  FSExtendedAlertKit: c87837d307dbf8be0dd2f432960262413530d5b2
+  JSONKit: efef3bbd3372ff33f96b9c6f34cf4fe18e74ab69
+  LBBlurredImage: f91897e9c2a0fddc794ef5df78ef03c1148043aa
+  MBProgressHUD: c356980b0cd097f19acec959b49dca5eb8ec31be
+  NSRails: 37a9da5bd6d8fac2427b2ba875e2d28fbd7a7853
+  ODRefreshControl: 7bc75258d9dba1f93c4e34654d1e4b5aa39529f0
+  SDWebImage: c74ea8de57c647f36b7176810192bb42cbdd1953
+  VKDAKeyboardControl: 0119e1b0516129ff2ec549a150c1769b27100b19
 
-COCOAPODS: 0.29.0
+COCOAPODS: 0.33.1

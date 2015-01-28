@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0500"
+   LastUpgradeVersion = "0510"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "729FE9B96D6149358DD71620"
+               BlueprintIdentifier = "67BE880B3DF345E2B3063268"
                BuildableName = "libPods-VKDAKeyboardControl.a"
                BlueprintName = "Pods-VKDAKeyboardControl"
                ReferencedContainer = "container:Pods.xcodeproj">

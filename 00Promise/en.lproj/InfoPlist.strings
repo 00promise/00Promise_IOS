@@ -1,2 +1,2 @@
-/* Localized versions of Info.plist keys */
-
+NSLocationAlwaysUsageDescription = "이 앱은 당신의 지역구를 알기위해 당신의 위치정보를 사용합니다.";
+NSLocationWhenInUseUsageDescription = "이 앱은 당신의 지역구를 알기위해 당신의 위치정보를 사용합니다.";

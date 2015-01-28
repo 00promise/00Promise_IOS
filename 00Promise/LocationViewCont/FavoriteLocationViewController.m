@@ -7,8 +7,7 @@
 //
 
 #import "FavoriteLocationViewController.h"
-#import "SearchViewController.h"
-#import "SearchPartyCell.h"
+#import "SearchCell.h"
 #import "BaseViewController.h"
 #import <FSExtendedAlertKit.h>
 #import <SDWebImage/UIImageView+WebCache.h>
@@ -152,6 +151,7 @@
     return 1;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    /*
     static NSString *CellIdentifier = @"Cell";
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         SearchPartyCell *cell = (SearchPartyCell*) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -211,7 +211,7 @@
         }
         return cell;
     }
-    
+    */
     return nil;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -226,7 +226,7 @@
     [[NSUserDefaults standardUserDefaults] setValue:sigungu.fullName forKey:@"locationName"];
     BaseViewController* baseViewCont = [[self.navigationController viewControllers] objectAtIndex:0];
     [[NSUserDefaults standardUserDefaults] setInteger:sigungu.ID.integerValue forKey:@"sigunguId"];
-    [baseViewCont.locationView reloadLocation:sigungu.ID.integerValue :sigungu.fullName];
+    //[baseViewCont.locationView reloadLocation:sigungu.ID.integerValue :sigungu.fullName];
     [self.navigationController popToRootViewControllerAnimated:TRUE];
 }
 #pragma mark UISearchBarDelegate

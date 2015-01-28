@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-AMScrollingNavbar.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-CJStringValidator.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -62,57 +67,62 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>05452D6D79C046EE86650319</key>
+		<key>032F3C2D523344EAAB5D8C2E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>058FAB8E784942FF96FEAE94</key>
+		<key>044923B3DF55455FA3797ED1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1F60C396DC0046B5A16CB730</key>
+		<key>4B06012B34B9409F9B57374F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>34658B05AFE94A74BD61B1D1</key>
+		<key>67BE880B3DF345E2B3063268</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>676991C664B341F1972E6AD8</key>
+		<key>77C3BCAAC38847EDB41BC397</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>729FE9B96D6149358DD71620</key>
+		<key>9A461E451CF240DDBE113343</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>74CD905B009D4B3D919B4B8D</key>
+		<key>ABBB478D6B854AE097064070</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7DE12890F30B454DA67D2A61</key>
+		<key>AE850BBFF2644C789084E2B1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>92D3AE2F555C4B6DAD87FA03</key>
+		<key>BAB10D7121D74631A1749A4E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C217E2C21DBD4FEBB5DC7E2A</key>
+		<key>C5C73579E35149FFBFCD5C76</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DEA57605CB08471A9884B52E</key>
+		<key>C97C7EBF60D148E79A9BB362</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D1D48BB97EFA4F8F8AE9A7D2</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -8,10 +8,15 @@
 
 #import "BaseViewController.h"
 #import "CandidateCell.h"
-#import <FSExtendedAlertKit.h>
+#import "UIViewController+ScrollingNavbar.h"
+#import <FSExtendedAlertKit/FSExtendedAlertKit.h>
 #import <SDWebImage/UIImageView+WebCache.h>
-@interface BaseViewController ()
+@interface BaseViewController () <SuperViewControllerDelegate, UIScrollViewDelegate, AMScrollingNavbarDelegate>
+@property (nonatomic, weak) IBOutlet UIButton* issueBtn;
+@property (nonatomic, weak) IBOutlet UIButton* politicianBtn;
+@property (nonatomic, weak) IBOutlet UIScrollView* scrollView;
 
+@property (nonatomic, strong) NSMutableArray* searchArr;
 @end
 
 @implementation BaseViewController
@@ -28,34 +33,52 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(centerItemClick)];
+    /*
+    [self followScrollView:self.scrollView withDelay:60];
+    [self setUseSuperview:YES];
+    [self setScrollableViewConstraint:self.headerConstraint withOffset:45];
+    [self setShouldScrollWhenContentFits:NO];
+    [self setScrollingNavbarDelegate:self];
+    */
+    /*
+    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(navBarClick)];
     gestureRecognizer.numberOfTapsRequired = 1;
     [self.navigationController.navigationBar setUserInteractionEnabled:YES];
     [self.navigationController.navigationBar addGestureRecognizer:gestureRecognizer];
-    
-    [_scrollView setContentOffset:CGPointMake(320, 0)];
+    */
+    //[_scrollView setContentOffset:CGPointMake(0, 0)];
 }
-
+- (void)viewWillLayoutSubviews{
+    [super viewWillLayoutSubviews];
+    
+}
+- (void)viewWillDisappear:(BOOL)animated{
+    
+}
+- (void)viewWillAppear:(BOOL)animated{
+    // TODO : 네이게이션에서 루트로 돌아오면 스크롤뷰 오프셋이 0으로 바뀜 - 이유를 몰라서 땜빵이로
+    if (_type == BaseViewIssue) {
+        [_scrollView setContentOffset:CGPointMake(0, 0) animated:FALSE];
+    }else if(_type == BaseViewSearch) {
+        [_scrollView setContentOffset:CGPointMake(320, 0) animated:FALSE];
+    }
+}
 - (void)viewDidAppear:(BOOL)animated{
+    
     if (IS_UNDER_IOS7) {
         //[_bottomNaviBarView setFrame:CGRectMake(0, 5, 320, 3)];
-        [_scrollView setFrame:CGRectMake(0, 3, 320, _scrollView.frame.size.height)];
+        //[_scrollView setFrame:CGRectMake(0, 3, 320, _scrollView.frame.size.height)];
     }
 }
 
 - (void)initVariable{
+    _type = BaseViewIssue;
     _searchArr = [NSMutableArray new];
 }
 - (void)initView{
-    //    CGFloat navBarHeight = [self.navigationController.navigationBar sizeThatFits:self.view.bounds.size].height;
-    //
-    //    // Resizing navigationBar
-    //    self.navigationController.navigationBar.frame = CGRectMake(0, 0, self.view.bounds.size.width, navBarHeight);
-    [self centerItemClick];
-    _scrollView.contentSize = CGSizeMake(320*3, 568);
-    _scrollView.pagingEnabled = YES;
-    
+    _scrollView.contentSize = CGSizeMake(320, 460);
+    //_scrollView.pagingEnabled = YES;
+    /*
     _locationView = [[[NSBundle mainBundle] loadNibNamed:@"LocationView" owner:nil options:nil] objectAtIndex:0];
     _locationView.parentViewCont = self;
     [_locationView setFrame:CGRectMake(0, 0, 320, 568)];
@@ -65,99 +88,63 @@
     _mainView.parentViewCont = self;
     [_mainView setFrame:CGRectMake(320, 0, 320, 568)];
     [_scrollView addSubview:_mainView];
+    */
+   
+    _hotIssueView = [[[NSBundle mainBundle] loadNibNamed:@"HotIssueView" owner:nil options:nil] objectAtIndex:0];
+    _hotIssueView.parentViewCont = self;
+    [_hotIssueView setFrame:CGRectMake(0, 0, 320, 568)];
+    [_scrollView addSubview:_hotIssueView];
     
     _searchView = [[[NSBundle mainBundle] loadNibNamed:@"SearchView" owner:nil options:nil] objectAtIndex:0];
     _searchView.parentViewCont = self;
     [_searchView setBackgroundColor:[UIColor clearColor]];
-    [_searchView setFrame:CGRectMake(640, 0, 320, 568)];
+    [_searchView setFrame:CGRectMake(320, 0, 320, 568)];
     [_scrollView addSubview:_searchView];
-    if (IS_IOS7 && IS_IPHONE_5) {
-        UIView* view = _searchView.searchDisplayCont.searchBar.subviews[0];
-        searchBarY = view.frame.origin.y;
-    }
-    //[self.view addSubview:_scrollView];
+    
 }
 
 - (IBAction)leftSwipeGesutre:(id)sender{
-    if (_scrollView.contentOffset.x == 0 || _scrollView.contentOffset.x == 320) {
-        [_scrollView setContentOffset:CGPointMake(_scrollView.contentOffset.x+320, 0) animated:TRUE];
+    if (_scrollView.contentOffset.x == 0) {
+        [self moveToIdx:1];
     }
 }
 
 - (IBAction)rightSwipeGesture:(id)sender{
-    if (_scrollView.contentOffset.x == 320 || _scrollView.contentOffset.x == 640) {
-        [_scrollView setContentOffset:CGPointMake(_scrollView.contentOffset.x-320, 0) animated:TRUE];
+    if (_scrollView.contentOffset.x == 320) {
+        [self moveToIdx:0];
     }
 }
 
-- (void)leftItemClick{
-    [_scrollView setContentOffset:CGPointMake(0, 0) animated:TRUE];
-    //[self topImgBarSetting];
-    /*
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+// 네이게이션 바를 클릭했을때!
+- (void)navBarClick{
     
-    LocationViewController* locationViewCont = [storyboard instantiateViewControllerWithIdentifier:@"locationViewController"];
-    
-    UIView *theParentView = [self.view superview];
-    
-    CATransition *animation = [CATransition animation];
-    [animation setDuration:0.3];
-    [animation setType:kCATransitionPush];
-    [animation setSubtype:kCATransitionFromLeft];
-    [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-    for (UIView* view in self.view.subviews) {
-        [view removeFromSuperview];
-    }
-    [self.view addSubview:locationViewCont.view];
-    
-    [theParentView.layer addAnimation:animation forKey:@"showLocationViewController"];
-     */
-}
-- (void)centerItemClick{
-    [_scrollView setContentOffset:CGPointMake(320, 0) animated:TRUE];
-    //[self topImgBarSetting];
-    /*
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    
-    MainViewController* mainViewCont = [storyboard instantiateViewControllerWithIdentifier:@"mainViewController"];
-    UIView *theParentView = [self.view superview];
-    
-    CATransition *animation = [CATransition animation];
-    [animation setDuration:0.3];
-    [animation setType:kCATransitionPush];
-    [animation setSubtype:kCATransitionFromRight];
-    [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-    for (UIView* view in self.view.subviews) {
-        [view removeFromSuperview];
-    }
-    [self.view addSubview:mainViewCont.view];
-    
-    [theParentView.layer addAnimation:animation forKey:@"showMainViewController"];
-     */
 }
 
-- (void)rightItemClick{
-    [_scrollView setContentOffset:CGPointMake(640, 0) animated:TRUE];
-    //[self topImgBarSetting];
-    /*
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    
-    SearchViewController* searchViewCont = [storyboard instantiateViewControllerWithIdentifier:@"searchViewController"];
-    
-    UIView *theParentView = [self.view superview];
-    
-    CATransition *animation = [CATransition animation];
-    [animation setDuration:0.3];
-    [animation setType:kCATransitionPush];
-    [animation setSubtype:kCATransitionFromRight];
-    [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-    for (UIView* view in self.view.subviews) {
-        [view removeFromSuperview];
+- (IBAction)hotIssueClick{
+    [self moveToIdx:0];
+}
+
+
+- (IBAction)politicianClick{
+    [self moveToIdx:1];
+}
+
+- (void)moveToIdx:(NSInteger)idx{
+    if (idx == 0) {
+        _type = BaseViewIssue;
+        [_issueBtn setSelected:TRUE];
+        [_politicianBtn setSelected:FALSE];
+        [_scrollView setContentOffset:CGPointMake(0, 0) animated:TRUE];
+        [_hotIssueView viewDidSlide];
+        [_searchView viewUnSilde];
+    }else if (idx == 1) {
+        _type = BaseViewSearch;
+        [_issueBtn setSelected:FALSE];
+        [_politicianBtn setSelected:TRUE];
+        [_scrollView setContentOffset:CGPointMake(320, 0) animated:TRUE];
+        [_hotIssueView viewUnSilde];
+        [_searchView viewDidSlide];
     }
-    [self.view addSubview:searchViewCont.view];
-    
-    [theParentView.layer addAnimation:animation forKey:@"showSearchViewController"];
-     */
 }
 
 #pragma mark UIScrollViewDelegate
@@ -165,7 +152,7 @@
     
 }
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    [self topImgBarSetting];
+    
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -181,32 +168,27 @@
      */
 }
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
-    [self topImgBarSetting];
 }
 
-- (void)topImgBarSetting{
-    int targetX = 0;
-    if (_scrollView.contentOffset.x < 320) {
-        targetX = -80;
-        [_locationView viewDidSlide];
-    }else if(_scrollView.contentOffset.x < 640){
-        targetX = 80;
-        [_mainView viewDidSlide];
-    }else {
-        targetX = 240;
-        [_searchView viewDidSlide];
+#pragma mark 
+/*
+- (void)navigationBarDidChangeToExpanded:(BOOL)expanded
+{
+    if (expanded) {
+        NSLog(@"Nav changed to expanded");
     }
-    _highlightBarImgView.frame = CGRectMake(targetX,
-                                           _highlightBarImgView.frame.origin.y, _highlightBarImgView.frame.size.width, _highlightBarImgView.frame.size.height);
-//    [UIView animateWithDuration:0.3f delay:0.0 options:UIViewAnimationOptionCurveEaseInOut
-//                     animations:^{
-//                         _highlightBarImgView.frame = CGRectMake(targetX,
-//                                                                 _highlightBarImgView.frame.origin.y, _highlightBarImgView.frame.size.width, _highlightBarImgView.frame.size.height);
-//                     }
-//                     completion:nil];
 }
+
+- (void)navigationBarDidChangeToCollapsed:(BOOL)collapsed
+{
+    if (collapsed) {
+        NSLog(@"Nav changed to collapsed");
+    }
+}
+ */
 
 #pragma mark UITableViewDelegate UITableViewDataSource
+/*
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
@@ -272,9 +254,10 @@
     Politician* politician = [_searchArr objectAtIndex:indexPath.row];
     [_searchView searchCandidateClick:politician.ID.integerValue];
 }
+ */
 #pragma mark UISearchBarDelegate
+/*
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-    [self.bottomNaviBarView setHidden:TRUE];
     [searchBar setShowsCancelButton:YES animated:YES];
     _searchView.tableView.allowsSelection = NO;
     _searchView.tableView.scrollEnabled = NO;
@@ -298,25 +281,14 @@
         }
     }
     
-    /*
-    CGRect statusBarFrame =  [[UIApplication sharedApplication] statusBarFrame];
-    UIView *topView = _searchView.searchDisplayCont.searchBar.subviews[0];
-    if (IS_IOS7 && IS_IPHONE_5) {
-        topView = _searchView.searchDisplayCont.searchBar.subviews[0];
-        topView.frame = CGRectMake(topView.frame.origin.x, searchBarY+statusBarFrame.size.height, topView.frame.size.width, topView.frame.size.height);
-    }
-    */
+
     if (cancelButton){
         //Set the new title of the cancel button
         [cancelButton setTitle:@"취소" forState:UIControlStateNormal];
         [cancelButton setTitleColor:[UIColor colorWithHex:@"#FF4723" alpha:1.0f] forState:UIControlStateNormal];
-        
-        //[cancelButton setBackgroundColor:[UIColor colorWithHex:@"#FF4723" alpha:1.0f]];
-        //[cancelButton setImage:[UIImage imageNamed:@"cancel_btn.png"] forState:UIControlStateNormal];
     }
 }
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar; {
-    [self.bottomNaviBarView setHidden:FALSE];
 }
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
     if ([searchText length] < 2) {
@@ -347,7 +319,6 @@
                 [_searchArr addObject:politician];
             }
             [_searchView.searchDisplayCont.searchResultsTableView reloadData];
-            //[_tableView reloadData];
         }
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
@@ -357,7 +328,6 @@
     }];
 }
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    [self.bottomNaviBarView setHidden:FALSE];
     searchBar.text=@"";
     
     [searchBar setShowsCancelButton:NO animated:YES];
@@ -390,5 +360,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+ */
 
 @end

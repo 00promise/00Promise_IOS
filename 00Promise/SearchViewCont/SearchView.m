@@ -7,15 +7,22 @@
 //
 
 #import "SearchView.h"
-#import "SearchPartyCell.h"
-#import "CandidateCell.h"
+#import "SearchTableViewCell.h"
 #import "AppDelegate.h"
 #import "UIColor+CreateMethods.h"
 #import "BaseViewController.h"
 #import "CandidateListViewController.h"
+#import "SearchListViewController.h"
 #import "CandidateViewController.h"
 #import <FSExtendedAlertKit.h>
 #import <SDWebImage/UIImageView+WebCache.h>
+@interface SearchView() <UIActionSheetDelegate>
+@property (nonatomic, strong) NSString* address;
+@property (nonatomic, strong) NSMutableArray* sidoArr;
+@property (nonatomic, strong) NSMutableArray* partyArr;
+@property (nonatomic, strong) NSMutableArray* electionArr;
+@end
+    
 @implementation SearchView
 
 - (id) initWithCoder:(NSCoder *)aCoder{
@@ -31,9 +38,12 @@
 }
 - (void)layoutSubviews{
     [super layoutSubviews];
+    /*
     if (IS_IOS7 ) {
         [_tableView setFrame:CGRectMake(0, 0, 320, _tableView.frame.size.height)];
     }
+     */
+    /*
     // create a new Search Bar and add it to the table view
     _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 44.0f)];
     //[[UISearchBar appearance] setSearchFieldBackgroundImage:[UIImage imageNamed:@"search_bg01.png"] forState:UIControlStateNormal];
@@ -57,25 +67,51 @@
     _searchDisplayCont.delegate = self.parentViewCont;
     _searchDisplayCont.searchResultsTableView.separatorColor = [UIColor clearColor];
     _tableView.tableHeaderView = _searchBar;
+     */
 }
 - (void)initVariable{
+    _address = @"";
+    _sidoArr = [NSMutableArray new];
     _partyArr = [NSMutableArray new];
     _electionArr = [NSMutableArray new];
+    
+    _locationManager = [[CLLocationManager alloc] init];
+    [_locationManager setDesiredAccuracy:kCLLocationAccuracyHundredMeters];
+    [_locationManager setDistanceFilter:kCLDistanceFilterNone];
+    [_locationManager setDelegate:self];
+    
+    [_locationManager setPausesLocationUpdatesAutomatically:YES];
 }
 - (void)initView{
-    [_partyArr removeAllObjects];
-    [MBProgressHUD showHUDAddedTo:self animated:YES];
-    [[AFAppDotNetAPIClient sharedClient] getPath:@"parties.json" parameters:nil success:^(AFHTTPRequestOperation *response, id responseObject) {
+    [[AFAppDotNetAPIClient sharedClient] getPath:@"district/sidos.json" parameters:nil success:^(AFHTTPRequestOperation *response, id responseObject) {
 #ifdef _SERVER_LOG_
-        NSLog(@"manifestos/parties.json : %@",(NSDictionary *)responseObject);
+        NSLog(@"district/sidos.json : %@",(NSDictionary *)responseObject);
 #endif
         NSString* code = [responseObject objectForKey:@"code"];
         if (![code isEqualToString:@"0000"]) {
-            FSBlockButton *cancelButton = [FSBlockButton blockButtonWithTitle:@"확인" block:^ {
-                
-            }];
-            FSAlertView *alert = [[FSAlertView alloc] initWithTitle:@"에러" message:[responseObject objectForKey:@"message"] cancelButton:cancelButton otherButtons: nil];
-            [alert show];
+            
+        }else{
+            NSMutableArray* sidoArr = [responseObject objectForKey:@"data"];
+            for (NSDictionary* dic in sidoArr) {
+                NSDictionary* sidoDic = [NSDictionary dictionaryWithObject:dic forKey:@"sido"];
+                Sido* sido = [Sido new];
+                [sido setPropertiesUsingRemoteDictionary:sidoDic];
+                [_sidoArr addObject:sido];
+            }
+        }
+    } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
+#ifdef _SERVER_LOG_
+        NSLog(@"district/sidos.json [HTTPClient Error]: %@", error.localizedDescription);
+#endif
+    }];
+    
+    [[AFAppDotNetAPIClient sharedClient] getPath:@"parties.json" parameters:nil success:^(AFHTTPRequestOperation *response, id responseObject) {
+#ifdef _SERVER_LOG_
+        NSLog(@"parties.json : %@",(NSDictionary *)responseObject);
+#endif
+        NSString* code = [responseObject objectForKey:@"code"];
+        if (![code isEqualToString:@"0000"]) {
+            
         }else{
             NSMutableArray* manifestoArr = [responseObject objectForKey:@"data"];
             for (NSDictionary* dic in manifestoArr) {
@@ -84,25 +120,20 @@
                 [party setPropertiesUsingRemoteDictionary:partyDic];
                 [_partyArr addObject:party];
             }
-            [_tableView reloadData];
         }
-        [MBProgressHUD hideHUDForView:self animated:YES];
     } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
-        NSLog(@"manifestos/parties.json [HTTPClient Error]: %@", error.localizedDescription);
-        [MBProgressHUD hideHUDForView:self animated:YES];
+#ifdef _SERVER_LOG_
+        NSLog(@"parties.json [HTTPClient Error]: %@", error.localizedDescription);
+#endif
     }];
     
     [[AFAppDotNetAPIClient sharedClient] getPath:@"elections.json" parameters:nil success:^(AFHTTPRequestOperation *response, id responseObject) {
 #ifdef _SERVER_LOG_
-        NSLog(@"manifestos/elections.json : %@",(NSDictionary *)responseObject);
+        NSLog(@"elections.json : %@",(NSDictionary *)responseObject);
 #endif
         NSString* code = [responseObject objectForKey:@"code"];
         if (![code isEqualToString:@"0000"]) {
-            FSBlockButton *cancelButton = [FSBlockButton blockButtonWithTitle:@"확인" block:^ {
-                
-            }];
-            FSAlertView *alert = [[FSAlertView alloc] initWithTitle:@"에러" message:[responseObject objectForKey:@"message"] cancelButton:cancelButton otherButtons: nil];
-            [alert show];
+            
         }else{
             NSMutableArray* manifestoArr = [responseObject objectForKey:@"data"];
             for (NSDictionary* dic in manifestoArr) {
@@ -111,119 +142,149 @@
                 [election setPropertiesUsingRemoteDictionary:electionDic];
                 [_electionArr addObject:election];
             }
-            [_tableView reloadData];
         }
-        [MBProgressHUD hideHUDForView:self animated:YES];
     } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
-        NSLog(@"manifestos/elections.json [HTTPClient Error]: %@", error.localizedDescription);
-//        FSBlockButton *cancelButton = [FSBlockButton blockButtonWithTitle:@"예" block:^ {
-//            [self initView];
-//        }];
-//        FSBlockButton *okButton = [FSBlockButton blockButtonWithTitle:@"아니요" block:^ {
-//            
-//        }];
-//        FSAlertView *alert = [[FSAlertView alloc] initWithTitle:@"에러" message:@"다시 시도하시겠습니까?." cancelButton:cancelButton otherButtons:okButton, nil];
-//        [alert show];
-        [MBProgressHUD hideHUDForView:self animated:YES];
+#ifdef _SERVER_LOG_
+        NSLog(@"elections.json [HTTPClient Error]: %@", error.localizedDescription);
+#endif
     }];
 }
-// 검색에서 클릭했을때
-- (void)searchCandidateClick:(int)politicianId{
-    
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    
-    CandidateViewController* candidateViewCont = [storyboard instantiateViewControllerWithIdentifier:@"candidateViewController"];
-    candidateViewCont.politicianId = politicianId;
-    
-    [((UIViewController *)self.parentViewCont).navigationController pushViewController:candidateViewCont animated:TRUE];
-    
+- (void)startLocationManager{
+    [_locationManager requestWhenInUseAuthorization];
+    if([CLLocationManager locationServicesEnabled]){
+        [_locationManager startUpdatingLocation];
+    }
+    else{
+        _address = @"";
+    }
 }
-//http://00promise.org/api/politicians/my_district/1.json
+
+- (IBAction)addressReloadClick:(id)sender{
+    [self startLocationManager];
+}
+
+#pragma mark - CLLocationManagerDelegate
+- (void)locationManager:(CLLocationManager *)manager
+     didUpdateLocations:(NSArray *)locations{
+    
+    [manager stopUpdatingLocation];
+    
+    CLLocation* location = [locations lastObject];
+    CLGeocoder *myGeocoder = [[CLGeocoder alloc]init];
+    CLLocation *cl = [[CLLocation alloc]initWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude];
+    [myGeocoder reverseGeocodeLocation:cl completionHandler:^(NSArray *placemarks, NSError *error)
+     {
+         CLPlacemark *placemark = [placemarks objectAtIndex:0];
+         _address = [NSString stringWithFormat:@"%@ %@ %@", placemark.administrativeArea,placemark.locality, placemark.thoroughfare];
+         [_tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+     }];
+}
+- (void)locationManager:(CLLocationManager *)manager
+       didFailWithError:(NSError *)error{
+
+}
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status{
+    if (status == kCLAuthorizationStatusDenied || status == kCLAuthorizationStatusNotDetermined) {
+        _address = @"위치검색을 허가해주세요.";
+    }
+}
 #pragma mark BaseViewDelegate
 - (void)viewDidSlide{
-    NSLog(@"viewDidSlide");
+    [self startLocationManager];
 }
 
 - (void)viewUnSilde{
 }
-
+#pragma mark UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 0) {
+        
+    }else if(buttonIndex == 1) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        
+        SearchListViewController* searchListViewCont = [storyboard instantiateViewControllerWithIdentifier:@"searchListViewController"];
+        searchListViewCont.type = SearchListLocation;
+        searchListViewCont.array = _sidoArr;
+        [((UIViewController *)self.parentViewCont).navigationController pushViewController:searchListViewCont animated:TRUE];
+    }
+}
+- (void)actionSheetCancel:(UIActionSheet *)actionSheet{
+    
+}
 #pragma mark UITableViewDelegate UITableViewDataSource
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 18)];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 14, tableView.frame.size.width, 18)];
-    [label setFont:[UIFont boldSystemFontOfSize:18]];
-    label.textColor = [UIColor colorWithHex:@"#ed3917" alpha:1.0f];
-    if (section == 0) {
-        label.text = @"선거";
-    }else if(section == 1){
-        label.text = @"정당";
-    }
-    [view addSubview:label];
-    return view;
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 50;
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 0) {
-        if (indexPath.row == 0) {
-            return 43+1;
-        }else if(indexPath.row == 1){
-            return 44+1;
-        }else{
-            return 42+1;
-        }
-    }else if(indexPath.section == 1){
-        if (indexPath.row == 0) {
-            return 43+1;
-        }else if(indexPath.row == 4){
-            return 44+1;
-        }else{
-            return 42+2;
-        }
-    }
-    return 0;
+    
+    return 60;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (section == 0) {
-        return [_electionArr count];
-    }
-    return [_partyArr count];
+
+    return 4;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    return 1;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"Cell";
-    SearchPartyCell *cell = (SearchPartyCell*) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    SearchTableViewCell *cell = (SearchTableViewCell*) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil){
-        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"SearchPartyCell" owner:nil options:nil];
+        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"SearchTableViewCell" owner:nil options:nil];
         cell = [topLevelObjects objectAtIndex:0];
     }
-    UIImage *backImage;
-    if (indexPath.row == 0) {
-        backImage = [UIImage imageNamed:@"area_bg01.png"];
-    }else if(indexPath.row == [tableView numberOfRowsInSection:indexPath.section]-1){
-        backImage = [UIImage imageNamed:@"area_bg03.png"];
-    }else{
-        backImage = [UIImage imageNamed:@"area_bg02.png"];
-    }
-    cell.backImgView.image = [backImage stretchableImageWithLeftCapWidth:3 topCapHeight:3];
+    UIImage *iconImage;
+    NSString* titleText;
     
-    if (indexPath.section == 0) {
-        Election* election = [_electionArr objectAtIndex:indexPath.row];
-        cell.partyLabel.text = election.name;
-    }else{
-        Party* party = [_partyArr objectAtIndex:indexPath.row];
-        cell.partyLabel.text = party.name;
+    if (indexPath.row == 0) {
+        iconImage = [UIImage imageNamed:@"main_icon01.png"];
+        titleText = @"우리 지역 찾기";
+        cell.addressLabel.text = _address;
+        cell.addressLabel.hidden = FALSE;
+        cell.btn.hidden = FALSE;
+        cell.searchView = self;
+    }else if(indexPath.row == 1){
+        iconImage = [UIImage imageNamed:@"main_icon02.png"];
+        titleText = @"정당으로 찾기";
+    }else if(indexPath.row == 2){
+        iconImage = [UIImage imageNamed:@"main_icon03.png"];
+        titleText = @"선거로 찾기";
+    }else if(indexPath.row == 3){
+        iconImage = [UIImage imageNamed:@"main_icon04.png"];
+        titleText = @"이름으로 찾기";
     }
+    cell.imgView.image = iconImage;
+    cell.label.text = titleText;
+    
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row == 0) {
+        UIActionSheet *menu = [[UIActionSheet alloc]
+                               initWithTitle: nil
+                               delegate:self
+                               cancelButtonTitle:@"취소"
+                               destructiveButtonTitle:nil
+                               otherButtonTitles:@"현재 지역 검색", @"지역 찾기", nil];
+        [menu showInView:self];
+    }else if(indexPath.row == 1) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        
+        SearchListViewController* searchListViewCont = [storyboard instantiateViewControllerWithIdentifier:@"searchListViewController"];
+        searchListViewCont.type = SearchListParty;
+        searchListViewCont.array = _partyArr;
+        [((UIViewController *)self.parentViewCont).navigationController pushViewController:searchListViewCont animated:TRUE];
+        
+    }else if(indexPath.row == 2) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        
+        SearchListViewController* searchListViewCont = [storyboard instantiateViewControllerWithIdentifier:@"searchListViewController"];
+        searchListViewCont.type = SearchListElection;
+        searchListViewCont.array = _electionArr;
+        [((UIViewController *)self.parentViewCont).navigationController pushViewController:searchListViewCont animated:TRUE];
+    }else if(indexPath.row == 3) {
+        [(UIViewController *)self.parentViewCont performSegueWithIdentifier:@"GoCandidateListPush" sender:nil];
+    }
+    /*
     if (indexPath.section == 0) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         
@@ -243,36 +304,8 @@
         Party* party = [_partyArr objectAtIndex:indexPath.row];
         candidateListViewCont.candidateId =  party.ID.integerValue;
         [((UIViewController *)self.parentViewCont).navigationController pushViewController:candidateListViewCont animated:TRUE];
-        //[(UIViewController *)self.parentViewCont performSegueWithIdentifier:@"GoCandidateListPush" sender:self];
     }
-}
-#pragma mark UITextFieldDelegate
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    /*
-     if (textField == _emailTextField) {
-     [_scrollView setContentOffset:CGPointMake(_scrollView.contentOffset.x, 99.5f) animated:YES];
-     }
-     else if (textField == _passwordTextField) {
-     [_scrollView setContentOffset:CGPointMake(_scrollView.contentOffset.x, 128.0f) animated:YES];
-     }*/
-//    if (_type == eSearchParty) {
-//        _type = eSearchCandidate;
-//        [_tableView reloadData];
-//    }
-    return TRUE;
-}
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
-{return YES;}
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{}
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{return YES;}
-- (BOOL)textFieldShouldClear:(UITextField *)textField
-{return YES;}
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [_searchTextField resignFirstResponder];
-    return TRUE;
+     */
 }
 
 

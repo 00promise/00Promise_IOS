@@ -10,9 +10,10 @@
 #import "CandidateCell.h"
 #import "JYGraphic.h"
 #import "CandidateViewController.h"
+#import "UIColor+CreateMethods.h"
 #import <FSExtendedAlertKit.h>
 #import <SDWebImage/UIImageView+WebCache.h>
-@interface CandidateListViewController ()
+@interface CandidateListViewController () <UISearchBarDelegate>
 
 @end
 
@@ -30,7 +31,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
 }
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -52,12 +52,14 @@
     [_tableView setContentInset:UIEdgeInsetsMake(10.0f, 0.0, 10.0, 0.0)];
     
     [_candidateArr removeAllObjects];
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    //[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    /*
     NSString *url;
     if (_electionId != 0) {
-        url = [NSString stringWithFormat:@"elections/%i/politicians.json",_electionId];
+        url = [NSString stringWithFormat:@"elections/%ld/politicians.json",_electionId];
     }else{
-        url = [NSString stringWithFormat:@"parties/%i/politicians.json",_candidateId];
+        url = [NSString stringWithFormat:@"parties/%ld/politicians.json",_candidateId];
     }
     [[AFAppDotNetAPIClient sharedClient] getPath:url parameters:nil success:^(AFHTTPRequestOperation *response, id responseObject) {
 #ifdef _SERVER_LOG_
@@ -86,6 +88,7 @@
     
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
+     */
 }
 - (void)backItemClick{
     [self.navigationController popViewControllerAnimated:TRUE];
@@ -94,9 +97,9 @@
     page++;
     NSString *url;
     if (_electionId != 0) {
-        url = [NSString stringWithFormat:@"elections/%i/politicians.json",_electionId];
+        url = [NSString stringWithFormat:@"elections/%ld/politicians.json",_electionId];
     }else{
-        url = [NSString stringWithFormat:@"parties/%i/politicians.json",_candidateId];
+        url = [NSString stringWithFormat:@"parties/%ld/politicians.json",_candidateId];
     }
     NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
     [params setObject:[NSString stringWithFormat:@"%d",page] forKey:@"page"];
@@ -105,7 +108,7 @@
         NSLog(@"parties/@id/politicians.json : %@",(NSDictionary *)responseObject);
 #endif
         NSString* code = [responseObject objectForKey:@"code"];
-        int tmpIdx;
+        NSUInteger tmpIdx;
         if (![code isEqualToString:@"0000"]) {
             FSBlockButton *cancelButton = [FSBlockButton blockButtonWithTitle:@"확인" block:^ {
                 [[UIApplication sharedApplication] finalize];
@@ -132,6 +135,24 @@
         NSLog(@"parties/@id/politicians.json [HTTPClient Error]: %@", error.localizedDescription);
         page--;
     }];
+}
+
+#pragma mark UISearchBarDelegate
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    
+}
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar; {
+}
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+
+    
+}
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+   
+    
+}
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 #pragma mark UITableViewDelegate UITableViewDataSource
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
