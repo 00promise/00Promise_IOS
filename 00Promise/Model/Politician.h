@@ -8,11 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "NSRails.h"
-
+// :history, :property, :military, :payment, :arrears, :now_arrears, :crime
 @interface Politician : NSRRemoteObject
-@property (nonatomic, strong) NSNumber *ID,*birthday;
-@property (nonatomic, strong) NSString *name, *memo, *img, *bgImg, *positionName, *partyName;
+@property (nonatomic, strong) NSNumber *ID,*birthday, *currentAge, *property, *payment, *arrears,*nowArrears;
+@property (nonatomic, strong) NSString *name, *memo, *img, *bgImg, *positionName, *partyName, *academic, *history, *military, *crime;
 @property (nonatomic, strong) NSMutableArray *manifestos;
 - (BOOL)haveImg;
 - (BOOL)haveBgImg;
+- (NSString*)birthDayStr;
 @end

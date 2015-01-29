@@ -14,11 +14,11 @@
     NSCalendar* calendar = [NSCalendar currentCalendar];
     NSDateComponents* components = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
     
-    int year = [components year];
-    int month = [components month];
-    int day = [components day];
+    NSInteger year = [components year];
+    NSInteger month = [components month];
+    NSInteger day = [components day];
     
-    return [NSString stringWithFormat:@"%d.%02d,%02d",year,month,day];
+    return [NSString stringWithFormat:@"%d.%02ld,%02ld",year,month,day];
 }
 
 + (NSString*)timeDateStringByTimestamp:(long)timestamp{
@@ -26,15 +26,15 @@
     NSCalendar* calendar = [NSCalendar currentCalendar];
     NSDateComponents* components = [calendar components:kCFCalendarUnitYear|kCFCalendarUnitMonth|kCFCalendarUnitDay|kCFCalendarUnitHour|kCFCalendarUnitMinute|kCFCalendarUnitSecond fromDate:date];
     
-    int year = [components year];
-    int month = [components month];
-    int day = [components day];
-    int hour = [components hour];
-    int minute = [components minute];
-    int second = [components second];
+    NSInteger year = [components year];
+    NSInteger month = [components month];
+    NSInteger day = [components day];
+    NSInteger hour = [components hour];
+    NSInteger minute = [components minute];
+    NSInteger second = [components second];
     if (hour >= 12) {
-        return [NSString stringWithFormat:@"%d.%02d,%02d 오후 %02d:%02d:%02d",year,month,day,hour,minute,second];
+        return [NSString stringWithFormat:@"%ld.%02ld,%02ld 오후 %02ld:%02ld:%02ld",year,month,day,hour,minute,second];
     }
-    return [NSString stringWithFormat:@"%d.%02d.%02d 오전 %02d:%02d:%02d",year,month,day,hour,minute,second];
+    return [NSString stringWithFormat:@"%ld.%02ld.%02ld 오전 %02ld:%02ld:%02ld",year,month,day,hour,minute,second];
 }
 @end

@@ -42,4 +42,15 @@
         return TRUE;
     return FALSE;
 }
+- (NSString*)birthDayStr{
+    NSDate* date = [[NSDate alloc] initWithTimeIntervalSince1970:_birthday.longLongValue];
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSDateComponents* components = [calendar components:kCFCalendarUnitYear|kCFCalendarUnitMonth|kCFCalendarUnitDay|kCFCalendarUnitHour|kCFCalendarUnitMinute|kCFCalendarUnitSecond fromDate:date];
+    
+    NSInteger year = [components year];
+    NSInteger month = [components month];
+    NSInteger day = [components day];
+
+    return [NSString stringWithFormat:@"%ld/%ld/%ld",year,month,day];
+}
 @end

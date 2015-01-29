@@ -176,6 +176,10 @@
 		CD7F7D65187D99E4002CC1B4 /* appicon_80x80.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7F7D61187D99E4002CC1B4 /* appicon_80x80.png */; };
 		CD7F7D67187D9B84002CC1B4 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7F7D66187D9B84002CC1B4 /* Default.png */; };
 		CD818B7417F7827A0027E9B5 /* bg_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD818B7317F7827A0027E9B5 /* bg_default@2x.png */; };
+		CD93EB681A7A970900C8DDAB /* CandidateDetailInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD93EB661A7A970900C8DDAB /* CandidateDetailInfoCell.m */; };
+		CD93EB691A7A970900C8DDAB /* CandidateDetailInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD93EB671A7A970900C8DDAB /* CandidateDetailInfoCell.xib */; };
+		CD93EB6D1A7A9A9F00C8DDAB /* MoreInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD93EB6B1A7A9A9F00C8DDAB /* MoreInfoCell.m */; };
+		CD93EB6E1A7A9A9F00C8DDAB /* MoreInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD93EB6C1A7A9A9F00C8DDAB /* MoreInfoCell.xib */; };
 		CD962F8F1800761500063142 /* CandidateListActivityIndicator.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD962F8E1800761500063142 /* CandidateListActivityIndicator.xib */; };
 		CD97C91C17F47981001402C4 /* cancel_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD97C91B17F47981001402C4 /* cancel_btn@2x.png */; };
 		CD97C92417F47AC5001402C4 /* UIColor+CreateMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = CD97C92317F47AC5001402C4 /* UIColor+CreateMethods.m */; };
@@ -417,6 +421,12 @@
 		CD7F7D61187D99E4002CC1B4 /* appicon_80x80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appicon_80x80.png; sourceTree = "<group>"; };
 		CD7F7D66187D9B84002CC1B4 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		CD818B7317F7827A0027E9B5 /* bg_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_default@2x.png"; sourceTree = "<group>"; };
+		CD93EB651A7A970900C8DDAB /* CandidateDetailInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CandidateDetailInfoCell.h; sourceTree = "<group>"; };
+		CD93EB661A7A970900C8DDAB /* CandidateDetailInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CandidateDetailInfoCell.m; sourceTree = "<group>"; };
+		CD93EB671A7A970900C8DDAB /* CandidateDetailInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CandidateDetailInfoCell.xib; sourceTree = "<group>"; };
+		CD93EB6A1A7A9A9F00C8DDAB /* MoreInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreInfoCell.h; sourceTree = "<group>"; };
+		CD93EB6B1A7A9A9F00C8DDAB /* MoreInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreInfoCell.m; sourceTree = "<group>"; };
+		CD93EB6C1A7A9A9F00C8DDAB /* MoreInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreInfoCell.xib; sourceTree = "<group>"; };
 		CD962F8E1800761500063142 /* CandidateListActivityIndicator.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CandidateListActivityIndicator.xib; sourceTree = "<group>"; };
 		CD97C91B17F47981001402C4 /* cancel_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel_btn@2x.png"; sourceTree = "<group>"; };
 		CD97C92217F47AC5001402C4 /* UIColor+CreateMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+CreateMethods.h"; sourceTree = "<group>"; };
@@ -557,14 +567,20 @@
 				CD97C94D17F49652001402C4 /* CandidateInfoCell.h */,
 				CD97C94E17F49652001402C4 /* CandidateInfoCell.m */,
 				CD97C95017F4966B001402C4 /* CandidateInfoCell.xib */,
-				CD97C95517F499FE001402C4 /* PledgeListCell.xib */,
+				CD93EB651A7A970900C8DDAB /* CandidateDetailInfoCell.h */,
+				CD93EB661A7A970900C8DDAB /* CandidateDetailInfoCell.m */,
+				CD93EB671A7A970900C8DDAB /* CandidateDetailInfoCell.xib */,
 				CD97C95217F499AC001402C4 /* PledgeListCell.h */,
 				CD97C95317F499AC001402C4 /* PledgeListCell.m */,
+				CD97C95517F499FE001402C4 /* PledgeListCell.xib */,
 				CD97C94A17F4952C001402C4 /* CandidateViewController.h */,
 				CD97C94B17F4952C001402C4 /* CandidateViewController.m */,
 				CD6E7FAF1A7A0D1200B868A1 /* CandidateTopView.h */,
 				CD6E7FB01A7A0D1200B868A1 /* CandidateTopView.m */,
 				CD6E7FAD1A7A0D0100B868A1 /* CandidateTopView.xib */,
+				CD93EB6A1A7A9A9F00C8DDAB /* MoreInfoCell.h */,
+				CD93EB6B1A7A9A9F00C8DDAB /* MoreInfoCell.m */,
+				CD93EB6C1A7A9A9F00C8DDAB /* MoreInfoCell.xib */,
 			);
 			path = CandidateViewCont;
 			sourceTree = "<group>";
@@ -1125,6 +1141,8 @@
 				CD04E72917F5F02600EEBDCD /* login_bg01@2x.png in Resources */,
 				CD97C91C17F47981001402C4 /* cancel_btn@2x.png in Resources */,
 				CD97C95117F4966B001402C4 /* CandidateInfoCell.xib in Resources */,
+				CD93EB6E1A7A9A9F00C8DDAB /* MoreInfoCell.xib in Resources */,
+				CD93EB691A7A970900C8DDAB /* CandidateDetailInfoCell.xib in Resources */,
 				CD04E74117F6152100EEBDCD /* feed_label03@2x.png in Resources */,
 				0DFE45AC17F2D6FA00843ED2 /* reply_btn01@2x.png in Resources */,
 				0DFE45B017F2D6FA00843ED2 /* top_btn01@2x.png in Resources */,
@@ -1199,6 +1217,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD93EB6D1A7A9A9F00C8DDAB /* MoreInfoCell.m in Sources */,
 				CDAA8ADE17F660AE00FC1C17 /* Election.m in Sources */,
 				CD7AE3AE1A7911AB00E2334F /* Link.m in Sources */,
 				CD97C94917F488D3001402C4 /* JYGraphic.m in Sources */,
@@ -1242,6 +1261,7 @@
 				CDAA8AF617F66B6300FC1C17 /* Party.m in Sources */,
 				0DF6DF2817F41C5D00BCBCCF /* PledgeCell.m in Sources */,
 				CD39CC0617E9FC1F00DAB305 /* LocationView.m in Sources */,
+				CD93EB681A7A970900C8DDAB /* CandidateDetailInfoCell.m in Sources */,
 				CD6E7FB41A7A28B800B868A1 /* MainNavigationViewController.m in Sources */,
 				CDAA8AE417F660D600FC1C17 /* ReplyEvaluations.m in Sources */,
 				CD97C94C17F4952C001402C4 /* CandidateViewController.m in Sources */,
