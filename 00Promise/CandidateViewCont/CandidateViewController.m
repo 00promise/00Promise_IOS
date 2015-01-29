@@ -12,10 +12,15 @@
 #import "PledgeViewController.h"
 #import "JYGraphic.h"
 #import "DateUtil.h"
+#import "CandidateTopView.h"
 #import <FSExtendedAlertKit.h>
 #import <SDWebImage/UIImageView+WebCache.h>
-@interface CandidateViewController ()
-
+@interface CandidateViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
+@property (nonatomic, weak) IBOutlet UITableView* tableView;
+@property (nonatomic, strong) CandidateTopView* candidateTopView;
+@property (nonatomic, assign) NSInteger profileImgSize;
+@property (nonatomic, assign) BOOL profileOn;
+@property (nonatomic, assign) BOOL linkOn;
 @end
 
 @implementation CandidateViewController
@@ -33,19 +38,37 @@
     if([[segue identifier] isEqualToString:@"leads_calls_to_detail"])
     {
     }
-    NSLog(@"%@",[segue identifier]);
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
 	// Do any additional setup after loading the view.
 }
 - (void)initVariable{
     memoHeight = 0;
 }
 - (void)initView{
+    _candidateTopView = [[[NSBundle mainBundle] loadNibNamed:@"CandidateTopView" owner:nil options:nil] objectAtIndex:0];
+    _candidateTopView.parent = self;
+    [_candidateTopView.backImgView setImageWithURL:[NSURL URLWithString:[_politician bgImg]] placeholderImage:[UIImage imageNamed:@"bg_default.png"] options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType){
+        
+    }];
+    [JYGraphic setRoundedView:_candidateTopView.profileImgView toDiameter:_candidateTopView.profileImgView.frame.size.width];
+    [_candidateTopView.profileImgView setImageWithURL:[NSURL URLWithString:[_politician img]] placeholderImage:[UIImage imageNamed:@"feed_bg_profile01.png"] options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType){
+        
+    }];
+    _profileImgSize = _candidateTopView.profileImgView.frame.size.width;
+    _candidateTopView.nameLabel.text = _politician.name;
+    _candidateTopView.positionLabel.text = _politician.positionName;
+    [_candidateTopView setFrame:CGRectMake(0, 0, 320, 227)];
+    [self.view addSubview:_candidateTopView];
+    
+    _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 227-80)];
+    _tableView.tableHeaderView.backgroundColor = [UIColor clearColor];
+    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [[AFAppDotNetAPIClient sharedClient] getPath:[NSString stringWithFormat:@"politicians/%d.json",_politicianId] parameters:nil success:^(AFHTTPRequestOperation *response, id responseObject) {
+    [[AFAppDotNetAPIClient sharedClient] getPath:[NSString stringWithFormat:@"politicians/%ld.json",_politicianId] parameters:nil success:^(AFHTTPRequestOperation *response, id responseObject) {
 #ifdef _SERVER_LOG_
         NSLog(@"politicians/@id.json : %@",(NSDictionary *)responseObject);
 #endif
@@ -67,7 +90,9 @@
         }
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
+#ifdef _SERVER_LOG_
         NSLog(@"politicians/@id.json [HTTPClient Error]: %@", error.localizedDescription);
+#endif
         FSBlockButton *cancelButton = [FSBlockButton blockButtonWithTitle:@"확인" block:^ {
             [self.navigationController popViewControllerAnimated:TRUE];
         }];
@@ -76,77 +101,88 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
 }
-- (void)backItemClick{
-    [self.navigationController popViewControllerAnimated:TRUE];
+- (IBAction)backItemClick:(id)sender{
+    [self dismissViewControllerAnimated:TRUE completion:nil];
+}
+- (IBAction)shareClick:(id)sender{
+    //NSString *text = [NSString stringWithFormat:@"%@ - %@",_politician.positionName, _politician.name];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/politicians/%ld",RAILS_BASE_URL,_politician.ID.integerValue]];
+    //UIImage *image = _candidateTopView.profileImgView.image;
+    
+    UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[url]applicationActivities:nil];
+    
+    [self presentViewController:controller animated:YES completion:nil];
+    
+}
+- (void)animationForTableView{
+    CGFloat offset = self.tableView.contentOffset.y;
+    if (self.tableView.contentOffset.y < 0) {
+        _candidateTopView.frame = CGRectMake(0, 0, self.view.frame.size.width+ (-offset) * 2, 227 + (-offset));
+        _candidateTopView.backImgView.center = CGPointMake(160, _candidateTopView.profileImgView.center.y);
+        _candidateTopView.profileImgView.center = CGPointMake(160, _candidateTopView.profileImgView.center.y);
+        _candidateTopView.nameLabel.alpha = 1.0f;
+        _candidateTopView.positionLabel.alpha = 1.0f;
+        [JYGraphic setRoundedView:_candidateTopView.profileImgView toDiameter:_candidateTopView.profileImgView.frame.size.width];
+    }else{
+        _candidateTopView.nameLabel.alpha = (272-offset*3)/272.0f;
+        _candidateTopView.positionLabel.alpha = (272-offset*3)/272.0f;
+        _candidateTopView.frame = CGRectMake(0, 0, 320, 227 + (-offset));
+        [JYGraphic setRoundedView:_candidateTopView.profileImgView toDiameter:_profileImgSize*(272-offset)/272.0f];
+    }
+    //[_candidateTopView setAlpha:(272+offset)/272.0f];
 }
 #pragma mark UITableViewDelegate UITableViewDataSource
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (section == 1) {
-        return 6;
-    }
-    return 0;
-}
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    int height = 0;
-    if (section == 0) {
-        height = 0;
-    }else{
-        height = 6;
-    }
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, height)];
-    [view setBackgroundColor:[UIColor clearColor]];
-    return view;
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    if (section == 1) {
-        return 10;
-    }
-    return 0;
-}
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    int height = 0;
-    if (section == 0) {
-        height = 0;
-    }else{
-        height = 10;
-    }
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, height)];
-    [view setBackgroundColor:[UIColor clearColor]];
-    return view;
-}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 0) {
-        return 234+memoHeight;
-    }else if (indexPath.section == 1){
-        if (indexPath.row == 0) {
-            return 57;
-        }else if(indexPath.row == [_politician.manifestos count]-1){
-            return 58;
-        }else{
-            return 56;
-        }
-    }
-    return 0;
+    return 100;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 0) {
-        if (_politician) {
-            return 1;
-        }
-        return 0;
-    }else if(section == 1){
-        return [_politician.manifestos count];
-    }
-    return 0;
+    return 10;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    return 3;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
+    
+    PledgeListCell *cell = (PledgeListCell*) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (cell == nil){
+        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"PledgeListCell" owner:nil options:nil];
+        cell = [topLevelObjects objectAtIndex:0];
+        
+    }
+    Manifesto* manifesto = [_politician.manifestos objectAtIndex:0];
+    UIImage *backImage;
+    if (indexPath.row == 0) {
+        backImage = [UIImage imageNamed:@"list_bg01.png"];
+        cell.backImgView.frame = CGRectMake(10, 0, 300, 57);
+    }else if(indexPath.row == [tableView numberOfRowsInSection:indexPath.section]-1){
+        backImage = [UIImage imageNamed:@"list_bg03.png"];
+        cell.backImgView.frame = CGRectMake(10, 0, 300, 58);
+    }else{
+        backImage = [UIImage imageNamed:@"list_bg02.png"];
+        cell.backImgView.frame = CGRectMake(10, 0, 300, 56);
+    }
+    
+    cell.backImgView.image = [backImage stretchableImageWithLeftCapWidth:3 topCapHeight:3];
+    cell.titleLabel.text = manifesto.title;
+    int maxRatingCnt = MAX(manifesto.goodCnt.integerValue, MAX(manifesto.fairCnt.integerValue, manifesto.poorCnt.integerValue));
+    if (maxRatingCnt == manifesto.goodCnt.integerValue) {
+        cell.ratingImgView.image = [UIImage imageNamed:@"appraisal_icon04.png"];
+        cell.ratingCntLabel.text = [NSString stringWithFormat:@"%d",manifesto.goodCnt.integerValue];
+    }else if (maxRatingCnt == manifesto.fairCnt.integerValue) {
+        cell.ratingImgView.image = [UIImage imageNamed:@"appraisal_icon05.png"];
+        cell.ratingCntLabel.text = [NSString stringWithFormat:@"%d",manifesto.fairCnt.integerValue];
+    }else if (maxRatingCnt == manifesto.poorCnt.integerValue) {
+        cell.ratingImgView.image = [UIImage imageNamed:@"appraisal_icon06.png"];
+        cell.ratingCntLabel.text = [NSString stringWithFormat:@"%d",manifesto.poorCnt.integerValue];
+    }
+    cell.replyCntLabel.text = [NSString stringWithFormat:@"%d",manifesto.replyCnt.integerValue];
+    return cell;
+    /*
     if (indexPath.section == 0) {
         CandidateInfoCell *cell = (CandidateInfoCell*) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil){
@@ -211,6 +247,7 @@
         cell.replyCntLabel.text = [NSString stringWithFormat:@"%d",manifesto.replyCnt.integerValue];
         return cell;
     }
+     */
     
     return NULL;
 }
@@ -225,8 +262,19 @@
         [self.navigationController pushViewController:pledgeViewCont animated:TRUE];
     }
 }
-
-
+#pragma mark UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [self animationForTableView];
+    if (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.frame.size.height) {
+        [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, scrollView.contentSize.height - scrollView.frame.size.height)];
+    }
+}
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    [self animationForTableView];
+}
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
+    [self animationForTableView];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

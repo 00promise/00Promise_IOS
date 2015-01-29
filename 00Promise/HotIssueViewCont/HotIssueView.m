@@ -7,16 +7,14 @@
 //
 
 #import "HotIssueView.h"
-#import "SearchCell.h"
-#import "CandidateCell.h"
 #import "AppDelegate.h"
 #import "UIColor+CreateMethods.h"
 #import "BaseViewController.h"
 #import "IssueBigTableViewCell.h"
 #import "IssueSmallTableViewCell.h"
-#import "Issue.h"
-#import "Link.h"
+#import "Models.h"
 #import "JYGraphic.h"
+#import "CandidateViewController.h"
 #import <FSExtendedAlertKit.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 @implementation HotIssueView
@@ -85,7 +83,7 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"Cell";
-    Issue* issue= [_issueArr objectAtIndex:indexPath.row];
+    Issue* issue = [_issueArr objectAtIndex:indexPath.row];
     CGSize expectedLabelSize = [issue.title sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(223, 200)];
     
     if (expectedLabelSize.height > 20) {
@@ -124,6 +122,14 @@
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-
+    Issue* issue= [_issueArr objectAtIndex:indexPath.row];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    CandidateViewController* candidateViewCont = [storyboard instantiateViewControllerWithIdentifier:@"candidateViewController"];
+    candidateViewCont.politician = issue.link.politician;
+    candidateViewCont.politicianId = issue.link.politician.ID.integerValue;
+    [((UIViewController*)self.parentViewCont) presentViewController:candidateViewCont animated:TRUE completion:nil];
+    
+    //[((UIViewController*)self.parentViewCont).navigationController pushViewController:candidateViewCont animated:TRUE];
 }
 @end

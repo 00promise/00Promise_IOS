@@ -20,14 +20,15 @@
 
 @implementation OTCover
 
-- (OTCover*)initWithTableViewWithHeaderImage:(UIImage*)headerImage withOTCoverHeight:(CGFloat)height{
+- (OTCover*)initWithTableViewWithHeaderView:(UIView*)headerView withOTCoverHeight:(CGFloat)height{
     
     CGRect bounds = [[UIScreen mainScreen] bounds];
     self = [[OTCover alloc] initWithFrame:bounds];
     
-    self.headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, bounds.size.width, height)];
-    [self.headerImageView setImage:headerImage];
-    [self addSubview:self.headerImageView];
+    //self.headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, bounds.size.width, height)];
+    //[self.headerImageView setImage:headerImage];
+    self.headerView = headerView;
+    [self addSubview:self.headerView];
     
     self.OTCoverHeight = height;
     
@@ -45,14 +46,16 @@
     return self;
 }
 
-- (OTCover*)initWithScrollViewWithHeaderImage:(UIImage*)headerImage withOTCoverHeight:(CGFloat)height withScrollContentViewHeight:(CGFloat)ContentViewheight{
+- (OTCover*)initWithScrollViewWithHeaderView:(UIView*)headerView withOTCoverHeight:(CGFloat)height withScrollContentViewHeight:(CGFloat)ContentViewheight{
     
     CGRect bounds = [[UIScreen mainScreen] bounds];
     self = [[OTCover alloc] initWithFrame:bounds];
     
-    self.headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, bounds.size.width, height)];
-    [self.headerImageView setImage:headerImage];
-    [self addSubview:self.headerImageView];
+    //self.headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, bounds.size.width, height)];
+    //[self.headerImageView setImage:headerImage];
+    
+    self.headerView = headerView;
+    [self addSubview:self.headerView];
     
     self.OTCoverHeight = height;
     
@@ -74,26 +77,30 @@
 }
 
 - (void)setHeaderImage:(UIImage *)headerImage{
+    /*
     [self.headerImageView setImage:headerImage];
     [self.blurImages removeAllObjects];
     [self prepareForBlurImages];
+     */
 }
 
 - (void)prepareForBlurImages
 {
+    /*
     CGFloat factor = 0.1;
     [self.blurImages addObject:self.headerImageView.image];
     for (NSUInteger i = 0; i < self.OTCoverHeight/10; i++) {
         [self.blurImages addObject:[self.headerImageView.image boxblurImageWithBlur:factor]];
         factor+=0.04;
     }
+     */
 }
 
 - (void)animationForTableView{
     CGFloat offset = self.tableView.contentOffset.y;
     
     if (self.tableView.contentOffset.y > 0) {
-        
+        /*
         NSInteger index = offset / 10;
         if (index < 0) {
             index = 0;
@@ -107,10 +114,10 @@
             
         }
         self.tableView.backgroundColor = [UIColor clearColor];
-        
+        */
     }
     else {
-        self.headerImageView.frame = CGRectMake(offset,0, self.frame.size.width+ (-offset) * 2, self.OTCoverHeight + (-offset));
+        self.headerView.frame = CGRectMake(offset,0, self.frame.size.width+ (-offset) * 2, self.OTCoverHeight + (-offset));
     }
 }
 
@@ -118,7 +125,7 @@
     CGFloat offset = self.scrollView.contentOffset.y;
     
     if (self.scrollView.contentOffset.y > 0) {
-        
+        /*
         NSInteger index = offset / 10;
         if (index < 0) {
             index = 0;
@@ -132,10 +139,10 @@
             
         }
         self.scrollView.backgroundColor = [UIColor clearColor];
-        
+        */
     }
     else {
-        self.headerImageView.frame = CGRectMake(offset,0, self.frame.size.width + (-offset) * 2, self.OTCoverHeight + (-offset));
+        self.headerView.frame = CGRectMake(offset,0, self.frame.size.width + (-offset) * 2, self.OTCoverHeight + (-offset));
     }
 }
 

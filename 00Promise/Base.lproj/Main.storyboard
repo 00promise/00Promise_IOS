@@ -84,6 +84,7 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="XUM-JG-Uxm"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="issueBtn" destination="Hn5-7e-MEx" id="YMj-rD-7sP"/>
                         <outlet property="politicianBtn" destination="GJ3-BZ-feX" id="xhN-kA-Nu0"/>
@@ -178,9 +179,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ZpY-ON-h4M">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ZpY-ON-h4M">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -199,7 +200,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7mM-DJ-fVA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="831" y="-1268.5333333333333"/>
+            <point key="canvasLocation" x="831" y="-1269"/>
         </scene>
         <!--Candidate View Controller-->
         <scene sceneID="8mQ-16-aBO">
@@ -209,23 +210,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="b1s-5K-UmF">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="separatorColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <color key="sectionIndexTrackingBackgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="6ch-XL-I5l">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <outlet property="dataSource" destination="XVn-XC-Z35" id="3e4-gM-n5F"/>
-                                    <outlet property="delegate" destination="XVn-XC-Z35" id="b05-6B-RUY"/>
+                                    <outlet property="dataSource" destination="XVn-XC-Z35" id="HRa-dD-7jV"/>
+                                    <outlet property="delegate" destination="XVn-XC-Z35" id="qrK-f3-N2F"/>
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.86274509803921573" green="0.35294117647058826" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="hbg-Jt-TqA"/>
                     <connections>
-                        <outlet property="tableView" destination="b1s-5K-UmF" id="1Hg-p4-2Nl"/>
+                        <outlet property="tableView" destination="6ch-XL-I5l" id="9Bj-TQ-4H2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f8g-ZU-kBX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -288,7 +292,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Z7j-Wa-l9o">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Z7j-Wa-l9o">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -583,10 +587,11 @@
             </objects>
             <point key="canvasLocation" x="167" y="488.71666666666664"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Main Navigation View Controller-->
         <scene sceneID="3eh-I2-IIn">
             <objects>
-                <navigationController storyboardIdentifier="mainNavigationController" automaticallyAdjustsScrollViewInsets="NO" definesPresentationContext="YES" id="awm-4e-fzS" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="mainNavigationController" automaticallyAdjustsScrollViewInsets="NO" definesPresentationContext="YES" id="awm-4e-fzS" customClass="MainNavigationViewController" sceneMemberID="viewController">
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="MjQ-0K-eTX">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

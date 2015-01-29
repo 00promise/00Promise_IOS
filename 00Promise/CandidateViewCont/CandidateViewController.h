@@ -13,9 +13,8 @@
     NSInteger memoHeight;
 }
 
-@property (nonatomic, weak) IBOutlet UITableView* tableView;
-
 @property (nonatomic, assign) NSInteger politicianId;
 @property (nonatomic, strong) Politician* politician;
-
+- (IBAction)backItemClick:(id)sender;
+- (IBAction)shareClick:(id)sender;
 @end

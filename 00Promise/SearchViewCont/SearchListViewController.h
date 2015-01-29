@@ -17,4 +17,5 @@ typedef enum{
 @interface SearchListViewController :  SuperViewController <SuperViewControllerDelegate>
 @property (nonatomic, assign) SearListType type;
 @property (nonatomic, strong) NSMutableArray* array;
+@property (nonatomic, assign) NSInteger sidoId;
 @end

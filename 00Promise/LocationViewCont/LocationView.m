@@ -289,10 +289,8 @@
     }
     Politician* politician = [_candicateArr objectAtIndex:indexPath.row];
     UIImage *backImage = [UIImage imageNamed:@"search_bg02.png"];
-    cell.backImgView.image = [backImage stretchableImageWithLeftCapWidth:3 topCapHeight:3];
     
     cell.nameLabel.text = politician.name;
-    cell.contentLabel.text = politician.memo;
     cell.positionLabel.text = politician.positionName;
     if ([politician haveImg]) {
         [cell.profileImgView setImageWithURL:[NSURL URLWithString:[politician img]] placeholderImage:nil options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType){

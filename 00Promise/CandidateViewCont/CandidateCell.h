@@ -10,9 +10,7 @@
 
 @interface CandidateCell : UITableViewCell
 
-@property (nonatomic, weak) IBOutlet UIImageView* backImgView;
 @property (nonatomic, weak) IBOutlet UIImageView* profileImgView;
 @property (nonatomic, weak) IBOutlet UILabel* nameLabel;
 @property (nonatomic, weak) IBOutlet UILabel* positionLabel;
-@property (nonatomic, weak) IBOutlet UILabel* contentLabel;
 @end

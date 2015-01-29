@@ -80,7 +80,9 @@
     
     [self presentViewController:loginViewController animated:FALSE completion:nil];
 }
-
+- (UIStatusBarStyle) preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

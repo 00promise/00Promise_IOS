@@ -156,7 +156,10 @@
 		CD6E7FA01A78CAAE00B868A1 /* HotIssueView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD6E7F9F1A78CAAE00B868A1 /* HotIssueView.xib */; };
 		CD6E7FA51A78CBEF00B868A1 /* FavoriteLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD6E7FA21A78CBEF00B868A1 /* FavoriteLocationViewController.m */; };
 		CD6E7FA61A78CBEF00B868A1 /* LocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD6E7FA41A78CBEF00B868A1 /* LocationViewController.m */; };
-		CD6E7FA91A78F23000B868A1 /* OTCover.m in Sources */ = {isa = PBXBuildFile; fileRef = CD6E7FA81A78F23000B868A1 /* OTCover.m */; };
+		CD6E7FAC1A7A0A2B00B868A1 /* OTCover.m in Sources */ = {isa = PBXBuildFile; fileRef = CD6E7FAB1A7A0A2B00B868A1 /* OTCover.m */; };
+		CD6E7FAE1A7A0D0100B868A1 /* CandidateTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD6E7FAD1A7A0D0100B868A1 /* CandidateTopView.xib */; };
+		CD6E7FB11A7A0D1200B868A1 /* CandidateTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD6E7FB01A7A0D1200B868A1 /* CandidateTopView.m */; };
+		CD6E7FB41A7A28B800B868A1 /* MainNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD6E7FB31A7A28B800B868A1 /* MainNavigationViewController.m */; };
 		CD7A30CE1A7920F700D4C04D /* SearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A30CD1A7920F700D4C04D /* SearchTableViewCell.m */; };
 		CD7A30D01A79211100D4C04D /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD7A30CF1A79211100D4C04D /* SearchTableViewCell.xib */; };
 		CD7A30D61A79357A00D4C04D /* SearchListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A30D51A79357A00D4C04D /* SearchListViewController.m */; };
@@ -384,8 +387,13 @@
 		CD6E7FA21A78CBEF00B868A1 /* FavoriteLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteLocationViewController.m; sourceTree = "<group>"; };
 		CD6E7FA31A78CBEF00B868A1 /* LocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationViewController.h; sourceTree = "<group>"; };
 		CD6E7FA41A78CBEF00B868A1 /* LocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationViewController.m; sourceTree = "<group>"; };
-		CD6E7FA71A78F23000B868A1 /* OTCover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCover.h; sourceTree = "<group>"; };
-		CD6E7FA81A78F23000B868A1 /* OTCover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCover.m; sourceTree = "<group>"; };
+		CD6E7FAA1A7A0A2B00B868A1 /* OTCover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCover.h; sourceTree = "<group>"; };
+		CD6E7FAB1A7A0A2B00B868A1 /* OTCover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCover.m; sourceTree = "<group>"; };
+		CD6E7FAD1A7A0D0100B868A1 /* CandidateTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CandidateTopView.xib; sourceTree = "<group>"; };
+		CD6E7FAF1A7A0D1200B868A1 /* CandidateTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CandidateTopView.h; sourceTree = "<group>"; };
+		CD6E7FB01A7A0D1200B868A1 /* CandidateTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CandidateTopView.m; sourceTree = "<group>"; };
+		CD6E7FB21A7A28B800B868A1 /* MainNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainNavigationViewController.h; sourceTree = "<group>"; };
+		CD6E7FB31A7A28B800B868A1 /* MainNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainNavigationViewController.m; sourceTree = "<group>"; };
 		CD7A30CC1A7920F700D4C04D /* SearchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTableViewCell.h; sourceTree = "<group>"; };
 		CD7A30CD1A7920F700D4C04D /* SearchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTableViewCell.m; sourceTree = "<group>"; };
 		CD7A30CF1A79211100D4C04D /* SearchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
@@ -540,20 +548,23 @@
 		0D22630417F2BBB400847356 /* CandidateViewCont */ = {
 			isa = PBXGroup;
 			children = (
-				0D22630817F2BBD000847356 /* CandidateCell.xib */,
+				CD97C95717F4A46A001402C4 /* CandidateListViewController.h */,
+				CD97C95817F4A46A001402C4 /* CandidateListViewController.m */,
+				CD962F8E1800761500063142 /* CandidateListActivityIndicator.xib */,
 				0D22630517F2BBC200847356 /* CandidateCell.h */,
 				0D22630617F2BBC200847356 /* CandidateCell.m */,
-				CD97C95017F4966B001402C4 /* CandidateInfoCell.xib */,
+				0D22630817F2BBD000847356 /* CandidateCell.xib */,
 				CD97C94D17F49652001402C4 /* CandidateInfoCell.h */,
 				CD97C94E17F49652001402C4 /* CandidateInfoCell.m */,
+				CD97C95017F4966B001402C4 /* CandidateInfoCell.xib */,
 				CD97C95517F499FE001402C4 /* PledgeListCell.xib */,
 				CD97C95217F499AC001402C4 /* PledgeListCell.h */,
 				CD97C95317F499AC001402C4 /* PledgeListCell.m */,
 				CD97C94A17F4952C001402C4 /* CandidateViewController.h */,
 				CD97C94B17F4952C001402C4 /* CandidateViewController.m */,
-				CD97C95717F4A46A001402C4 /* CandidateListViewController.h */,
-				CD97C95817F4A46A001402C4 /* CandidateListViewController.m */,
-				CD962F8E1800761500063142 /* CandidateListActivityIndicator.xib */,
+				CD6E7FAF1A7A0D1200B868A1 /* CandidateTopView.h */,
+				CD6E7FB01A7A0D1200B868A1 /* CandidateTopView.m */,
+				CD6E7FAD1A7A0D0100B868A1 /* CandidateTopView.xib */,
 			);
 			path = CandidateViewCont;
 			sourceTree = "<group>";
@@ -593,6 +604,8 @@
 				CD04E73A17F602C800EEBDCD /* LogoutCell.xib */,
 				CD04E73717F602A100EEBDCD /* LogoutCell.h */,
 				CD04E73817F602A100EEBDCD /* LogoutCell.m */,
+				CD6E7FB21A7A28B800B868A1 /* MainNavigationViewController.h */,
+				CD6E7FB31A7A28B800B868A1 /* MainNavigationViewController.m */,
 			);
 			path = MainViewCont;
 			sourceTree = "<group>";
@@ -834,11 +847,11 @@
 				CD7A30CC1A7920F700D4C04D /* SearchTableViewCell.h */,
 				CD7A30CD1A7920F700D4C04D /* SearchTableViewCell.m */,
 				CD7A30CF1A79211100D4C04D /* SearchTableViewCell.xib */,
+				CD7A30D41A79357A00D4C04D /* SearchListViewController.h */,
+				CD7A30D51A79357A00D4C04D /* SearchListViewController.m */,
 				0D2262FB17F286D300847356 /* SearchCell.h */,
 				0D2262FC17F286D300847356 /* SearchCell.m */,
 				0D2262FE17F286ED00847356 /* SearchCell.xib */,
-				CD7A30D41A79357A00D4C04D /* SearchListViewController.h */,
-				CD7A30D51A79357A00D4C04D /* SearchListViewController.m */,
 			);
 			path = SearchViewCont;
 			sourceTree = "<group>";
@@ -876,8 +889,8 @@
 		CD97C92617F47E07001402C4 /* Librarys */ = {
 			isa = PBXGroup;
 			children = (
-				CD6E7FA71A78F23000B868A1 /* OTCover.h */,
-				CD6E7FA81A78F23000B868A1 /* OTCover.m */,
+				CD6E7FAA1A7A0A2B00B868A1 /* OTCover.h */,
+				CD6E7FAB1A7A0A2B00B868A1 /* OTCover.m */,
 				CDAA8ACC17F6576E00FC1C17 /* AFAppDotNetAPIClient.h */,
 				CDAA8ACD17F6576E00FC1C17 /* AFAppDotNetAPIClient.m */,
 			);
@@ -1105,6 +1118,7 @@
 				0DFE45A617F2D6FA00843ED2 /* list_bg02@2x.png in Resources */,
 				0DFE459F17F2D6FA00843ED2 /* feed_bg_profile01@2x.png in Resources */,
 				0D22630217F2ACE100847356 /* dim@2x.png in Resources */,
+				CD6E7FAE1A7A0D0100B868A1 /* CandidateTopView.xib in Resources */,
 				0DFE459617F2D6FA00843ED2 /* appraisal_icon02_off@2x.png in Resources */,
 				CD04E72817F5F02600EEBDCD /* login_bar01@2x.png in Resources */,
 				0DFE456117F2D26600843ED2 /* back@2x.png in Resources */,
@@ -1191,6 +1205,7 @@
 				CDAA8AF017F6610800FC1C17 /* Winner.m in Sources */,
 				CDAA8ACE17F6576E00FC1C17 /* AFAppDotNetAPIClient.m in Sources */,
 				CDAA8AE117F660C700FC1C17 /* Rating.m in Sources */,
+				CD6E7FAC1A7A0A2B00B868A1 /* OTCover.m in Sources */,
 				CD7A30D61A79357A00D4C04D /* SearchListViewController.m in Sources */,
 				CD04E73917F602A100EEBDCD /* LogoutCell.m in Sources */,
 				CDAA8AF317F6637F00FC1C17 /* DateUtil.m in Sources */,
@@ -1209,7 +1224,6 @@
 				CD17F47F17DCC1CB00CE6968 /* AppDelegate.m in Sources */,
 				CD97C94F17F49652001402C4 /* CandidateInfoCell.m in Sources */,
 				0DA10CB617E163E200914C5B /* MainTableViewCell.m in Sources */,
-				CD6E7FA91A78F23000B868A1 /* OTCover.m in Sources */,
 				CDAA8AD217F65A8E00FC1C17 /* Manifesto.m in Sources */,
 				0DFE45B617F2DE6100843ED2 /* ReplyCell.m in Sources */,
 				CD04E73617F5F09A00EEBDCD /* RegisterViewController.m in Sources */,
@@ -1228,11 +1242,13 @@
 				CDAA8AF617F66B6300FC1C17 /* Party.m in Sources */,
 				0DF6DF2817F41C5D00BCBCCF /* PledgeCell.m in Sources */,
 				CD39CC0617E9FC1F00DAB305 /* LocationView.m in Sources */,
+				CD6E7FB41A7A28B800B868A1 /* MainNavigationViewController.m in Sources */,
 				CDAA8AE417F660D600FC1C17 /* ReplyEvaluations.m in Sources */,
 				CD97C94C17F4952C001402C4 /* CandidateViewController.m in Sources */,
 				CD6E7FA51A78CBEF00B868A1 /* FavoriteLocationViewController.m in Sources */,
 				CD7AE3A81A79111F00E2334F /* Issue.m in Sources */,
 				0D22630717F2BBC200847356 /* CandidateCell.m in Sources */,
+				CD6E7FB11A7A0D1200B868A1 /* CandidateTopView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

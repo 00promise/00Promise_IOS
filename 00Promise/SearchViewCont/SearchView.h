@@ -12,9 +12,7 @@
 @interface SearchView : BaseView <CLLocationManagerDelegate>
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) CLLocation* currentLocation;
-//@property (nonatomic, weak) IBOutlet UITextField* searchTextField;
 @property (nonatomic, weak) IBOutlet UITableView* tableView;
-//@property (nonatomic, strong) UISearchDisplayController *searchDisplayCont;
-//@property (nonatomic, strong) UISearchBar* searchBar;
+
 - (IBAction)addressReloadClick:(id)sender;
 @end

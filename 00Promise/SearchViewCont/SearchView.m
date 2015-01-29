@@ -21,6 +21,7 @@
 @property (nonatomic, strong) NSMutableArray* sidoArr;
 @property (nonatomic, strong) NSMutableArray* partyArr;
 @property (nonatomic, strong) NSMutableArray* electionArr;
+@property (nonatomic, strong) Sigungu* sigungu;
 @end
     
 @implementation SearchView
@@ -177,6 +178,34 @@
          CLPlacemark *placemark = [placemarks objectAtIndex:0];
          _address = [NSString stringWithFormat:@"%@ %@ %@", placemark.administrativeArea,placemark.locality, placemark.thoroughfare];
          [_tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+         
+         NSMutableDictionary* params = [NSMutableDictionary new];
+         [params setObject:[NSString stringWithFormat:@"%@",placemark.locality] forKey:@"q"];
+         
+         [[AFAppDotNetAPIClient sharedClient] getPath:@"district/search.json" parameters:params success:^(AFHTTPRequestOperation *response, id responseObject) {
+#ifdef _SERVER_LOG_
+             NSLog(@"district/search.json : %@",(NSDictionary *)responseObject);
+#endif
+             NSString* code = [responseObject objectForKey:@"code"];
+             if (![code isEqualToString:@"0000"]) {
+                 
+             }else{
+                 Sigungu* sigungu = [Sigungu new];
+                 NSMutableArray* sigunguArr = [responseObject objectForKey:@"data"];
+                 if ([sigunguArr count] == 0) {
+                     [MBProgressHUD hideHUDForView:self animated:YES];
+                     return ;
+                 }
+                 NSDictionary* sigunguDic = [sigunguArr objectAtIndex:0];
+                 [sigungu setPropertiesUsingRemoteDictionary:[NSDictionary dictionaryWithObject:sigunguDic forKey:@"sigungu"]];
+                 _sigungu = sigungu;
+             }
+         } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
+#ifdef _SERVER_LOG_
+             NSLog(@"district/search.json [HTTPClient Error]: %@", error.localizedDescription);
+#endif
+         }];
+
      }];
 }
 - (void)locationManager:(CLLocationManager *)manager
@@ -198,7 +227,14 @@
 #pragma mark UIActionSheetDelegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 0) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         
+        CandidateListViewController* candidateListViewCont = [storyboard instantiateViewControllerWithIdentifier:@"candidateListViewController"];
+        candidateListViewCont.type = CandidateListLocation;
+        candidateListViewCont.ID = _sigungu.ID.integerValue;
+        candidateListViewCont.titleTxt = _sigungu.name;
+        
+         [((UIViewController *)self.parentViewCont).navigationController pushViewController:candidateListViewCont animated:TRUE];
     }else if(buttonIndex == 1) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         
@@ -282,30 +318,12 @@
         searchListViewCont.array = _electionArr;
         [((UIViewController *)self.parentViewCont).navigationController pushViewController:searchListViewCont animated:TRUE];
     }else if(indexPath.row == 3) {
-        [(UIViewController *)self.parentViewCont performSegueWithIdentifier:@"GoCandidateListPush" sender:nil];
-    }
-    /*
-    if (indexPath.section == 0) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        
         CandidateListViewController* candidateListViewCont = [storyboard instantiateViewControllerWithIdentifier:@"candidateListViewController"];
-        candidateListViewCont.electionId = 0;
-        candidateListViewCont.candidateId = 0;
-        Election* election = [_electionArr objectAtIndex:indexPath.row];
-        candidateListViewCont.electionId = election.ID.integerValue;
-        
-        [((UIViewController *)self.parentViewCont).navigationController pushViewController:candidateListViewCont animated:TRUE];
-    }else if (indexPath.section == 1){
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        
-        CandidateListViewController* candidateListViewCont = [storyboard instantiateViewControllerWithIdentifier:@"candidateListViewController"];
-        candidateListViewCont.electionId = 0;
-        candidateListViewCont.candidateId = 0;
-        Party* party = [_partyArr objectAtIndex:indexPath.row];
-        candidateListViewCont.candidateId =  party.ID.integerValue;
+        candidateListViewCont.type = CandidateListName;
+        candidateListViewCont.titleTxt = _sigungu.name;
         [((UIViewController *)self.parentViewCont).navigationController pushViewController:candidateListViewCont animated:TRUE];
     }
-     */
 }
 
 

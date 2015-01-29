@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "SuperViewController.h"
+typedef enum {
+    CandidateListLocation,
+    CandidateListParty,
+    CandidateListElection,
+    CandidateListName
+}CandidateListType;
 @interface CandidateListViewController : SuperViewController <SuperViewControllerDelegate>
 {
     int page;
@@ -18,6 +24,7 @@
 @property (nonatomic, retain) UIActivityIndicatorView *activityIndicator;
 
 @property (nonatomic, strong) NSMutableArray* candidateArr;
-@property (nonatomic, assign) NSInteger electionId;
-@property (nonatomic, assign) NSInteger candidateId;
+@property (nonatomic, assign) CandidateListType type;
+@property (nonatomic, assign) NSInteger ID;
+@property (nonatomic, strong) NSString* titleTxt;
 @end

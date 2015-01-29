@@ -33,10 +33,12 @@
 {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = FALSE;
+    [self setNeedsStatusBarAppearanceUpdate];
+    
     UINavigationBar *navBar = self.navigationController.navigationBar;
     
     UIView *overlayView = [[UIView alloc] initWithFrame:CGRectMake(0, 44, self.view.frame.size.width, 1)];
-    [overlayView setBackgroundColor:[UIColor whiteColor]];
+    [overlayView setBackgroundColor:[UIColor colorWithHex:@"#DC5A14" alpha:1.0f]];
     [navBar setBackgroundColor:[UIColor whiteColor]];
     [navBar addSubview:overlayView];
     
@@ -59,7 +61,7 @@
 //    [titleImgView setCenter:CGPointMake(160, 18)];
 //    [navBar addSubview:titleImgView];
 
-    if ([self isKindOfClass:[LocationViewController class]] || [self isKindOfClass:[FavoriteLocationViewController class]] || [self isKindOfClass:[SearchListViewController class]]) {
+    if ([self isKindOfClass:[LocationViewController class]] || [self isKindOfClass:[FavoriteLocationViewController class]] || [self isKindOfClass:[SearchListViewController class]] || [self isKindOfClass:[CandidateListViewController class]]) {
         titleLabel=[[UILabel alloc]init];
         
         titleLabel.font=[UIFont boldSystemFontOfSize:19];
@@ -185,6 +187,10 @@
         }
     }
     return nil;
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)didReceiveMemoryWarning

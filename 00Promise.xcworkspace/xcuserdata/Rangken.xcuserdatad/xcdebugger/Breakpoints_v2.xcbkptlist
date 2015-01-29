@@ -9,13 +9,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "00Promise/SearchViewCont/SearchView.m"
-            timestampString = "444153145.54851"
+            filePath = "00Promise/CandidateViewCont/CandidateListViewController.m"
+            timestampString = "444203797.700741"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "274"
-            endingLineNumber = "274"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "00Promise/SearchViewCont/SearchListViewController.m"
-            timestampString = "444153469.522362"
+            filePath = "00Promise/CandidateViewCont/CandidateListViewController.m"
+            timestampString = "444204203.90803"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            startingLineNumber = "303"
+            endingLineNumber = "303"
+            landmarkName = "-searchBarTextDidBeginEditing:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,13 +41,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "00Promise/SearchViewCont/SearchListViewController.m"
-            timestampString = "444153469.522362"
+            filePath = "00Promise/CandidateViewCont/CandidateListViewController.m"
+            timestampString = "444203797.700741"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "-tableView:numberOfRowsInSection:"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -57,13 +57,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "00Promise/SearchViewCont/SearchView.m"
-            timestampString = "444153109.460547"
+            filePath = "00Promise/CandidateViewCont/CandidateListViewController.m"
+            timestampString = "444203797.700741"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "275"
-            endingLineNumber = "275"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -73,13 +73,29 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "00Promise/MainViewCont/BaseViewController.m"
-            timestampString = "444155217.919743"
+            filePath = "00Promise/CandidateViewCont/CandidateViewController.m"
+            timestampString = "444218030.002857"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
-            landmarkName = "-initView"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
+            landmarkName = "-animationForTableView"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "00Promise/CandidateViewCont/CandidateViewController.m"
+            timestampString = "444218030.002857"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
+            landmarkName = "-animationForTableView"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
