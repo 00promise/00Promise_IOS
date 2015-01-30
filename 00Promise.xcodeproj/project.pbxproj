@@ -190,6 +190,8 @@
 		CD97C95417F499AC001402C4 /* PledgeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD97C95317F499AC001402C4 /* PledgeListCell.m */; };
 		CD97C95617F499FE001402C4 /* PledgeListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD97C95517F499FE001402C4 /* PledgeListCell.xib */; };
 		CD97C95917F4A46A001402C4 /* CandidateListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD97C95817F4A46A001402C4 /* CandidateListViewController.m */; };
+		CD9F4C181A7B472600A28675 /* CandidateLinkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9F4C161A7B472600A28675 /* CandidateLinkCell.m */; };
+		CD9F4C191A7B472600A28675 /* CandidateLinkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD9F4C171A7B472600A28675 /* CandidateLinkCell.xib */; };
 		CDAA8ACE17F6576E00FC1C17 /* AFAppDotNetAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = CDAA8ACD17F6576E00FC1C17 /* AFAppDotNetAPIClient.m */; };
 		CDAA8AD217F65A8E00FC1C17 /* Manifesto.m in Sources */ = {isa = PBXBuildFile; fileRef = CDAA8AD117F65A8E00FC1C17 /* Manifesto.m */; };
 		CDAA8AD517F65B5100FC1C17 /* Models.m in Sources */ = {isa = PBXBuildFile; fileRef = CDAA8AD417F65B5100FC1C17 /* Models.m */; };
@@ -205,6 +207,8 @@
 		CDAA8AF317F6637F00FC1C17 /* DateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CDAA8AF217F6637F00FC1C17 /* DateUtil.m */; };
 		CDAA8AF617F66B6300FC1C17 /* Party.m in Sources */ = {isa = PBXBuildFile; fileRef = CDAA8AF517F66B6300FC1C17 /* Party.m */; };
 		CDAA8AF817F705BC00FC1C17 /* default_image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDAA8AF717F705BC00FC1C17 /* default_image@2x.png */; };
+		CDEADC771A7B805700E8E006 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDEADC761A7B805700E8E006 /* KakaoOpenSDK.framework */; };
+		CDEADC791A7B818D00E8E006 /* kakao_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = CDEADC781A7B818D00E8E006 /* kakao_btn.png */; };
 		EB2F4EDBE54949DBB96B66BD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ACE57A14C21B4B948DD9FB49 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -443,6 +447,9 @@
 		CD97C95517F499FE001402C4 /* PledgeListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PledgeListCell.xib; sourceTree = "<group>"; };
 		CD97C95717F4A46A001402C4 /* CandidateListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CandidateListViewController.h; sourceTree = "<group>"; };
 		CD97C95817F4A46A001402C4 /* CandidateListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CandidateListViewController.m; sourceTree = "<group>"; };
+		CD9F4C151A7B472600A28675 /* CandidateLinkCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CandidateLinkCell.h; sourceTree = "<group>"; };
+		CD9F4C161A7B472600A28675 /* CandidateLinkCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CandidateLinkCell.m; sourceTree = "<group>"; };
+		CD9F4C171A7B472600A28675 /* CandidateLinkCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CandidateLinkCell.xib; sourceTree = "<group>"; };
 		CDAA8ACB17F63AE300FC1C17 /* list_line01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list_line01@2x.png"; sourceTree = "<group>"; };
 		CDAA8ACC17F6576E00FC1C17 /* AFAppDotNetAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFAppDotNetAPIClient.h; sourceTree = "<group>"; };
 		CDAA8ACD17F6576E00FC1C17 /* AFAppDotNetAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFAppDotNetAPIClient.m; sourceTree = "<group>"; };
@@ -473,6 +480,8 @@
 		CDAA8AF417F66B6300FC1C17 /* Party.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Party.h; sourceTree = "<group>"; };
 		CDAA8AF517F66B6300FC1C17 /* Party.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Party.m; sourceTree = "<group>"; };
 		CDAA8AF717F705BC00FC1C17 /* default_image@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default_image@2x.png"; sourceTree = "<group>"; };
+		CDEADC761A7B805700E8E006 /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KakaoOpenSDK.framework; path = Frameworks/KakaoOpenSDK.framework; sourceTree = "<group>"; };
+		CDEADC781A7B818D00E8E006 /* kakao_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kakao_btn.png; sourceTree = "<group>"; };
 		DC77871E421C4EAF9582D434 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -481,6 +490,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDEADC771A7B805700E8E006 /* KakaoOpenSDK.framework in Frameworks */,
 				0D70CE6117EFCFE900C2E452 /* CoreLocation.framework in Frameworks */,
 				CD17F47117DCC1CB00CE6968 /* CoreGraphics.framework in Frameworks */,
 				CD17F47317DCC1CB00CE6968 /* UIKit.framework in Frameworks */,
@@ -578,6 +588,9 @@
 				CD6E7FAF1A7A0D1200B868A1 /* CandidateTopView.h */,
 				CD6E7FB01A7A0D1200B868A1 /* CandidateTopView.m */,
 				CD6E7FAD1A7A0D0100B868A1 /* CandidateTopView.xib */,
+				CD9F4C151A7B472600A28675 /* CandidateLinkCell.h */,
+				CD9F4C161A7B472600A28675 /* CandidateLinkCell.m */,
+				CD9F4C171A7B472600A28675 /* CandidateLinkCell.xib */,
 				CD93EB6A1A7A9A9F00C8DDAB /* MoreInfoCell.h */,
 				CD93EB6B1A7A9A9F00C8DDAB /* MoreInfoCell.m */,
 				CD93EB6C1A7A9A9F00C8DDAB /* MoreInfoCell.xib */,
@@ -588,6 +601,7 @@
 		0D22630A17F2BC3E00847356 /* Test */ = {
 			isa = PBXGroup;
 			children = (
+				CDEADC781A7B818D00E8E006 /* kakao_btn.png */,
 				CD97C91B17F47981001402C4 /* cancel_btn@2x.png */,
 				0D22630B17F2BC3E00847356 /* arnold@2x.png */,
 				0D22630C17F2BC3E00847356 /* test_candidate1@2x.png */,
@@ -777,6 +791,7 @@
 		CD17F46D17DCC1CB00CE6968 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CDEADC761A7B805700E8E006 /* KakaoOpenSDK.framework */,
 				0D70CE6017EFCFE900C2E452 /* CoreLocation.framework */,
 				CD17F46E17DCC1CB00CE6968 /* Foundation.framework */,
 				CD17F47017DCC1CB00CE6968 /* CoreGraphics.framework */,
@@ -1064,6 +1079,7 @@
 				CD7F7D63187D99E4002CC1B4 /* appicon_57x57.png in Resources */,
 				0DFE45A517F2D6FA00843ED2 /* list_bg01@2x.png in Resources */,
 				CD6E7F911A78C25200B868A1 /* main_icon01@3x.png in Resources */,
+				CDEADC791A7B818D00E8E006 /* kakao_btn.png in Resources */,
 				CD04E72C17F5F02600EEBDCD /* login_bg04@2x.png in Resources */,
 				CD6E7F7F1A78C23D00B868A1 /* btn_close01.png@3x.png in Resources */,
 				CD7AE3951A790C6C00E2334F /* IssueSmallTableViewCell.xib in Resources */,
@@ -1090,6 +1106,7 @@
 				CDAA8AF817F705BC00FC1C17 /* default_image@2x.png in Resources */,
 				CD6E7F6F1A78C22900B868A1 /* main_title@2x.png in Resources */,
 				0DFE45B117F2D6FA00843ED2 /* top_btn02@2x.png in Resources */,
+				CD9F4C191A7B472600A28675 /* CandidateLinkCell.xib in Resources */,
 				CD6E7F801A78C23D00B868A1 /* main_btn_reset.png in Resources */,
 				CD6E7F691A78C22900B868A1 /* main_tab02_off@2x.png in Resources */,
 				0DFE459C17F2D6FA00843ED2 /* appraisal_icon06@2x.png in Resources */,
@@ -1234,6 +1251,7 @@
 				CDAA8AED17F660FC00FC1C17 /* User.m in Sources */,
 				0D2262FD17F286D300847356 /* SearchCell.m in Sources */,
 				CD17F48517DCC1CB00CE6968 /* ViewController.m in Sources */,
+				CD9F4C181A7B472600A28675 /* CandidateLinkCell.m in Sources */,
 				CDAA8AD517F65B5100FC1C17 /* Models.m in Sources */,
 				CD39CC1017E9FF8400DAB305 /* SearchView.m in Sources */,
 				CDAA8AD817F6609400FC1C17 /* Politician.m in Sources */,
@@ -1392,10 +1410,38 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "00Promise/00Promise-Prefix.pch";
 				INFOPLIST_FILE = "00Promise/00Promise-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					CoreData,
+					"-framework",
+					CoreGraphics,
+					"-framework",
+					CoreImage,
+					"-framework",
+					Foundation,
+					"-framework",
+					ImageIO,
+					"-framework",
+					MobileCoreServices,
+					"-framework",
+					QuartzCore,
+					"-framework",
+					Security,
+					"-framework",
+					SystemConfiguration,
+					"-framework",
+					UIKit,
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1409,10 +1455,38 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "00Promise/00Promise-Prefix.pch";
 				INFOPLIST_FILE = "00Promise/00Promise-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					CoreData,
+					"-framework",
+					CoreGraphics,
+					"-framework",
+					CoreImage,
+					"-framework",
+					Foundation,
+					"-framework",
+					ImageIO,
+					"-framework",
+					MobileCoreServices,
+					"-framework",
+					QuartzCore,
+					"-framework",
+					Security,
+					"-framework",
+					SystemConfiguration,
+					"-framework",
+					UIKit,
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;

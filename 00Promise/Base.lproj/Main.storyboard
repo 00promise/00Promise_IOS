@@ -426,6 +426,17 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="U5r-IA-DNM">
+                                <rect key="frame" x="20" y="424" width="279" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" image="kakao_btn.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="kakaoLoginClick:" destination="uiH-Uc-4cs" eventType="touchUpInside" id="zuT-Jj-iAZ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -441,7 +452,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-261" y="488.71666666666664"/>
+            <point key="canvasLocation" x="-261" y="488"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="3am-1Q-6rr">
@@ -612,6 +623,7 @@
     </scenes>
     <resources>
         <image name="arrow_icon03.png" width="10" height="15"/>
+        <image name="kakao_btn.png" width="600" height="92"/>
         <image name="login_bar01.png" width="282" height="1"/>
         <image name="login_bg01.png" width="320" height="548"/>
         <image name="login_bg02.png" width="290" height="50"/>

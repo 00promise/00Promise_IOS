@@ -23,8 +23,8 @@
 #import <Foundation/Foundation.h>
 #import "AFHTTPClient.h"
 //#define RAILS_BASE_URL @"http://test.00promise.org"
-//#define RAILS_BASE_URL @"http://www.00promise.org"
-#define RAILS_BASE_URL @"http://192.168.0.3:3000"
+#define RAILS_BASE_URL @"http://www.00promise.org"
+//#define RAILS_BASE_URL @"http://10.10.119.178:3000"
 
 @interface AFAppDotNetAPIClient : AFHTTPClient
 + (AFAppDotNetAPIClient *)sharedClient;

@@ -12,6 +12,7 @@
 #import <NSString+CJStringValidator.h>
 #import <FSExtendedAlertKit.h>
 #import "AFAppDotNetAPIClient.h"
+#import <AFNetworking/AFNetworking.h>
 #import "MBProgressHUD.h"
 @interface LoginViewController ()
 
@@ -31,6 +32,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self setNeedsStatusBarAppearanceUpdate];
 	// Do any additional setup after loading the view.
 }
 - (IBAction)loginClick:(id)sender{
@@ -111,6 +113,127 @@
     }
     return isValide;
 }
+
+- (IBAction)kakaoLoginClick:(id)sender {
+    [[KOSession sharedSession] close];
+    
+    [[KOSession sharedSession] openWithCompletionHandler:^(NSError *error) {
+        
+        if ([[KOSession sharedSession] isOpen]) {
+            [KOSessionTask meTaskWithCompletionHandler:^(KOUser* result, NSError *error) {
+                if (result) {
+                    // success
+                    [self registerKakao:result];
+                } else {
+                    FSBlockButton *cancelButton = [FSBlockButton blockButtonWithTitle:@"확인" block:^ {
+                    }];
+                    FSAlertView *alert = [[FSAlertView alloc] initWithTitle:@"에러" message:[NSString stringWithFormat:@"카카오 로그인에 실패했습니다.(%@)",error.localizedDescription] cancelButton:cancelButton otherButtons: nil];
+                    [alert show];
+                }
+            }];
+        } else {
+            FSBlockButton *cancelButton = [FSBlockButton blockButtonWithTitle:@"확인" block:^ {
+            }];
+            FSAlertView *alert = [[FSAlertView alloc] initWithTitle:@"에러" message:[NSString stringWithFormat:@"카카오 로그인에 실패했습니다.(%@)",error.localizedDescription] cancelButton:cancelButton otherButtons: nil];
+            [alert show];
+        }
+        
+    }];
+}
+
+- (void)registerKakao:(KOUser*)user{
+    NSLog(@"userId=%@", user.ID);
+    NSLog(@"nickName=%@", [user propertyForKey:@"nickname"]);
+    NSLog(@"properties=%@", [user propertyForKey:@"profile_image"]);
+    
+    NSMutableDictionary* params = [NSMutableDictionary new];
+    [params setObject:[NSString stringWithFormat:@"%@@kakao.com",user.ID] forKey:@"email"];
+    [params setObject:user.ID forKey:@"password"];
+    [params setObject:user.ID forKey:@"password_confirmation"];
+    
+    [params setObject:[user propertyForKey:@"nickname"] forKey:@"nickname"];
+    [params setObject:user.ID forKey:@"social_id"];
+    
+    NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[user propertyForKey:@"profile_image"]]];
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    NSMutableURLRequest *request = [[AFAppDotNetAPIClient sharedClient]  multipartFormRequestWithMethod:@"POST" path:@"users/social_sign_up.json" parameters:params constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
+        [formData appendPartWithFileData:imageData name:@"img" fileName:[NSString stringWithFormat:@"%@-profile.jpg",user.ID] mimeType:@"image/jpeg"];
+    }];
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
+        NSLog(@"Sent %lld of %lld bytes", totalBytesWritten, totalBytesExpectedToWrite);
+    }];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id JSON) {
+        id jsonResponse = [NSJSONSerialization JSONObjectWithData:JSON
+                                                          options:NSJSONReadingAllowFragments | NSJSONReadingMutableContainers
+                                                            error:nil];
+#ifdef _SERVER_LOG_
+        NSLog(@"users/update.json  : %@",[jsonResponse debugDescription]);
+#endif
+        NSString* code = [jsonResponse objectForKey:@"code"];
+        if (![code isEqualToString:@"0000"]) {
+            FSBlockButton *cancelButton = [FSBlockButton blockButtonWithTitle:@"확인" block:^ {
+            }];
+            FSAlertView *alert = [[FSAlertView alloc] initWithTitle:@"에러" message:[jsonResponse objectForKey:@"message"] cancelButton:cancelButton otherButtons: nil];
+            [alert show];
+        }else{
+            NSDictionary* userDic = [jsonResponse objectForKey:@"data"];
+            [[NSUserDefaults standardUserDefaults] setValue:[userDic objectForKey:@"auth_token"] forKey:@"authToken"];
+            [[NSUserDefaults standardUserDefaults] setValue:[userDic objectForKey:@"email"] forKey:@"email"];
+            
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            
+            UINavigationController* naviViewController = [storyboard instantiateViewControllerWithIdentifier:@"mainNavigationController"];
+            naviViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+            [self presentViewController:naviViewController animated:YES completion:nil];
+        }
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        FSBlockButton *cancelButton = [FSBlockButton blockButtonWithTitle:@"확인" block:^ {
+        }];
+        FSAlertView *alert = [[FSAlertView alloc] initWithTitle:@"회원 가입" message:@"카카오로 회원가입에 실패하였습니다." cancelButton:cancelButton otherButtons: nil];
+        [alert show];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    }];
+    [operation start];
+    /*
+    MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.dimBackground = TRUE;
+    [[AFAppDotNetAPIClient sharedClient] postPath:@"users/social_sign_up.json" parameters:params success:^(AFHTTPRequestOperation *response, id responseObject) {
+#ifdef _SERVER_LOG_
+        NSLog(@"users/sign_up.json : %@",(NSDictionary *)responseObject);
+#endif
+        NSString* code = [responseObject objectForKey:@"code"];
+        if (![code isEqualToString:@"0000"]) {
+            FSBlockButton *cancelButton = [FSBlockButton blockButtonWithTitle:@"확인" block:^ {
+            }];
+            FSAlertView *alert = [[FSAlertView alloc] initWithTitle:@"에러" message:[responseObject objectForKey:@"message"] cancelButton:cancelButton otherButtons: nil];
+            [alert show];
+        }else{
+            NSDictionary* userDic = [responseObject objectForKey:@"data"];
+            [[NSUserDefaults standardUserDefaults] setValue:[userDic objectForKey:@"auth_token"] forKey:@"authToken"];
+            [[NSUserDefaults standardUserDefaults] setValue:[userDic objectForKey:@"email"] forKey:@"email"];
+            
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            
+            UINavigationController* naviViewController = [storyboard instantiateViewControllerWithIdentifier:@"mainNavigationController"];
+            naviViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+            [self presentViewController:naviViewController animated:YES completion:nil];
+        }
+        
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
+        NSLog(@"users/sign_up.json [HTTPClient Error]: %@", error.localizedDescription);
+        FSBlockButton *cancelButton = [FSBlockButton blockButtonWithTitle:@"확인" block:^ {
+        }];
+        FSAlertView *alert = [[FSAlertView alloc] initWithTitle:@"서버공사" message:@"서버 공사중입니다. 잠시만 기다려 주세요." cancelButton:cancelButton otherButtons: nil];
+        [alert show];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    }];
+     */
+}
+
 #pragma mark UITextFieldDelegate
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     
@@ -138,6 +261,11 @@
     }
     return YES;
 }
+
+- (UIStatusBarStyle) preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

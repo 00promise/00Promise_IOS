@@ -12,7 +12,7 @@
 @interface Politician : NSRRemoteObject
 @property (nonatomic, strong) NSNumber *ID,*birthday, *currentAge, *property, *payment, *arrears,*nowArrears;
 @property (nonatomic, strong) NSString *name, *memo, *img, *bgImg, *positionName, *partyName, *academic, *history, *military, *crime;
-@property (nonatomic, strong) NSMutableArray *manifestos;
+@property (nonatomic, strong) NSMutableArray *manifestos, *links, *replies;
 - (BOOL)haveImg;
 - (BOOL)haveBgImg;
 - (NSString*)birthDayStr;

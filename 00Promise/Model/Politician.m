@@ -8,12 +8,17 @@
 
 #import "Politician.h"
 #import "Manifesto.h"
+#import "Link.h"
+#import "Reply.h"
 @implementation Politician
 - (Class)nestedClassForProperty:(NSString *)property
 {
     if ([property isEqualToString:@"manifestos"])
         return [Manifesto class];
-
+    if ([property isEqualToString:@"links"])
+        return [Link class];
+    if ([property isEqualToString:@"replies"])
+        return [Reply class];
     return [super nestedClassForProperty:property];
 }
 - (NSString *) propertyForRemoteKey:(NSString *)remoteKey

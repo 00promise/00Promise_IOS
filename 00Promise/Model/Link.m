@@ -28,7 +28,21 @@
         *remoteKey = @"id";
     if ([property isEqualToString:@"descriptionInfo"])
         *remoteKey = @"description";
-    
+    if ([property isEqualToString:@"createdAt"])
+        return @"createdAt";
+    if ([property isEqualToString:@"updatedAt"])
+        return @"updatedAt";
     return [super encodeValueForProperty:property remoteKey:remoteKey];
+}
+- (void) decodeRemoteValue:(id)remoteObject forRemoteKey:(NSString *)remoteKey
+{
+    if ([remoteKey isEqualToString:@"created_at"]) {
+        _createdAt = remoteObject;
+        return ;
+    }if ([remoteKey isEqualToString:@"updated_at"]) {
+        _updatedAt = remoteObject;
+        return ;
+    }
+    [super decodeRemoteValue:remoteObject forRemoteKey:remoteKey];
 }
 @end

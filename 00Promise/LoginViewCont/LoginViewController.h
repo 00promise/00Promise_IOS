@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <KakaoOpenSDK/KakaoOpenSDK.h>
 @interface LoginViewController : UIViewController
 @property (nonatomic, weak) IBOutlet UITextField* emailTextField;
 @property (nonatomic, weak) IBOutlet UITextField* passwordTextField;

@@ -44,7 +44,7 @@
 //                   }];
 //    
     self.view.backgroundColor = [UIColor clearColor];
-    NSTimer* timer = [NSTimer timerWithTimeInterval:1.5f target:self selector:@selector(goToMain) userInfo:nil repeats:FALSE];
+    NSTimer* timer = [NSTimer timerWithTimeInterval:1.5f target:self selector:@selector(goToLogin) userInfo:nil repeats:FALSE];
     [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
 }
 
@@ -83,6 +83,7 @@
 - (UIStatusBarStyle) preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
+-(BOOL)prefersStatusBarHidden { return YES; }
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

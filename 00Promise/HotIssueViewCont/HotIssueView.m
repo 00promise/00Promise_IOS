@@ -14,6 +14,7 @@
 #import "IssueSmallTableViewCell.h"
 #import "Models.h"
 #import "JYGraphic.h"
+#import "BaseViewController.h"
 #import "CandidateViewController.h"
 #import <FSExtendedAlertKit.h>
 #import <SDWebImage/UIImageView+WebCache.h>
@@ -22,7 +23,7 @@
 - (id) initWithCoder:(NSCoder *)aCoder{
     if(self = [super initWithCoder:aCoder]){
         [self initVariable];
-        [self initView];
+        //[self initView];
     }
     return self;
 }
@@ -30,8 +31,7 @@
     _issueArr = [NSMutableArray new];
 }
 
-- (void)initView{
-    [MBProgressHUD showHUDAddedTo:self animated:YES];
+- (void)initView{    [MBProgressHUD showHUDAddedTo:self.parentViewCont.view animated:YES];
     [[AFAppDotNetAPIClient sharedClient] getPath:@"issues.json" parameters:nil success:^(AFHTTPRequestOperation *response, id responseObject) {
 #ifdef _SERVER_LOG_
         NSLog(@"issues.json : %@",(NSDictionary *)responseObject);
@@ -52,7 +52,7 @@
             }
             [_tableView reloadData];
         }
-        [MBProgressHUD hideHUDForView:self animated:YES];
+        [MBProgressHUD hideHUDForView:self.parentViewCont.view animated:YES];
     } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
         NSLog(@"issues.json [HTTPClient Error]: %@", error.localizedDescription);
         FSBlockButton *cancelButton = [FSBlockButton blockButtonWithTitle:@"확인" block:^ {
@@ -60,7 +60,7 @@
         }];
         FSAlertView *alert = [[FSAlertView alloc] initWithTitle:@"에러" message:@"정보를 가져올수 없습니다." cancelButton:cancelButton otherButtons: nil];
         [alert show];
-        [MBProgressHUD hideHUDForView:self animated:YES];
+        [MBProgressHUD hideHUDForView:self.parentViewCont.view animated:YES];
     }];
 }
 

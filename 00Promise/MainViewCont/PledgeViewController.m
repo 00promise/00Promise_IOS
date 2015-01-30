@@ -705,9 +705,7 @@
         cell.ratingDisAgreeLabel.text = [NSString stringWithFormat:@"비공감 %d",reply.disagreeCnt.integerValue];
         cell.agreeBtn.tag = indexPath.row;
         cell.disAgreeBtn.tag = indexPath.row;
-        if (indexPath.row > 3) {
-            [cell.bestImgView setHidden:TRUE];
-        }
+        
         CGSize size = [reply.content sizeWithFont:[UIFont systemFontOfSize:16] constrainedToSize:CGSizeMake(280, 220)];
         [cell.contentLabel setFrame:CGRectMake(cell.contentLabel.frame.origin.x, cell.contentLabel.frame.origin.y, cell.contentLabel.frame.size.width, size.height+20)];
         return cell;

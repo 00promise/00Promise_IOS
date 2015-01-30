@@ -10,7 +10,7 @@
 #import "NSRails.h"
 #import "Politician.h"
 @interface Link : NSRRemoteObject
-@property (nonatomic, strong) NSNumber *ID;
+@property (nonatomic, strong) NSNumber *ID, *createdAt, *updatedAt;
 @property (nonatomic, strong) NSString *titlel, *press, *title, *url;
 @property (nonatomic, strong) Politician* politician;
 @end

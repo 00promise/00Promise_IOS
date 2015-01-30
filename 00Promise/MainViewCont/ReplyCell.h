@@ -11,7 +11,6 @@
 @class PledgeViewController;
 @interface ReplyCell : UITableViewCell
 @property (nonatomic, strong) PledgeViewController* parent;
-@property (nonatomic, weak) IBOutlet UIImageView* bestImgView;
 @property (nonatomic, weak) IBOutlet UILabel* nameLabel;
 @property (nonatomic, weak) IBOutlet UILabel* createdAtLabel;
 @property (nonatomic, weak) IBOutlet UILabel* contentLabel;

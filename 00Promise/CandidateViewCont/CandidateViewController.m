@@ -15,6 +15,8 @@
 #import "JYGraphic.h"
 #import "DateUtil.h"
 #import "CandidateTopView.h"
+#import "CandidateLinkCell.h"
+#import "ReplyCell.h"
 #import <FSExtendedAlertKit.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 @interface CandidateViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
@@ -49,7 +51,7 @@
 }
 - (void)initVariable{
     memoHeight = 0;
-    _linkOn = TRUE;
+    _linkOn = FALSE;
     _profileOn = FALSE;
 }
 - (void)initView{
@@ -137,7 +139,39 @@
     //[_candidateTopView setAlpha:(272+offset)/272.0f];
 }
 #pragma mark UITableViewDelegate UITableViewDataSource
-
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section == 1) {
+        return 50;
+    }else if(section == 2){
+        return 70;
+    }
+    return 0;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if (section == 1) {
+        UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
+        UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(15, 20, 200, 20)];
+        label.font = [UIFont boldSystemFontOfSize:15];
+        label.text = @"관련기사";
+        label.textColor = [UIColor colorWithHex:@"#888888" alpha:1.0f];
+        [view addSubview:label];
+        UIView* lineView = [[UIView alloc] initWithFrame:CGRectMake(15, 49, 290, 1)];
+        lineView.backgroundColor = [UIColor colorWithHex:@"#b2b2b2" alpha:1.0f];
+        [view addSubview:lineView];
+        return view;
+    }else if(section == 2){
+        UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
+        UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(15, 10, 200, 20)];
+        label.font = [UIFont boldSystemFontOfSize:15];
+        label.text = [NSString stringWithFormat:@"댓글 %ld",[_politician.replies count]];
+        label.textColor = [UIColor colorWithHex:@"#808080" alpha:1.0f];
+        [view addSubview:label];
+        UIView* lineView = [[UIView alloc] initWithFrame:CGRectMake(15, 49, 290, 1)];
+        [view addSubview:lineView];
+        return view;
+    }
+    return nil;
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         if (_profileOn) {
@@ -150,6 +184,7 @@
             }else if (indexPath.row == 5) {
                 return 186;
             }else if (indexPath.row == 6) {
+                // 더보기 접기
                 return 50;
             }
             return 55;
@@ -157,11 +192,33 @@
             if (indexPath.row == 2) {
                 return 185;
             }else if (indexPath.row == 3) {
+                // 더보기 접기
                 return 50;
             }
             return 55;
         }
         
+    }else if (indexPath.section == 1){
+        if (indexPath.row == [_politician.links count] || (!_linkOn && indexPath.row == 2)) {
+            // 더보기 접기
+            return 50;
+        }else{
+            Link* link = [_politician.links objectAtIndex:indexPath.row];
+            NSString* linkTitle = link.title;
+            CGSize expectedLabelSize = [linkTitle sizeWithFont:[UIFont boldSystemFontOfSize:15.0] constrainedToSize:CGSizeMake(280, 200)];
+            
+            if (expectedLabelSize.height > 20) {
+                return 95;
+            }else{
+                return 71;
+            }
+        }
+    }else if (indexPath.section == 2){
+        Reply* reply = [_politician.replies objectAtIndex:indexPath.row];
+        NSString* replyTxt = reply.content;
+        CGSize expectedLabelSize = [replyTxt sizeWithFont:[UIFont boldSystemFontOfSize:15.0] constrainedToSize:CGSizeMake(280, 200)];
+        
+        return expectedLabelSize.height + 30;
     }
     return 100;
 }
@@ -174,6 +231,16 @@
             return 4;
         }
     }
+    else if (section == 1) {
+        if (_linkOn) {
+            return [_politician.links count]+1;
+        }else{
+            return 3;
+        }
+    }else if (section == 2){
+        return [_politician.replies count];
+    }
+    
     return 10;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -295,111 +362,55 @@
             }
             return cell;
         }
-    }else{
-        PledgeListCell *cell = (PledgeListCell*) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    }else if(indexPath.section == 1){
+        if (indexPath.row == [_politician.links count] || (!_linkOn && indexPath.row == 2)) {
+            MoreInfoCell *cell = (MoreInfoCell*) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (cell == nil){
+                NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"MoreInfoCell" owner:nil options:nil];
+                cell = [topLevelObjects objectAtIndex:0];
+            }
+            if (_linkOn) {
+                cell.nameLabel.text = @"기사 접어두기";
+            }else{
+                cell.nameLabel.text = [NSString stringWithFormat:@"%ld개 기사 더보기",[_politician.links count]-2];
+            }
+            return cell;
+        }else {
+            CandidateLinkCell *cell = (CandidateLinkCell*) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (cell == nil){
+                NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"CandidateLinkCell" owner:nil options:nil];
+                cell = [topLevelObjects objectAtIndex:0];
+            }
+            Link* link = [_politician.links objectAtIndex:indexPath.row];
+            NSString* linkTitle = link.title;
+            cell.titleLabel.text = link.title;
+            cell.pressLabel.text = [NSString stringWithFormat:@"%@ | %@",link.press, [DateUtil dateStringByTimestamp:link.updatedAt.longValue]];
+            CGSize expectedLabelSize = [linkTitle sizeWithFont:[UIFont boldSystemFontOfSize:15.0] constrainedToSize:CGSizeMake(280, 200)];
+            if (expectedLabelSize.height < 20) {
+                cell.titleLabel.frame = CGRectMake(cell.titleLabel.frame.origin.x, cell.titleLabel.frame.origin.y-10, cell.titleLabel.frame.size.width, cell.titleLabel.frame.size.height);
+                cell.pressLabel.frame = CGRectMake(cell.pressLabel.frame.origin.x, cell.pressLabel.frame.origin.y-25, cell.pressLabel.frame.size.width, cell.pressLabel.frame.size.height);
+                cell.lineView.frame = CGRectMake(cell.lineView.frame.origin.x, cell.lineView.frame.origin.y-25, cell.lineView.frame.size.width, cell.lineView.frame.size.height);
+            }
+            return cell;
+        }
+    }else if(indexPath.section == 2){
+        ReplyCell *cell = (ReplyCell*) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (cell == nil){
-            NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"PledgeListCell" owner:nil options:nil];
+            NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"ReplyCell" owner:nil options:nil];
             cell = [topLevelObjects objectAtIndex:0];
             
         }
-        Manifesto* manifesto = [_politician.manifestos objectAtIndex:0];
-        UIImage *backImage;
-        if (indexPath.row == 0) {
-            backImage = [UIImage imageNamed:@"list_bg01.png"];
-            cell.backImgView.frame = CGRectMake(10, 0, 300, 57);
-        }else if(indexPath.row == [tableView numberOfRowsInSection:indexPath.section]-1){
-            backImage = [UIImage imageNamed:@"list_bg03.png"];
-            cell.backImgView.frame = CGRectMake(10, 0, 300, 58);
-        }else{
-            backImage = [UIImage imageNamed:@"list_bg02.png"];
-            cell.backImgView.frame = CGRectMake(10, 0, 300, 56);
-        }
-        
-        cell.backImgView.image = [backImage stretchableImageWithLeftCapWidth:3 topCapHeight:3];
-        cell.titleLabel.text = manifesto.title;
-        int maxRatingCnt = MAX(manifesto.goodCnt.integerValue, MAX(manifesto.fairCnt.integerValue, manifesto.poorCnt.integerValue));
-        if (maxRatingCnt == manifesto.goodCnt.integerValue) {
-            cell.ratingImgView.image = [UIImage imageNamed:@"appraisal_icon04.png"];
-            cell.ratingCntLabel.text = [NSString stringWithFormat:@"%d",manifesto.goodCnt.integerValue];
-        }else if (maxRatingCnt == manifesto.fairCnt.integerValue) {
-            cell.ratingImgView.image = [UIImage imageNamed:@"appraisal_icon05.png"];
-            cell.ratingCntLabel.text = [NSString stringWithFormat:@"%d",manifesto.fairCnt.integerValue];
-        }else if (maxRatingCnt == manifesto.poorCnt.integerValue) {
-            cell.ratingImgView.image = [UIImage imageNamed:@"appraisal_icon06.png"];
-            cell.ratingCntLabel.text = [NSString stringWithFormat:@"%d",manifesto.poorCnt.integerValue];
-        }
-        cell.replyCntLabel.text = [NSString stringWithFormat:@"%d",manifesto.replyCnt.integerValue];
+        Reply* reply = [_politician.replies objectAtIndex:indexPath.row];
+        cell.nameLabel.text = reply.username;
+        cell.createdAtLabel.text = [DateUtil timeDateStringByTimestamp:reply.createdAt.longLongValue];
+        cell.contentLabel.text = reply.content;
+        cell.ratingAgreeLabel.text = [NSString stringWithFormat:@"좋아요 %ld",reply.agreeCnt.integerValue];
+        cell.ratingDisAgreeLabel.text = [NSString stringWithFormat:@"싫어요 %ld",reply.disagreeCnt.integerValue];
+        cell.agreeBtn.tag = indexPath.row;
+        cell.disAgreeBtn.tag = indexPath.row;
         return cell;
     }
-    
-    /*
-    if (indexPath.section == 0) {
-        CandidateInfoCell *cell = (CandidateInfoCell*) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (cell == nil){
-            NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"CandidateInfoCell" owner:nil options:nil];
-            cell = [topLevelObjects objectAtIndex:0];
-            
-        }
-        [JYGraphic setRoundedView:cell.politicianImgView toDiameter:88.0f];
-        UIImage *backImage = [UIImage imageNamed:@"profile_bg01.png"];
-        cell.backImgView.image = [backImage stretchableImageWithLeftCapWidth:3 topCapHeight:3];
-        
-        if ([_politician haveImg]) {
-            [cell.politicianImgView setImageWithURL:[NSURL URLWithString:[_politician img]] placeholderImage:[UIImage imageNamed:@"feed_bg_profile01.png"] options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType){
-                
-            }];
-        }
-        if ([_politician haveBgImg]) {
-            [cell.bgImgView setImageWithURL:[NSURL URLWithString:[_politician bgImg]] placeholderImage:[UIImage imageNamed:@"bg_default.png"] options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType){
-                
-            }];
-        }
-        cell.nameLabel.text = _politician.name;
-        cell.birthLabel.text = [DateUtil dateStringByTimestamp:_politician.birthday.longLongValue];
-        cell.positionLabel.text = [NSString stringWithFormat:@"현재 제 %@ (%@)",_politician.positionName,_politician.partyName];
-        cell.positionHistoryLabel.text = _politician.memo;
-        cell.positionHistoryLabel.frame = CGRectMake(cell.positionHistoryLabel.frame.origin.x, cell.positionHistoryLabel.frame.origin.y, cell.positionHistoryLabel.frame.size.width, memoHeight);
-        return cell;
-    }else{
-        PledgeListCell *cell = (PledgeListCell*) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        
-        if (cell == nil){
-            NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"PledgeListCell" owner:nil options:nil];
-            cell = [topLevelObjects objectAtIndex:0];
-            
-        }
-        Manifesto* manifesto = [_politician.manifestos objectAtIndex:indexPath.row];
-        UIImage *backImage;
-        if (indexPath.row == 0) {
-            backImage = [UIImage imageNamed:@"list_bg01.png"];
-            cell.backImgView.frame = CGRectMake(10, 0, 300, 57);
-        }else if(indexPath.row == [tableView numberOfRowsInSection:indexPath.section]-1){
-            backImage = [UIImage imageNamed:@"list_bg03.png"];
-            cell.backImgView.frame = CGRectMake(10, 0, 300, 58);
-        }else{
-            backImage = [UIImage imageNamed:@"list_bg02.png"];
-            cell.backImgView.frame = CGRectMake(10, 0, 300, 56);
-        }
-        
-        cell.backImgView.image = [backImage stretchableImageWithLeftCapWidth:3 topCapHeight:3];
-        cell.titleLabel.text = manifesto.title;
-        int maxRatingCnt = MAX(manifesto.goodCnt.integerValue, MAX(manifesto.fairCnt.integerValue, manifesto.poorCnt.integerValue));
-        if (maxRatingCnt == manifesto.goodCnt.integerValue) {
-            cell.ratingImgView.image = [UIImage imageNamed:@"appraisal_icon04.png"];
-            cell.ratingCntLabel.text = [NSString stringWithFormat:@"%d",manifesto.goodCnt.integerValue];
-        }else if (maxRatingCnt == manifesto.fairCnt.integerValue) {
-            cell.ratingImgView.image = [UIImage imageNamed:@"appraisal_icon05.png"];
-            cell.ratingCntLabel.text = [NSString stringWithFormat:@"%d",manifesto.fairCnt.integerValue];
-        }else if (maxRatingCnt == manifesto.poorCnt.integerValue) {
-            cell.ratingImgView.image = [UIImage imageNamed:@"appraisal_icon06.png"];
-            cell.ratingCntLabel.text = [NSString stringWithFormat:@"%d",manifesto.poorCnt.integerValue];
-        }
-        cell.replyCntLabel.text = [NSString stringWithFormat:@"%d",manifesto.replyCnt.integerValue];
-        return cell;
-    }
-     */
-    
     return NULL;
 }
 
@@ -413,6 +424,18 @@
             }
         }else{
             if (indexPath.row == 3) {
+                _profileOn = !_profileOn;
+                [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+            }
+        }
+    }else if (indexPath.section == 1) {
+        if (_linkOn) {
+            if (indexPath.row == [_politician.links count]) {
+                _linkOn = !_linkOn;
+                [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+            }
+        }else{
+            if (indexPath.row == 2) {
                 _profileOn = !_profileOn;
                 [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
             }

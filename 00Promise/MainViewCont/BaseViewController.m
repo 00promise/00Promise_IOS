@@ -78,6 +78,7 @@
    
     _hotIssueView = [[[NSBundle mainBundle] loadNibNamed:@"HotIssueView" owner:nil options:nil] objectAtIndex:0];
     _hotIssueView.parentViewCont = self;
+    [_hotIssueView initView];
     [_hotIssueView setFrame:CGRectMake(0, 0, 320, 568)];
     [_scrollView addSubview:_hotIssueView];
     
@@ -158,5 +159,5 @@
 - (UIStatusBarStyle) preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
-
+-(BOOL)prefersStatusBarHidden { return FALSE; }
 @end

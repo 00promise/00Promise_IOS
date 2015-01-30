@@ -21,6 +21,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             </tableViewCellContentView>
             <connections>
                 <outlet property="nameLabel" destination="0fH-Pd-jw8" id="Vlp-oK-OW2"/>

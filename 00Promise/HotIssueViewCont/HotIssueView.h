@@ -11,4 +11,5 @@
 @interface HotIssueView : BaseView
 @property (nonatomic, strong) NSMutableArray* issueArr;
 @property (nonatomic, strong) IBOutlet UITableView* tableView;
+- (void)initView;
 @end

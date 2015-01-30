@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import <KakaoOpenSDK/KakaoOpenSDK.h>
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -17,10 +17,12 @@
     
     //Badge 개수 설정
     //application.applicationIconBadgeNumber = 0;
-    
+    NSLog(@"APP START");
     return YES;
 }
-
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [KOSession handleOpenURL:url];
+}
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     NSLog(@"deviceToken : %@", deviceToken);
     NSMutableString* token = [[NSMutableString alloc]initWithFormat:@"%@",deviceToken];
