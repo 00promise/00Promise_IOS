@@ -44,8 +44,13 @@
 //                   }];
 //    
     self.view.backgroundColor = [UIColor clearColor];
-    NSTimer* timer = [NSTimer timerWithTimeInterval:1.5f target:self selector:@selector(goToLogin) userInfo:nil repeats:FALSE];
-    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"authToken"]) {
+        NSTimer* timer = [NSTimer timerWithTimeInterval:1.5f target:self selector:@selector(goToMain) userInfo:nil repeats:FALSE];
+        [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+    }else{
+        NSTimer* timer = [NSTimer timerWithTimeInterval:1.5f target:self selector:@selector(goToLogin) userInfo:nil repeats:FALSE];
+        [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated

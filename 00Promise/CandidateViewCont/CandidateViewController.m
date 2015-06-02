@@ -199,7 +199,8 @@
         }
         
     }else if (indexPath.section == 1){
-        if (indexPath.row == [_politician.links count] || (!_linkOn && indexPath.row == 2)) {
+//        if (indexPath.row == [_politician.links count] || (!_linkOn && indexPath.row == 2)) {
+        if (false) {
             // 더보기 접기
             return 50;
         }else{
@@ -232,11 +233,7 @@
         }
     }
     else if (section == 1) {
-        if (_linkOn) {
-            return [_politician.links count]+1;
-        }else{
-            return 3;
-        }
+        return [_politician.links count];
     }else if (section == 2){
         return [_politician.replies count];
     }
@@ -244,7 +241,7 @@
     return 10;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    return 2;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -363,7 +360,8 @@
             return cell;
         }
     }else if(indexPath.section == 1){
-        if (indexPath.row == [_politician.links count] || (!_linkOn && indexPath.row == 2)) {
+//        if (indexPath.row == [_politician.links count] || (!_linkOn && indexPath.row == 2)) {
+        if (false) {
             MoreInfoCell *cell = (MoreInfoCell*) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil){
                 NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"MoreInfoCell" owner:nil options:nil];
@@ -445,15 +443,16 @@
 #pragma mark UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [self animationForTableView];
+    
     if (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.frame.size.height) {
         [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, scrollView.contentSize.height - scrollView.frame.size.height)];
     }
 }
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    [self animationForTableView];
+    //[self animationForTableView];
 }
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
-    [self animationForTableView];
+    //[self animationForTableView];
 }
 - (void)didReceiveMemoryWarning
 {
